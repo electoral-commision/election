@@ -5,17 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AEC Federal Election 2026</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific styling for the Senate entries in the list */
+        .senate-style {
+            border-left: 6px solid #7e57c2 !important;
+            background-color: #f4f0fa !important;
+        }
+        .senate-label {
+            color: #512da8;
+            font-weight: 800;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <header>
             <p class="breadcrumb">AEC Live | Federal Election 2026 | Results</p>
             <h1>2026 Federal Election Results</h1>
-            <p class="update-time" id="time-display">Loading last edit...</p>
+            <p class="update-time" id="time-display">Connecting to AEC Servers...</p>
         </header>
 
-        <div id="election-winner" style="text-align: center; font-size: 2.5rem; font-weight: 900; margin-bottom: 25px; text-transform: uppercase; padding: 25px; border-radius: 8px; display: none; line-height: 1.2;">
-            </div>
+        <div id="election-winner" style="text-align: center; font-size: 2.2rem; font-weight: 900; margin-bottom: 25px; text-transform: uppercase; padding: 25px; border-radius: 8px; display: none; line-height: 1.2; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+        </div>
 
         <section class="main-tally">
             <div class="status-bar">
