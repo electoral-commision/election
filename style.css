@@ -5,53 +5,55 @@
     --alp: #e61e2b;
     --lnp: #005696;
     --onp: #f7941d;
+    --text-dim: #aaa;
 }
 
 body { background: var(--bg); color: white; font-family: sans-serif; margin: 0; padding: 20px; }
 .container { max-width: 900px; margin: 0 auto; }
 
+.breadcrumb { color: #5cb7ff; font-size: 11px; font-weight: bold; margin-bottom: 8px; }
+h1 { margin: 0; font-size: 32px; letter-spacing: -1px; font-weight: 900; }
+.update-time { color: #666; font-size: 13px; margin: 10px 0 30px; }
+
 /* Tabs */
 .tab-container { display: flex; gap: 20px; border-bottom: 1px solid #333; margin-bottom: 25px; }
-.tab-btn { background: none; border: none; color: #888; padding: 10px 0; cursor: pointer; font-size: 12px; font-weight: bold; }
+.tab-btn { background: none; border: none; color: #888; padding-bottom: 10px; cursor: pointer; font-size: 12px; font-weight: bold; text-transform: uppercase; }
 .tab-btn.active { color: #5cb7ff; border-bottom: 2px solid #5cb7ff; }
 
 /* Controls */
-.search-bar { background: #1a1a1a; border: 1px solid var(--border); border-radius: 25px; padding: 12px 20px; margin-bottom: 20px; display: flex; }
+.search-bar { background: #1a1a1a; border: 1px solid var(--border); border-radius: 25px; padding: 12px 20px; display: flex; align-items: center; margin-bottom: 20px; }
 .search-bar input { background: none; border: none; color: white; width: 100%; outline: none; margin-left: 10px; }
+
 .filter-sort-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-.chip, .chip-mini { background: #1a1a1a; border: 1px solid var(--border); color: white; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: bold; cursor: pointer; }
-.chip.active, .chip-mini.active { background: #333; border-color: #5cb7ff; color: #5cb7ff; }
+.control-group { display: flex; align-items: center; gap: 10px; }
+.label { font-size: 11px; color: #666; font-weight: bold; text-transform: uppercase; }
 
-/* Tally Bars */
-.banner { background: linear-gradient(90deg, #005696, #f7941d); padding: 15px; text-align: center; border-radius: 8px; font-weight: 900; margin-bottom: 25px; }
+.chip, .chip-mini, .chip-select { background: #1a1a1a; border: 1px solid var(--border); color: white; padding: 6px 15px; border-radius: 20px; font-size: 13px; font-weight: bold; cursor: pointer; }
+.chip.active, .chip-mini.active { background: #333; border-color: #5cb7ff; }
+
+/* Banner & Bars */
+.banner { background: linear-gradient(90deg, #005696, #f7941d); padding: 15px; text-align: center; border-radius: 8px; font-weight: 900; margin-bottom: 25px; color: white; }
+.tally-header { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 5px; font-weight: bold; }
 .bars-container { position: relative; margin-bottom: 40px; }
-.majority-line { position: absolute; left: 53.3%; top: 0; bottom: 0; width: 2px; border-left: 1px dashed rgba(255,255,255,0.3); z-index: 5; }
-.p-bar-bg { flex: 1; background: #222; height: 38px; border-radius: 4px; overflow: hidden; display: flex; }
-.p-bar { height: 100%; transition: width 0.8s; display: flex; align-items: center; justify-content: flex-end; }
-.p-count { padding-right: 15px; font-weight: 800; font-size: 18px; }
+.majority-line { position: absolute; left: 53.3%; top: 0; bottom: 0; width: 2px; border-left: 1px dashed #fff3; z-index: 5; }
+.party-row { display: flex; align-items: center; margin-bottom: 8px; }
+.p-name { width: 50px; font-weight: 900; font-size: 14px; } /* Bolded Bar Labels */
+.p-bar-bg { flex: 1; background: #222; height: 35px; border-radius: 4px; overflow: hidden; }
+.p-bar { height: 100%; display: flex; align-items: center; justify-content: flex-end; transition: width 0.8s ease-in-out; }
+.p-count { padding-right: 15px; font-weight: 900; font-size: 18px; }
 
-/* List Cards & Colored GAIN Badges */
-.seat-card { background: var(--card); border: 1px solid var(--border); padding: 18px 20px; border-radius: 4px; display: flex; justify-content: space-between; margin-bottom: 2px; }
-.s-badge { font-size: 10px; font-weight: 900; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; display: inline-block; color: white !important; }
-.s-badge.alp { background-color: var(--alp); }
-.s-badge.lnp { background-color: var(--lnp); }
-.s-badge.onp { background-color: var(--onp); }
+.alp { background: var(--alp); } .lnp { background: var(--lnp); } .onp { background: var(--onp); }
 
-/* Map View & Hex Colors */
-.map-container { background: #0f0f0f; border-radius: 12px; padding: 20px; position: relative; height: 500px; display: flex; flex-direction: column; align-items: center; border: 1px solid var(--border); }
-.vic-map { position: relative; width: 100%; max-width: 600px; height: 400px; margin-top: 20px; }
-.hex-geo { 
-    position: absolute; width: 48px; height: 54px; 
-    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    font-size: 10px; font-weight: bold; cursor: pointer; transition: transform 0.2s;
-}
-.hex-geo.alp { background-color: var(--alp); }
-.hex-geo.lnp { background-color: var(--lnp); }
-.hex-geo.onp { background-color: var(--onp); }
-.hex-geo:hover { transform: scale(1.2); z-index: 10; border: 1px solid white; }
-.hex-swing { font-size: 7px; opacity: 0.9; }
+/* Hex Map */
+.hex-map-wrapper { background: #111; padding: 40px; border-radius: 12px; display: flex; justify-content: center; overflow-x: auto; }
+.hex-grid { display: grid; grid-template-columns: repeat(10, 42px); grid-auto-rows: 36px; gap: 4px 12px; }
+.hex { width: 50px; height: 55px; clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; cursor: pointer; }
+.hex:nth-child(20n+11), .hex:nth-child(20n+12), .hex:nth-child(20n+13), .hex:nth-child(20n+14), .hex:nth-child(20n+15),
+.hex:nth-child(20n+16), .hex:nth-child(20n+17), .hex:nth-child(20n+18), .hex:nth-child(20n+19), .hex:nth-child(20n+20) { transform: translateX(27px); }
 
-.alp { background-color: var(--alp); }
-.lnp { background-color: var(--lnp); }
-.onp { background-color: var(--onp); }
+/* List Cards */
+.seat-card { background: var(--card); border: 1px solid var(--border); padding: 20px; border-radius: 4px; display: flex; justify-content: space-between; margin-bottom: 2px; }
+.s-name { font-size: 16px; font-weight: 900; margin-bottom: 4px; } /* Bolded Division Name */
+.s-person { color: var(--text-dim); font-size: 14px; margin-bottom: 8px; }
+.s-badge { font-size: 10px; font-weight: 900; text-transform: uppercase; padding: 3px 6px; border-radius: 3px; display: inline-block; color: white; }
+.s-swing { font-weight: bold; align-self: center; font-size: 14px; }
