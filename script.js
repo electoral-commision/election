@@ -6,7 +6,7 @@ const seats = [
     { name: "Higgins", party: "alp", person: "Thecone", status: "GAIN", from: "from oth", swing: "50%" },
     { name: "Chisholm", party: "onp", person: "Triple G gaming", status: "GAIN", from: "from oth", swing: "100%" },
     { name: "Macnamara", party: "onp", person: "itsmerealdd", status: "GAIN", from: "from oth", swing: "100%" },
-    { name: "Maribyrnong", party: "", person: "", status: "IN DOUBT", from: "", swing: "Counting..." },
+    { name: "Maribyrnong", party: "lnp", person: "2023 Toyota Camry", status: "GAIN", from: "from oth", swing: "100%" },
     { name: "Wills", party: "", person: "", status: "IN DOUBT", from: "", swing: "Counting..." },
     { name: "Fraser", party: "", person: "", status: "IN DOUBT", from: "", swing: "Counting..." },
     { name: "Dunkley", party: "", person: "", status: "IN DOUBT", from: "", swing: "Counting..." },
