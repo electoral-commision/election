@@ -1,6 +1,6 @@
-// --- ONLY EDIT THE SEATS LIST BELOW ---
+// --- SEAT DATA ---
 const seats = [
-    // HOUSE OF REPRESENTATIVES (Counts towards /15)
+    // HOUSE OF REPRESENTATIVES (These count toward the 15 total)
     { name: "Melbourne", party: "alp", person: "Bounty", status: "GAIN", from: "FROM OTH", swing: "33.3% Gain", type: "house" },
     { name: "Kooyong", party: "onp", person: "Bumuncha", status: "GAIN", from: "FROM OTH", swing: "50.0% Gain", type: "house" },
     { name: "Higgins", party: "alp", person: "Thecone", status: "GAIN", from: "FROM OTH", swing: "50.0% Gain", type: "house" },
@@ -17,86 +17,14 @@ const seats = [
     { name: "Calwell", party: "alp", person: "kiwi", status: "GAIN", from: "FROM OTH", swing: "50.0% Gain", type: "house" },
     { name: "Bruce", party: "alp", person: "Awol_21", status: "GAIN", from: "FROM OTH", swing: "50.0% Gain", type: "house" },
 
-    // SENATE (Does NOT count towards /15)
-    { name: "Senate Seat 1", party: "alp", person: "itxw4sley._.", status: "ELECTED", from: "SENATE", swing: "Proportional", type: "senate" },
-    { name: "Senate Seat 2", party: "lnp", person: "hitheresam", status: "ELECTED", from: "SENATE", swing: "Proportional", type: "senate" },
-    { name: "Senate Seat 3", party: "onp", person: "Reald", status: "ELECTED", from: "SENATE", swing: "Proportional", type: "senate" },
-    { name: "Senate Seat 4", party: "alp", person: "jeffery_harrold1", status: "ELECTED", from: "SENATE", swing: "Proportional", type: "senate" },
-    { name: "Senate Seat 5", party: "onp", person: "siua10011", status: "ELECTED", from: "SENATE", swing: "Proportional", type: "senate" },
-    { name: "Senate Seat 6", party: "alp", person: "asperytravel", status: "ELECTED", from: "SENATE", swing: "Proportional", type: "senate" }
+    // SENATE (These appear in the list but DO NOT count toward the 15 total)
+    { name: "Senate Seat 1", party: "alp", person: "itxw4sley._.", status: "ELECTED", from: "SENATE", swing: "Quota Met", type: "senate" },
+    { name: "Senate Seat 2", party: "lnp", person: "hitheresam", status: "ELECTED", from: "SENATE", swing: "Quota Met", type: "senate" },
+    { name: "Senate Seat 3", party: "onp", person: "Reald", status: "ELECTED", from: "SENATE", swing: "Quota Met", type: "senate" },
+    { name: "Senate Seat 4", party: "alp", person: "jeffery_harrold1", status: "ELECTED", from: "SENATE", swing: "Quota Met", type: "senate" },
+    { name: "Senate Seat 5", party: "onp", person: "siua10011", status: "ELECTED", from: "SENATE", swing: "Quota Met", type: "senate" },
+    { name: "Senate Seat 6", party: "alp", person: "asperytravel", status: "ELECTED", from: "SENATE", swing: "Quota Met", type: "senate" }
 ];
 
 const TOTAL_HOUSE_SEATS = 15;
-let currentFilter = "all";
-
-async function updateDashboard() {
-    const totals = { alp: 0, lnp: 0, onp: 0, oth: 0 };
-    
-    // Only count 'house' type for the bars and progress
-    seats.forEach(s => {
-        if (s.type === "house" && totals[s.party] !== undefined) {
-            totals[s.party]++;
-        }
-    });
-
-    // Winner Logic (LNP + ONP Coalition)
-    const winnerDiv = document.getElementById('election-winner');
-    const coalitionTotal = totals.lnp + totals.onp;
-    winnerDiv.style.display = "block";
-    
-    if (coalitionTotal >= 8) {
-        winnerDiv.style.background = "linear-gradient(90deg, #005696 0%, #f7941d 100%)";
-        winnerDiv.style.color = "white";
-        winnerDiv.innerText = "Government Formed: LNP-ONP Coalition";
-    } else if (totals.alp >= 8) {
-        winnerDiv.style.background = "#e61e2b";
-        winnerDiv.style.color = "white";
-        winnerDiv.innerText = "Government Formed: Australian Labor Party";
-    } else {
-        winnerDiv.style.background = "#222";
-        winnerDiv.style.color = "#888";
-        winnerDiv.innerText = "Hung Parliament: Negotiations Ongoing";
-    }
-
-    // Progress Counter (Strictly /15)
-    const totalHouseCounted = totals.alp + totals.lnp + totals.onp + totals.oth;
-    const percent = ((totalHouseCounted / TOTAL_HOUSE_SEATS) * 100).toFixed(1);
-    document.getElementById('percent-counted').innerText = `${percent}% counted (${totalHouseCounted}/${TOTAL_HOUSE_SEATS})`;
-
-    // Update Bars
-    updateBar("alp", totals.alp);
-    updateBar("lnp", totals.lnp);
-    updateBar("onp", totals.onp);
-
-    renderSeatList();
-}
-
-function renderSeatList() {
-    const list = document.getElementById('seat-list');
-    list.innerHTML = "";
-    seats.forEach(s => {
-        const isInDoubt = (s.party === "" || s.person === "");
-        const isChanging = (s.status === "GAIN");
-
-        if (currentFilter === "doubt" && !isInDoubt) return;
-        if (currentFilter === "changing" && !isChanging) return;
-
-        const card = document.createElement('div');
-        card.className = `seat-card ${s.type === 'senate' ? 'senate-style' : ''}`;
-        const partyClass = s.party ? `bg-${s.party}` : 'bg-pending';
-        
-        card.innerHTML = `
-            <div>
-                <div class="seat-name">${s.name} ${s.type === 'senate' ? '(SENATE)' : ''}</div>
-                <div class="person-name">${s.person}</div>
-                <div class="badge-row">
-                    <span class="badge ${partyClass}">${s.party.toUpperCase()} ${s.status}</span>
-                    <span class="from-text">${s.from}</span>
-                </div>
-            </div>
-            <div class="swing-box"><div class="swing-label">${s.swing}</div></div>
-        `;
-        list.appendChild(card);
-    });
-}
-// ... (rest of your existing filter and updateBar functions)
+let current
