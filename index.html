@@ -3,58 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AEC Live | Federal Election 2026</title>
+    <title>AEC Federal Election 2026</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="aec-container">
-        <header class="aec-header">
-            <p class="analyst-tag">By chief elections and data analyst <strong>Casey Briggs</strong></p>
+    <div class="container">
+        <header>
+            <p class="breadcrumb">AEC Live | Federal Election 2026 | Results</p>
             <h1>2026 Federal Election Results</h1>
-            <p id="time-display" class="status-timestamp">Updated Thu at 5:30pm</p>
+            <p class="update-time" id="time-display">Loading last edit...</p>
         </header>
 
-        <div id="election-winner" class="coalition-banner"></div>
+        <div id="election-winner" style="text-align: center; font-size: 2.5rem; font-weight: 900; margin-bottom: 25px; text-transform: uppercase; padding: 25px; border-radius: 8px; display: none; line-height: 1.2; border: 2px solid rgba(255,255,255,0.1);">
+            </div>
 
-        <div class="aec-tabs">
-            <button id="btn-house" class="tab-btn active" onclick="switchView('house')">House of Reps</button>
-            <button id="btn-senate" class="tab-btn" onclick="switchView('senate')">The Senate</button>
-        </div>
-
-        <section id="house-view" class="tally-card">
-            <div class="tally-meta">
-                <span id="percent-counted">100.0% counted</span>
+        <section class="main-tally">
+            <div class="status-bar">
+                <span id="percent-counted">0% counted</span>
                 <span class="goal">8 to win</span>
             </div>
-            <div class="progress-container">
-                <div class="majority-line"></div>
-                <div class="party-progress-row">
-                    <span class="party-id">ALP</span>
-                    <div class="progress-bg"><div id="alp-bar" class="progress-fill alp"></div></div>
-                    <span id="alp-count" class="party-total">0</span>
+            <div class="bar-wrapper">
+                <div class="majority-marker"></div>
+                <div class="party-row">
+                    <div class="party-label">ALP</div>
+                    <div class="bar-container"><div class="bar alp" id="alp-bar"><span class="count" id="alp-count">0</span></div></div>
                 </div>
-                <div class="party-progress-row">
-                    <span class="party-id">LNP</span>
-                    <div class="progress-bg"><div id="lnp-bar" class="progress-fill lnp"></div></div>
-                    <span id="lnp-count" class="party-total">0</span>
+                <div class="party-row">
+                    <div class="party-label">LNP</div>
+                    <div class="bar-container"><div class="bar lnp" id="lnp-bar"><span class="count" id="lnp-count">0</span></div></div>
                 </div>
-                <div class="party-progress-row">
-                    <span class="party-id">ONP</span>
-                    <div class="progress-bg"><div id="onp-bar" class="progress-fill onp"></div></div>
-                    <span id="onp-count" class="party-total">0</span>
+                <div class="party-row">
+                    <div class="party-label">ONP</div>
+                    <div class="bar-container"><div class="bar onp" id="onp-bar"><span class="count" id="onp-count">0</span></div></div>
                 </div>
             </div>
         </section>
 
-        <section id="senate-view" class="senate-viz-card" style="display: none;">
-            <svg viewBox="0 0 200 130" class="senate-svg">
-                <g id="senate-dots"></g>
-                <text x="100" y="90" class="senate-num">6</text>
-                <text x="100" y="110" class="senate-sub">Senate Composition</text>
-            </svg>
+        <section class="seat-by-seat">
+            <div class="filter-bar">
+                <span id="filter-all" class="active">All Seats</span>
+                <span id="filter-doubt">In Doubt</span>
+                <span id="filter-changing">Changing</span>
+            </div>
+            <div id="seat-list"></div>
         </section>
-
-        <section id="seat-list" class="seat-grid"></section>
     </div>
     <script src="script.js"></script>
 </body>
