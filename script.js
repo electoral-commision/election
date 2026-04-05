@@ -1,6 +1,4 @@
-// --- SEAT DATA ---
 const seats = [
-    // HOUSE OF REPRESENTATIVES (These count toward the 15 total)
     { name: "Melbourne", party: "alp", person: "Bounty", status: "GAIN", from: "FROM OTH", swing: "33.3% Gain", type: "house" },
     { name: "Kooyong", party: "onp", person: "Bumuncha", status: "GAIN", from: "FROM OTH", swing: "50.0% Gain", type: "house" },
     { name: "Higgins", party: "alp", person: "Thecone", status: "GAIN", from: "FROM OTH", swing: "50.0% Gain", type: "house" },
@@ -17,122 +15,92 @@ const seats = [
     { name: "Calwell", party: "alp", person: "kiwi", status: "GAIN", from: "FROM OTH", swing: "50.0% Gain", type: "house" },
     { name: "Bruce", party: "alp", person: "Awol_21", status: "GAIN", from: "FROM OTH", swing: "50.0% Gain", type: "house" },
 
-    // SENATE (These appear in the list but DO NOT count toward the 15 total)
-    { name: "Senate Seat 1", party: "alp", person: "itxw4sley._.", status: "ELECTED", from: "SENATE", swing: "Quota Met", type: "senate" },
-    { name: "Senate Seat 2", party: "lnp", person: "hitheresam", status: "ELECTED", from: "SENATE", swing: "Quota Met", type: "senate" },
-    { name: "Senate Seat 3", party: "onp", person: "Reald", status: "ELECTED", from: "SENATE", swing: "Quota Met", type: "senate" },
-    { name: "Senate Seat 4", party: "alp", person: "jeffery_harrold1", status: "ELECTED", from: "SENATE", swing: "Quota Met", type: "senate" },
-    { name: "Senate Seat 5", party: "onp", person: "siua10011", status: "ELECTED", from: "SENATE", swing: "Quota Met", type: "senate" },
-    { name: "Senate Seat 6", party: "alp", person: "asperytravel", status: "ELECTED", from: "SENATE", swing: "Quota Met", type: "senate" }
+    // SENATORS
+    { name: "Senate Seat 1", party: "alp", person: "itxw4sley._.", status: "ELECTED", from: "SENATE", type: "senate" },
+    { name: "Senate Seat 2", party: "lnp", person: "hitheresam", status: "ELECTED", from: "SENATE", type: "senate" },
+    { name: "Senate Seat 3", party: "onp", person: "Reald", status: "ELECTED", from: "SENATE", type: "senate" },
+    { name: "Senate Seat 4", party: "alp", person: "jeffery_harrold1", status: "ELECTED", from: "SENATE", type: "senate" },
+    { name: "Senate Seat 5", party: "onp", person: "siua10011", status: "ELECTED", from: "SENATE", type: "senate" },
+    { name: "Senate Seat 6", party: "alp", person: "asperytravel", status: "ELECTED", from: "SENATE", type: "senate" }
 ];
 
-const TOTAL_HOUSE_SEATS = 15;
-let currentFilter = "all";
+function updateDashboard() {
+    const totals = { alp: 0, lnp: 0, onp: 0 };
+    const senateList = [];
 
-async function updateDashboard() {
-    const totals = { alp: 0, lnp: 0, onp: 0, oth: 0 };
-    
-    // Only tally 'house' type seats for the progress bars
     seats.forEach(s => {
-        if (s.type === "house" && totals[s.party] !== undefined) {
+        if (s.type === "house") {
             totals[s.party]++;
+        } else {
+            senateList.push(s);
         }
     });
 
-    // Coalition Logic: LNP + ONP
+    // House Winner Logic
     const winnerDiv = document.getElementById('election-winner');
-    const coalitionTotal = totals.lnp + totals.onp;
+    const coalition = totals.lnp + totals.onp;
     winnerDiv.style.display = "block";
-    
-    if (coalitionTotal >= 8) {
-        winnerDiv.style.background = "linear-gradient(90deg, #005696 0%, #f7941d 100%)";
-        winnerDiv.style.color = "white";
+    if (coalition >= 8) {
+        winnerDiv.style.background = "linear-gradient(90deg, #005696, #f7941d)";
         winnerDiv.innerText = "Government Formed: LNP-ONP Coalition";
-    } else if (totals.alp >= 8) {
-        winnerDiv.style.background = "#e61e2b";
-        winnerDiv.style.color = "white";
-        winnerDiv.innerText = "Government Formed: Australian Labor Party";
-    } else {
-        winnerDiv.style.background = "#333";
-        winnerDiv.style.color = "#eee";
-        winnerDiv.innerText = "Hung Parliament: Negotiations Ongoing";
     }
 
-    // Progress Counter (House Seats Only)
-    const totalHouseCounted = totals.alp + totals.lnp + totals.onp + totals.oth;
-    const percent = ((totalHouseCounted / TOTAL_HOUSE_SEATS) * 100).toFixed(1);
-    document.getElementById('percent-counted').innerText = `${percent}% counted (${totalHouseCounted}/${TOTAL_HOUSE_SEATS})`;
-
-    // GitHub Time Sync
-    try {
-        const response = await fetch('https://api.github.com/repos/electoral-commision/election/commits?path=script.js&page=1&per_page=1');
-        const data = await response.json();
-        if (data && data[0]) {
-            const commitDate = new Date(data[0].commit.committer.date);
-            const timeString = commitDate.toLocaleTimeString('en-AU', { hour: 'numeric', minute: '2-digit', second: '2-digit', hour12: true });
-            document.getElementById('time-display').innerText = `Updated at ${timeString}`;
-        }
-    } catch (err) {
-        document.getElementById('time-display').innerText = "Updated Live";
-    }
-
-    // Update Bar Graphics
+    // Progress Bar
+    document.getElementById('percent-counted').innerText = `100% counted (${totals.alp + totals.lnp + totals.onp}/15)`;
     updateBar("alp", totals.alp);
     updateBar("lnp", totals.lnp);
     updateBar("onp", totals.onp);
 
+    drawSenateHorshoe(senateList);
     renderSeatList();
+}
+
+function drawSenateHorshoe(senators) {
+    const container = document.getElementById('senate-dots');
+    container.innerHTML = "";
+    const colors = { alp: "#e61e2b", lnp: "#005696", onp: "#f7941d" };
+    
+    const radius = 70;
+    const centerX = 100;
+    const centerY = 90;
+
+    senators.forEach((s, i) => {
+        // Calculate angle from 180 to 0 degrees
+        const angle = Math.PI - (i * (Math.PI / (senators.length - 1)));
+        const x = centerX + radius * Math.cos(angle);
+        const y = centerY - radius * Math.sin(angle);
+
+        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        circle.setAttribute("cx", x);
+        circle.setAttribute("cy", y);
+        circle.setAttribute("r", 8);
+        circle.setAttribute("fill", colors[s.party]);
+        container.appendChild(circle);
+    });
 }
 
 function renderSeatList() {
     const list = document.getElementById('seat-list');
     list.innerHTML = "";
-    
     seats.forEach(s => {
-        const isInDoubt = (s.party === "" || s.person === "");
-        const isChanging = (s.status === "GAIN");
-
-        if (currentFilter === "doubt" && !isInDoubt) return;
-        if (currentFilter === "changing" && !isChanging) return;
-
         const card = document.createElement('div');
-        // Apply special class if it's a Senate seat
         card.className = `seat-card ${s.type === 'senate' ? 'senate-style' : ''}`;
-        
-        const partyClass = s.party ? `bg-${s.party}` : 'bg-pending';
-        
         card.innerHTML = `
             <div>
-                ${s.type === 'senate' ? '<span class="senate-label">FEDERAL SENATE</span>' : ''}
-                <div class="seat-name">${s.name}</div>
+                <div class="seat-name">${s.name} ${s.type === 'senate' ? ' (SENATE)' : ''}</div>
                 <div class="person-name">${s.person}</div>
                 <div class="badge-row">
-                    <span class="badge ${partyClass}">${s.party.toUpperCase()} ${s.status}</span>
-                    <span class="from-text">${s.from}</span>
+                    <span class="badge bg-${s.party}">${s.party.toUpperCase()}</span>
                 </div>
             </div>
-            <div class="swing-box"><div class="swing-label">${s.swing}</div></div>
         `;
         list.appendChild(card);
     });
 }
 
 function updateBar(id, count) {
-    const bar = document.getElementById(`${id}-bar`);
-    const label = document.getElementById(`${id}-count`);
-    if(label) label.innerText = count;
-    if(bar) bar.style.width = (count / TOTAL_HOUSE_SEATS * 100) + "%";
+    document.getElementById(`${id}-count`).innerText = count;
+    document.getElementById(`${id}-bar`).style.width = (count / 15 * 100) + "%";
 }
-
-function setFilter(type, el) {
-    currentFilter = type;
-    document.querySelectorAll('.filter-bar span').forEach(s => s.classList.remove('active'));
-    el.classList.add('active');
-    renderSeatList();
-}
-
-document.getElementById('filter-all').onclick = function() { setFilter('all', this); };
-document.getElementById('filter-doubt').onclick = function() { setFilter('doubt', this); };
-document.getElementById('filter-changing').onclick = function() { setFilter('changing', this); };
 
 window.onload = updateDashboard;
