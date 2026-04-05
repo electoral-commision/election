@@ -12,38 +12,60 @@
             <p class="breadcrumb">AEC Live | Federal Election 2026</p>
             <div class="tab-container">
                 <button class="tab-btn active" id="tab-house">House</button>
-                <button class="tab-btn" id="tab-house-map">House Map</button>
+                <button class="tab-btn" id="tab-map">House Map</button>
                 <button class="tab-btn" id="tab-senate">Senate</button>
             </div>
             <h1 id="view-title">2026 Federal Election Results</h1>
-            <p class="update-time" id="time-display">Fetching last edit...</p>
+            <p class="update-time" id="time-display">Loading...</p>
         </header>
 
         <div class="controls-wrapper">
-            <div class="search-container">
-                <input type="text" id="seat-search" placeholder="Search electorate or candidate name">
+            <div class="search-bar">
                 <span class="search-icon">🔍</span>
+                <input type="text" id="seat-search" placeholder="Search electorate or candidate name">
             </div>
-            <div class="filter-sort-row">
+            
+            <div class="filter-sort-container">
                 <div class="filter-group">
-                    <span class="label">Filters</span>
-                    <button class="chip" id="filter-doubt">Seats in Doubt</button>
-                    <button class="chip" id="filter-changing">Changing Seats</button>
-                    <select class="chip-select"><option>Won by</option></select>
-                    <select class="chip-select"><option>Held by</option></select>
+                    <span class="ctrl-label">Filters</span>
+                    <button class="chip" id="btn-doubt">Seats in Doubt</button>
+                    <button class="chip" id="btn-changing">Changing Seats</button>
+                    <div class="chip select-wrapper">Won by <span class="arrow">▾</span></div>
+                    <div class="chip select-wrapper">Held by <span class="arrow">▾</span></div>
                 </div>
                 <div class="sort-group">
-                    <span class="label">Sort</span>
-                    <button class="chip-mini">A-Z</button>
-                    <button class="chip-mini active">Latest</button>
-                    <button class="chip-mini">Margin</button>
+                    <span class="ctrl-label">Sort</span>
+                    <button class="chip-sm">A-Z</button>
+                    <button class="chip-sm active">Latest</button>
+                    <button class="chip-sm">Margin</button>
                 </div>
             </div>
         </div>
 
-        <div id="tally-section">
+        <div id="house-view">
             <div id="election-winner"></div>
-            </div>
+            <section class="main-tally">
+                <div class="status-bar">
+                    <span>100% counted</span>
+                    <span class="goal">8 to win</span>
+                </div>
+                <div class="bar-wrapper">
+                    <div class="majority-marker"></div>
+                    <div class="party-row">
+                        <div class="party-label">ALP</div>
+                        <div class="bar-container"><div class="bar alp" id="alp-bar"><span class="count" id="alp-count">0</span></div></div>
+                    </div>
+                    <div class="party-row">
+                        <div class="party-label">LNP</div>
+                        <div class="bar-container"><div class="bar lnp" id="lnp-bar"><span class="count" id="lnp-count">0</span></div></div>
+                    </div>
+                    <div class="party-row">
+                        <div class="party-label">ONP</div>
+                        <div class="bar-container"><div class="bar onp" id="onp-bar"><span class="count" id="onp-count">0</span></div></div>
+                    </div>
+                </div>
+            </section>
+        </div>
 
         <div id="map-view" style="display: none;">
             <div class="map-grid" id="map-grid"></div>
@@ -56,7 +78,7 @@
             </div>
         </div>
 
-        <section class="seat-list-container" id="list-view">
+        <section class="seat-list-container">
             <div id="seat-list"></div>
         </section>
     </div>
