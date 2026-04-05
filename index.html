@@ -9,14 +9,14 @@
 <body>
     <div class="container">
         <header>
-            <p class="breadcrumb">AEC Live | Federal Election 2026</p>
+            <p class="breadcrumb">AEC LIVE | FEDERAL ELECTION 2026</p>
             <div class="tab-container">
-                <button class="tab-btn active" id="tab-house">House</button>
-                <button class="tab-btn" id="tab-map">House Map</button>
-                <button class="tab-btn" id="tab-senate">Senate</button>
+                <button class="tab-btn active" data-view="house">HOUSE</button>
+                <button class="tab-btn" data-view="map">HOUSE MAP</button>
+                <button class="tab-btn" data-view="senate">SENATE</button>
             </div>
-            <h1 id="view-title">2026 Federal Election Results</h1>
-            <p class="update-time" id="time-display">Loading...</p>
+            <h1>2026 Federal Election Results</h1>
+            <p class="update-time" id="time-display">Updated 7:50 pm</p>
         </header>
 
         <div class="controls-wrapper">
@@ -25,59 +25,58 @@
                 <input type="text" id="seat-search" placeholder="Search electorate or candidate name">
             </div>
             
-            <div class="filter-sort-container">
-                <div class="filter-group">
-                    <span class="ctrl-label">Filters</span>
-                    <button class="chip" id="btn-doubt">Seats in Doubt</button>
-                    <button class="chip" id="btn-changing">Changing Seats</button>
-                    <div class="chip select-wrapper">Won by <span class="arrow">▾</span></div>
+            <div class="filter-sort-row">
+                <div class="control-group">
+                    <span class="label">Filters</span>
+                    <button class="chip" id="filter-doubt">Seats in Doubt</button>
+                    <button class="chip" id="filter-changing">Changing Seats</button>
+                    <select class="chip-select" id="filter-won"><option value="">Won by ▾</option></select>
                 </div>
-                <div class="sort-group">
-                    <span class="ctrl-label">Sort</span>
-                    <button class="chip-sm active">Latest</button>
-                    <button class="chip-sm">A-Z</button>
+                <div class="control-group">
+                    <span class="label">Sort</span>
+                    <button class="chip-mini active" data-sort="latest">Latest</button>
+                    <button class="chip-mini" data-sort="az">A-Z</button>
+                    <button class="chip-mini" data-sort="margin">Margin</button>
                 </div>
             </div>
         </div>
 
         <div id="house-view">
-            <div id="election-winner"></div>
-            <section class="main-tally">
-                <div class="status-bar"><span>100% counted</span><span>8 to win</span></div>
-                <div class="bar-wrapper">
-                    <div class="majority-marker"></div>
-                    <div class="party-row">
-                        <div class="party-label">ALP</div>
-                        <div class="bar-container"><div class="bar alp" id="alp-bar"><span class="count" id="alp-count">0</span></div></div>
-                    </div>
-                    <div class="party-row">
-                        <div class="party-label">LNP</div>
-                        <div class="bar-container"><div class="bar lnp" id="lnp-bar"><span class="count" id="lnp-count">0</span></div></div>
-                    </div>
-                    <div class="party-row">
-                        <div class="party-label">ONP</div>
-                        <div class="bar-container"><div class="bar onp" id="onp-bar"><span class="count" id="onp-count">0</span></div></div>
-                    </div>
+            <div id="winner-banner" class="banner">COALITION GOVERNMENT FORMED</div>
+            <div class="tally-header">
+                <span>100% counted</span>
+                <span>8 to win</span>
+            </div>
+            <div class="bars-container">
+                <div class="majority-line"></div>
+                <div class="party-row">
+                    <span class="p-name">ALP</span>
+                    <div class="p-bar-bg"><div class="p-bar alp" style="width: 46.6%"><span class="p-count">7</span></div></div>
                 </div>
-            </section>
+                <div class="party-row">
+                    <span class="p-name">LNP</span>
+                    <div class="p-bar-bg"><div class="p-bar lnp" style="width: 33.3%"><span class="p-count">5</span></div></div>
+                </div>
+                <div class="party-row">
+                    <span class="p-name">ONP</span>
+                    <div class="p-bar-bg"><div class="p-bar onp" style="width: 20%"><span class="p-count">3</span></div></div>
+                </div>
+            </div>
         </div>
 
-        <div id="map-view" style="display: none;">
-            <div class="hex-grid-container">
+        <div id="map-view" class="view-section" style="display: none;">
+            <div class="hex-map-wrapper">
                 <div class="hex-grid" id="hex-grid"></div>
             </div>
         </div>
 
-        <div id="senate-view" style="display: none;">
-            <div class="horseshoe-box">
+        <div id="senate-view" class="view-section" style="display: none;">
+            <div class="senate-box">
                 <svg id="senate-svg" viewBox="0 0 400 200"></svg>
-                <div id="senate-legend" class="legend"></div>
             </div>
         </div>
 
-        <section class="seat-list-container">
-            <div id="seat-list"></div>
-        </section>
+        <div id="list-container"></div>
     </div>
     <script src="script.js"></script>
 </body>
