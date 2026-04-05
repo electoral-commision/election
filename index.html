@@ -12,7 +12,6 @@
             <p class="breadcrumb">AEC LIVE | FEDERAL ELECTION 2026</p>
             <div class="tab-container">
                 <button class="tab-btn active" data-view="house">HOUSE</button>
-                <button class="tab-btn" data-view="map">HOUSE MAP</button>
                 <button class="tab-btn" data-view="senate">SENATE</button>
             </div>
             <h1>2026 Federal Election Results</h1>
@@ -30,7 +29,12 @@
                     <span class="label">Filters</span>
                     <button class="chip" id="filter-doubt">Seats in Doubt</button>
                     <button class="chip" id="filter-changing">Changing Seats</button>
-                    <select class="chip-select" id="filter-won"><option value="">Won by ▾</option></select>
+                    <select class="chip-select" id="filter-won">
+                        <option value="">Won by ▾</option>
+                        <option value="alp">ALP</option>
+                        <option value="lnp">LNP</option>
+                        <option value="onp">ONP</option>
+                    </select>
                 </div>
                 <div class="control-group">
                     <span class="label">Sort</span>
@@ -43,36 +47,32 @@
 
         <div id="house-view">
             <div id="winner-banner" class="banner">COALITION GOVERNMENT FORMED</div>
-            <div class="tally-header">
-                <span class="tally-info">100% counted</span>
-                <span class="tally-info">8 to win</span>
+            
+            <div class="tally-header-row">
+                <span class="tally-stat">100% counted</span>
+                <span class="tally-stat">8 to win</span>
             </div>
+
             <div class="bars-container">
                 <div class="majority-line"></div>
                 <div class="party-row">
                     <span class="p-name">ALP</span>
-                    <div class="p-bar-bg"><div class="p-bar alp" id="alp-bar"><span class="p-count" id="alp-count">7</span></div></div>
+                    <div class="p-bar-bg"><div class="p-bar alp" style="width: 46.6%"><span class="p-count">7</span></div></div>
                 </div>
                 <div class="party-row">
                     <span class="p-name">LNP</span>
-                    <div class="p-bar-bg"><div class="p-bar lnp" id="lnp-bar"><span class="p-count" id="lnp-count">5</span></div></div>
+                    <div class="p-bar-bg"><div class="p-bar lnp" style="width: 33.3%"><span class="p-count">5</span></div></div>
                 </div>
                 <div class="party-row">
                     <span class="p-name">ONP</span>
-                    <div class="p-bar-bg"><div class="p-bar onp" id="onp-bar"><span class="p-count" id="onp-count">3</span></div></div>
+                    <div class="p-bar-bg"><div class="p-bar onp" style="width: 20%"><span class="p-count">3</span></div></div>
                 </div>
-            </div>
-        </div>
-
-        <div id="map-view" class="view-section" style="display: none;">
-            <div class="hex-map-wrapper">
-                <div class="hex-grid" id="hex-grid"></div>
             </div>
         </div>
 
         <div id="senate-view" class="view-section" style="display: none;">
-            <div class="senate-box">
-                <svg id="senate-svg" viewBox="0 0 400 200"></svg>
+            <div class="senate-container">
+                <svg id="senate-svg" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid meet"></svg>
             </div>
         </div>
 
