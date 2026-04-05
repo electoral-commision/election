@@ -16,14 +16,15 @@ const seats = [
     { name: "Bruce", party: "alp", person: "Awol_21", status: "GAIN", from: "FROM OTH", swing: "50.0% Gain" }
 ];
 
+// SENATE DATA: 6 SEATS TOTAL
 const senateData = [
-    { label: "LNP", count: 31, color: "#005696" },
-    { label: "ALP", count: 26, color: "#e61e2b" },
-    { label: "GRN", count: 12, color: "#009c3d" },
-    { label: "ONP", count: 7, color: "#f7941d" }
+    { label: "LNP", count: 2, color: "#005696" },
+    { label: "ALP", count: 2, color: "#e61e2b" },
+    { label: "ONP", count: 1, color: "#f7941d" },
+    { label: "GRN", count: 1, color: "#009c3d" }
 ];
 
-const TOTAL_SEATS = 15;
+const TOTAL_HOUSE_SEATS = 15;
 let currentFilter = "all";
 
 function updateDashboard() {
@@ -36,16 +37,16 @@ function updateDashboard() {
 
     if (coalitionTotal >= 8) {
         winnerDiv.style.background = "linear-gradient(90deg, #005696 0%, #f7941d 100%)";
-        winnerDiv.innerText = "Government Formed: LNP-ONP Coalition";
+        winnerDiv.innerText = "LNP-ONP Coalition Government";
     } else if (totals.alp >= 8) {
         winnerDiv.style.background = "#e61e2b";
-        winnerDiv.innerText = "Government Formed: Australian Labor Party";
+        winnerDiv.innerText = "Labor Party Government";
     } else {
         winnerDiv.style.background = "#222";
-        winnerDiv.innerText = "Hung Parliament: Negotiations Ongoing";
+        winnerDiv.innerText = "Hung Parliament";
     }
 
-    document.getElementById('percent-counted').innerText = `100% counted (${seats.length}/${TOTAL_SEATS})`;
+    document.getElementById('percent-counted').innerText = `100% counted (${seats.length}/${TOTAL_HOUSE_SEATS})`;
     updateBar("alp", totals.alp);
     updateBar("lnp", totals.lnp);
     updateBar("onp", totals.onp);
@@ -58,27 +59,21 @@ function renderSenateHorshoe() {
     svg.innerHTML = '';
     legend.innerHTML = '';
 
-    const totalSenate = senateData.reduce((sum, p) => sum + p.count, 0);
     let seatIndex = 0;
-    const rows = 4;
-    const seatsPerRow = Math.ceil(totalSenate / rows);
+    const totalSenate = 6;
 
     senateData.forEach(party => {
-        // Create Legend
         legend.innerHTML += `<div class="legend-item"><div class="dot-sample" style="background:${party.color}"></div>${party.label}: ${party.count}</div>`;
 
-        // Create Dots
         for (let i = 0; i < party.count; i++) {
-            const row = Math.floor(seatIndex / seatsPerRow);
-            const pos = seatIndex % seatsPerRow;
-            const radius = 100 + (row * 25);
-            const angle = Math.PI + (pos / (seatsPerRow - 1)) * Math.PI;
-            
+            // Calculate horseshoe coordinates
+            const angle = Math.PI + (seatIndex / (totalSenate - 1)) * Math.PI;
+            const radius = 130;
             const cx = 200 + radius * Math.cos(angle);
-            const cy = 180 + radius * Math.sin(angle);
+            const cy = 170 + radius * Math.sin(angle);
 
             const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-            dot.setAttribute("cx", cx); dot.setAttribute("cy", cy); dot.setAttribute("r", 7);
+            dot.setAttribute("cx", cx); dot.setAttribute("cy", cy); dot.setAttribute("r", 12);
             dot.setAttribute("fill", party.color);
             svg.appendChild(dot);
             seatIndex++;
@@ -90,14 +85,14 @@ function updateBar(id, count) {
     const bar = document.getElementById(`${id}-bar`);
     const label = document.getElementById(`${id}-count`);
     if(label) label.innerText = count;
-    if(bar) bar.style.width = (count / TOTAL_SEATS * 100) + "%";
+    if(bar) bar.style.width = (count / TOTAL_HOUSE_SEATS * 100) + "%";
 }
 
 function renderSeatList() {
     const list = document.getElementById('seat-list');
     list.innerHTML = "";
     seats.forEach(s => {
-        if (currentFilter === "doubt" && s.party !== "") return;
+        if (currentFilter === "doubt" && s.status !== "IN DOUBT") return;
         const card = document.createElement('div');
         card.className = 'seat-card';
         card.innerHTML = `
@@ -114,7 +109,6 @@ function renderSeatList() {
     });
 }
 
-// Tab Toggling logic
 document.getElementById('tab-house').onclick = function() {
     this.classList.add('active');
     document.getElementById('tab-senate').classList.remove('active');
