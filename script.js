@@ -1,9 +1,9 @@
 // --- ONLY EDIT THE SEATS LIST BELOW ---
 // The top bars will update automatically when you add a 'party' to a seat.
 const seats = [
-    { name: "Melbourne", party: "", person: "", status: "IN DOUBT", from: "", swing: "Counting..." },
-    { name: "Kooyong", party: "", person: "", status: "IN DOUBT", from: "", swing: "Counting..." },
-    { name: "Higgins", party: "", person: "", status: "IN DOUBT", from: "", swing: "Counting..." },
+    { name: "Melbourne", party: "alp", person: "Awol_21", status: "GAIN", from: "", swing: "100%" },
+    { name: "Kooyong", party: "onp", person: "Jedstar54321", status: "GAIN", from: "", swing: "100%" },
+    { name: "Higgins", party: "alp", person: "John", status: "GAIN", from: "", swing: "100%" },
     { name: "Chisholm", party: "", person: "", status: "IN DOUBT", from: "", swing: "Counting..." },
     { name: "Macnamara", party: "", person: "", status: "IN DOUBT", from: "", swing: "Counting..." },
     { name: "Maribyrnong", party: "", person: "", status: "IN DOUBT", from: "", swing: "Counting..." },
