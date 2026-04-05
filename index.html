@@ -5,72 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AEC Federal Election 2026</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .senate-viz-container {
-            text-align: center;
-            background: #1a1a1a;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            color: white;
-        }
-        .senate-svg { width: 300px; height: 180px; }
-        .senate-total-text {
-            font-size: 2.5rem;
-            font-weight: 900;
-            fill: white;
-            text-anchor: middle;
-        }
-        .senate-label-small {
-            font-size: 0.8rem;
-            fill: #888;
-            text-anchor: middle;
-            text-transform: uppercase;
-        }
-        .senate-style { border-left: 6px solid #7e57c2 !important; background-color: #f4f0fa !important; }
-    </style>
 </head>
 <body>
     <div class="container">
         <header>
             <p class="breadcrumb">AEC Live | Federal Election 2026</p>
             <h1>2026 Federal Election Results</h1>
-            <p class="update-time" id="time-display">Connecting...</p>
+            <p id="time-display" class="update-time">Synchronizing with AEC...</p>
         </header>
 
-        <div id="election-winner" style="text-align: center; font-size: 2rem; font-weight: 900; margin-bottom: 25px; text-transform: uppercase; padding: 20px; border-radius: 8px; display: none;"></div>
+        <div id="election-winner" style="text-align: center; font-size: 2rem; font-weight: 900; margin-bottom: 25px; text-transform: uppercase; padding: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"></div>
 
-        <section class="main-tally">
-            <h3 style="color: #888; margin-bottom: 10px;">House of Representatives</h3>
+        <div class="view-switcher">
+            <button id="btn-house" class="view-btn active" onclick="switchView('house')">House of Reps</button>
+            <button id="btn-senate" class="view-btn" onclick="switchView('senate')">The Senate</button>
+        </div>
+
+        <section id="house-view" class="main-tally">
             <div class="status-bar">
-                <span id="percent-counted">0% counted</span>
+                <span>100.0% counted (15/15)</span>
                 <span class="goal">8 to win</span>
             </div>
             <div class="bar-wrapper">
                 <div class="majority-marker"></div>
                 <div class="party-row">
                     <div class="party-label">ALP</div>
-                    <div class="bar-container"><div class="bar alp" id="alp-bar"><span class="count" id="alp-count">0</span></div></div>
+                    <div class="bar-container"><div class="bar alp" id="alp-bar" style="width: 46.6%"><span class="count" id="alp-count">7</span></div></div>
                 </div>
                 <div class="party-row">
                     <div class="party-label">LNP</div>
-                    <div class="bar-container"><div class="bar lnp" id="lnp-bar"><span class="count" id="lnp-count">0</span></div></div>
+                    <div class="bar-container"><div class="bar lnp" id="lnp-bar" style="width: 33.3%"><span class="count" id="lnp-count">5</span></div></div>
                 </div>
                 <div class="party-row">
                     <div class="party-label">ONP</div>
-                    <div class="bar-container"><div class="bar onp" id="onp-bar"><span class="count" id="onp-count">0</span></div></div>
+                    <div class="bar-container"><div class="bar onp" id="onp-bar" style="width: 20%"><span class="count" id="onp-count">3</span></div></div>
                 </div>
             </div>
         </section>
 
-        <section class="senate-viz-container">
-            <h3 style="color: #888; margin-bottom: 15px;">Senate Composition</h3>
-            <svg class="senate-svg" viewBox="0 0 200 120">
+        <section id="senate-view" class="senate-viz-container" style="display: none;">
+            <svg class="senate-svg" viewBox="0 0 200 130">
                 <g id="senate-dots"></g>
-                <text x="100" y="85" class="senate-total-text">6</text>
-                <text x="100" y="105" class="senate-label-small">Total Senators</text>
+                <text x="100" y="95" class="senate-total-text">6</text>
+                <text x="100" y="115" class="senate-label-small">Total Senators</text>
             </svg>
-            <div id="senate-legend" style="display: flex; justify-content: center; gap: 15px; font-size: 0.9rem;">
+            <div class="senate-legend">
                 <span><span style="color:#e61e2b">●</span> ALP: 3</span>
                 <span><span style="color:#005696">●</span> LNP: 1</span>
                 <span><span style="color:#f7941d">●</span> ONP: 2</span>
@@ -78,9 +57,6 @@
         </section>
 
         <section class="seat-by-seat">
-            <div class="filter-bar">
-                <span id="filter-all" class="active">All Districts</span>
-            </div>
             <div id="seat-list"></div>
         </section>
     </div>
