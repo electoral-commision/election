@@ -1,106 +1,109 @@
 const seats = [
-    { name: "Melbourne", party: "alp", person: "Bounty", status: "GAIN", from: "FROM OTH", swing: "33.3% Gain", type: "house" },
-    { name: "Kooyong", party: "onp", person: "Bumuncha", status: "GAIN", from: "FROM OTH", swing: "50.0% Gain", type: "house" },
-    { name: "Higgins", party: "alp", person: "Thecone", status: "GAIN", from: "FROM OTH", swing: "50.0% Gain", type: "house" },
-    { name: "Chisholm", party: "onp", person: "Triple G gaming", status: "GAIN", from: "FROM OTH", swing: "100% Gain", type: "house" },
-    { name: "Macnamara", party: "onp", person: "itsmerealdd", status: "GAIN", from: "FROM OTH", swing: "100% Gain", type: "house" },
-    { name: "Maribyrnong", party: "lnp", person: "2023 Toyota Camry", status: "GAIN", from: "FROM OTH", swing: "100% Gain", type: "house" },
-    { name: "Wills", party: "lnp", person: "Nswsteamtrainfan10", status: "GAIN", from: "FROM OTH", swing: "100% Gain", type: "house" },
-    { name: "Fraser", party: "lnp", person: "Chris", status: "GAIN", from: "FROM OTH", swing: "100% Gain", type: "house" },
-    { name: "Dunkley", party: "alp", person: "Jehrhfdhdhhfhdj", status: "GAIN", from: "FROM OTH", swing: "50.0% Gain", type: "house" },
-    { name: "Corangamite", party: "alp", person: "nathantombleson2024", status: "GAIN", from: "FROM OTH", swing: "50.0% Gain", type: "house" },
-    { name: "Casey", party: "lnp", person: "officer_chilly", status: "GAIN", from: "FROM OTH", swing: "50.0% Gain", type: "house" },
-    { name: "La Trobe", party: "alp", person: "BanditNinja", status: "GAIN", from: "FROM OTH", swing: "100% Gain", type: "house" },
-    { name: "Monash", party: "lnp", person: "Harley", status: "GAIN", from: "FROM OTH", swing: "100% Gain", type: "house" },
-    { name: "Calwell", party: "alp", person: "kiwi", status: "GAIN", from: "FROM OTH", swing: "50.0% Gain", type: "house" },
-    { name: "Bruce", party: "alp", person: "Awol_21", status: "GAIN", from: "FROM OTH", swing: "50.0% Gain", type: "house" },
+    // HOUSE DISTRICTS (7 ALP, 5 LNP, 3 ONP)
+    { name: "Melbourne", party: "alp", person: "Bounty", type: "house" },
+    { name: "Higgins", party: "alp", person: "Thecone", type: "house" },
+    { name: "Dunkley", party: "alp", person: "Jehrhfdhdhhfhdj", type: "house" },
+    { name: "Corangamite", party: "alp", person: "nathantombleson2024", type: "house" },
+    { name: "La Trobe", party: "alp", person: "BanditNinja", type: "house" },
+    { name: "Calwell", party: "alp", person: "kiwi", type: "house" },
+    { name: "Bruce", party: "alp", person: "Awol_21", type: "house" },
+    { name: "Maribyrnong", party: "lnp", person: "2023 Toyota Camry", type: "house" },
+    { name: "Wills", party: "lnp", person: "Nswsteamtrainfan10", type: "house" },
+    { name: "Fraser", party: "lnp", person: "Chris", type: "house" },
+    { name: "Casey", party: "lnp", person: "officer_chilly", type: "house" },
+    { name: "Monash", party: "lnp", person: "Harley", type: "house" },
+    { name: "Kooyong", party: "onp", person: "Bumuncha", type: "house" },
+    { name: "Chisholm", party: "onp", person: "Triple G gaming", type: "house" },
+    { name: "Macnamara", party: "onp", person: "itsmerealdd", type: "house" },
 
-    // SENATORS
-    { name: "Senate Seat 1", party: "alp", person: "itxw4sley._.", status: "ELECTED", from: "SENATE", type: "senate" },
-    { name: "Senate Seat 2", party: "lnp", person: "hitheresam", status: "ELECTED", from: "SENATE", type: "senate" },
-    { name: "Senate Seat 3", party: "onp", person: "Reald", status: "ELECTED", from: "SENATE", type: "senate" },
-    { name: "Senate Seat 4", party: "alp", person: "jeffery_harrold1", status: "ELECTED", from: "SENATE", type: "senate" },
-    { name: "Senate Seat 5", party: "onp", person: "siua10011", status: "ELECTED", from: "SENATE", type: "senate" },
-    { name: "Senate Seat 6", party: "alp", person: "asperytravel", status: "ELECTED", from: "SENATE", type: "senate" }
+    // SENATE SEATS
+    { name: "Senate Seat 1", party: "alp", person: "itxw4sley._.", type: "senate" },
+    { name: "Senate Seat 2", party: "alp", person: "jeffery_harrold1", type: "senate" },
+    { name: "Senate Seat 3", party: "alp", person: "asperytravel", type: "senate" },
+    { name: "Senate Seat 4", party: "lnp", person: "hitheresam", type: "senate" },
+    { name: "Senate Seat 5", party: "onp", person: "Reald", type: "senate" },
+    { name: "Senate Seat 6", party: "onp", person: "siua10011", type: "senate" }
 ];
 
-function updateDashboard() {
-    const totals = { alp: 0, lnp: 0, onp: 0 };
-    const senateList = [];
+function switchView(view) {
+    const houseEl = document.getElementById('house-view');
+    const senateEl = document.getElementById('senate-view');
+    const btnHouse = document.getElementById('btn-house');
+    const btnSenate = document.getElementById('btn-senate');
 
-    seats.forEach(s => {
-        if (s.type === "house") {
-            totals[s.party]++;
-        } else {
-            senateList.push(s);
-        }
-    });
-
-    // House Winner Logic
-    const winnerDiv = document.getElementById('election-winner');
-    const coalition = totals.lnp + totals.onp;
-    winnerDiv.style.display = "block";
-    if (coalition >= 8) {
-        winnerDiv.style.background = "linear-gradient(90deg, #005696, #f7941d)";
-        winnerDiv.innerText = "Government Formed: LNP-ONP Coalition";
+    if (view === 'house') {
+        houseEl.style.display = 'block';
+        senateEl.style.display = 'none';
+        btnHouse.classList.add('active');
+        btnSenate.classList.remove('active');
+    } else {
+        houseEl.style.display = 'none';
+        senateEl.style.display = 'block';
+        btnHouse.classList.remove('active');
+        btnSenate.classList.add('active');
+        drawSenateHorshoe();
     }
-
-    // Progress Bar
-    document.getElementById('percent-counted').innerText = `100% counted (${totals.alp + totals.lnp + totals.onp}/15)`;
-    updateBar("alp", totals.alp);
-    updateBar("lnp", totals.lnp);
-    updateBar("onp", totals.onp);
-
-    drawSenateHorshoe(senateList);
-    renderSeatList();
+    renderSeatList(view);
 }
 
-function drawSenateHorshoe(senators) {
+function drawSenateHorshoe() {
     const container = document.getElementById('senate-dots');
     container.innerHTML = "";
     const colors = { alp: "#e61e2b", lnp: "#005696", onp: "#f7941d" };
     
-    const radius = 70;
-    const centerX = 100;
-    const centerY = 90;
+    // Sort so Red is Left, Blue is Middle, Orange is Right
+    const order = ["alp", "lnp", "onp"];
+    const senateSeats = seats
+        .filter(s => s.type === "senate")
+        .sort((a, b) => order.indexOf(a.party) - order.indexOf(b.party));
 
-    senators.forEach((s, i) => {
-        // Calculate angle from 180 to 0 degrees
-        const angle = Math.PI - (i * (Math.PI / (senators.length - 1)));
+    const radius = 75;
+    const centerX = 100;
+    const centerY = 100;
+
+    senateSeats.forEach((s, i) => {
+        const angle = Math.PI - (i * (Math.PI / (senateSeats.length - 1)));
         const x = centerX + radius * Math.cos(angle);
         const y = centerY - radius * Math.sin(angle);
 
         const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
         circle.setAttribute("cx", x);
         circle.setAttribute("cy", y);
-        circle.setAttribute("r", 8);
+        circle.setAttribute("r", 9);
         circle.setAttribute("fill", colors[s.party]);
         container.appendChild(circle);
     });
 }
 
-function renderSeatList() {
+function renderSeatList(viewType) {
     const list = document.getElementById('seat-list');
     list.innerHTML = "";
-    seats.forEach(s => {
+    
+    seats.filter(s => s.type === viewType).forEach(s => {
         const card = document.createElement('div');
-        card.className = `seat-card ${s.type === 'senate' ? 'senate-style' : ''}`;
+        card.className = 'seat-card';
         card.innerHTML = `
             <div>
-                <div class="seat-name">${s.name} ${s.type === 'senate' ? ' (SENATE)' : ''}</div>
+                <div class="seat-name">${s.name}</div>
                 <div class="person-name">${s.person}</div>
-                <div class="badge-row">
-                    <span class="badge bg-${s.party}">${s.party.toUpperCase()}</span>
-                </div>
+                <span class="badge bg-${s.party}">${s.party.toUpperCase()}</span>
             </div>
         `;
         list.appendChild(card);
     });
 }
 
-function updateBar(id, count) {
-    document.getElementById(`${id}-count`).innerText = count;
-    document.getElementById(`${id}-bar`).style.width = (count / 15 * 100) + "%";
+function init() {
+    const winnerDiv = document.getElementById('election-winner');
+    winnerDiv.style.background = "linear-gradient(90deg, #005696, #f7941d)";
+    winnerDiv.style.color = "white";
+    winnerDiv.innerText = "Government Formed: LNP-ONP Coalition";
+    
+    // Set time
+    const now = new Date();
+    document.getElementById('time-display').innerText = "Updated at " + now.toLocaleTimeString();
+    
+    switchView('house');
 }
 
-window.onload = updateDashboard;
+window.onload = init;
