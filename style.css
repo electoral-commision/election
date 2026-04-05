@@ -1,71 +1,72 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: #000;
+    color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     margin: 0;
-    padding: 20px;
     display: flex;
     justify-content: center;
 }
 
-.container { width: 100%; max-width: 600px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+.aec-container { width: 100%; max-width: 650px; padding: 20px; }
 
-header { text-align: center; border-bottom: 2px solid #eee; margin-bottom: 20px; padding-bottom: 10px; }
+.aec-header { margin-bottom: 20px; }
+.analyst-tag { font-size: 0.8rem; color: #aaa; margin: 0; }
+.analyst-tag strong { color: #0084ff; text-decoration: underline; }
+.status-timestamp { color: #00ff00; font-size: 0.85rem; margin-top: 10px; }
 
-.breadcrumb { color: #666; font-size: 0.75rem; text-transform: uppercase; }
+.coalition-banner {
+    padding: 12px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
 
-.update-time { color: #d32f2f; font-weight: bold; font-size: 0.85rem; }
+.aec-tabs { display: flex; gap: 4px; background: #222; padding: 4px; border-radius: 20px; margin-bottom: 25px; width: fit-content; margin-inline: auto; }
+.tab-btn {
+    background: none; border: none; color: #888; padding: 8px 16px; border-radius: 18px; cursor: pointer; font-weight: bold;
+}
+.tab-btn.active { background: #fff; color: #000; }
 
-.winner-banner { text-align: center; font-size: 1.5rem; font-weight: bold; color: white; padding: 15px; border-radius: 5px; margin-bottom: 20px; text-transform: uppercase; }
+.tally-card { background: #111; padding: 20px; border-radius: 12px; margin-bottom: 25px; border: 1px solid #222; }
+.tally-meta { display: flex; justify-content: space-between; font-size: 0.8rem; color: #888; margin-bottom: 15px; }
 
-.view-switcher { display: flex; justify-content: center; gap: 5px; margin-bottom: 20px; }
+.progress-container { position: relative; }
+.majority-line { position: absolute; left: 53.3%; height: 100%; width: 1px; border-left: 1px dashed #666; z-index: 5; }
 
-.view-btn { padding: 8px 15px; border: 1px solid #ccc; background: #eee; cursor: pointer; font-weight: bold; }
-
-.view-btn.active { background: #005696; color: white; border-color: #005696; }
-
-.main-tally { margin-bottom: 30px; }
-
-.status-bar { display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 10px; font-weight: bold; }
-
-.bar-wrapper { position: relative; margin-bottom: 20px; }
-
-.majority-marker { position: absolute; left: 53.3%; top: 0; bottom: 0; width: 2px; background: #333; z-index: 5; }
-
-.party-row { display: flex; align-items: center; margin-bottom: 8px; }
-
-.party-label { width: 45px; font-weight: bold; font-size: 0.9rem; }
-
-.bar-container { flex-grow: 1; background: #e0e0e0; height: 30px; position: relative; }
-
-.bar { height: 100%; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; color: white; font-weight: bold; }
+.party-progress-row { display: flex; align-items: center; margin-bottom: 10px; gap: 10px; }
+.party-id { width: 40px; font-weight: bold; }
+.progress-bg { flex-grow: 1; background: #222; height: 35px; border-radius: 4px; overflow: hidden; }
+.progress-fill { height: 100%; }
+.party-total { width: 30px; text-align: right; font-weight: bold; font-size: 1.2rem; }
 
 .alp { background: #e61e2b; }
 .lnp { background: #005696; }
 .onp { background: #f7941d; }
 
-.senate-viz-container { text-align: center; padding: 20px; background: #f9f9f9; border: 1px solid #ddd; margin-bottom: 20px; }
+.seat-row-card {
+    background: #111;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #222;
+}
 
-.senate-svg { width: 250px; height: 150px; }
+.seat-info h3 { margin: 0; font-size: 1.1rem; }
+.seat-status-line { margin: 8px 0; display: flex; align-items: center; gap: 8px; }
+.status-badge { padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; }
+.from-tag { font-size: 0.7rem; color: #666; font-weight: bold; }
+.candidate-name { color: #888; margin: 0; font-size: 0.85rem; }
 
-.senate-total-text { font-size: 2.5rem; font-weight: bold; fill: #333; text-anchor: middle; }
+.seat-swing { text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; font-size: 0.8rem; color: #aaa; }
+.gauge-placeholder { width: 40px; height: 20px; border-radius: 20px 20px 0 0; border: 4px solid #222; border-bottom: none; }
+.party-border-alp { border-color: #e61e2b; border-bottom: none; }
+.party-border-lnp { border-color: #005696; border-bottom: none; }
+.party-border-onp { border-color: #f7941d; border-bottom: none; }
 
-.senate-label-small { font-size: 0.75rem; fill: #777; text-anchor: middle; }
-
-.seat-card { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #eee; }
-
-.seat-name { font-weight: bold; color: #005696; }
-
-.person-name { font-size: 0.9rem; margin: 2px 0; }
-
-.badge { font-size: 0.7rem; padding: 2px 6px; color: white; font-weight: bold; border-radius: 3px; }
-
-.bg-alp { background: #e61e2b; }
-.bg-lnp { background: #005696; }
-.bg-onp { background: #f7941d; }
-
-.from-text { font-size: 0.7rem; color: #777; margin-left: 5px; }
-
-.swing-box { background: #eee; padding: 5px 10px; border-radius: 4px; min-width: 70px; text-align: center; }
-
-.swing-label { font-size: 0.75rem; font-weight: bold; }
+.senate-viz-card { background: #111; border-radius: 12px; padding: 40px; text-align: center; border: 1px solid #222; }
+.senate-svg { width: 280px; height: 180px; }
+.senate-num { font-size: 3rem; fill: #fff; font-weight: 900; text-anchor: middle; }
+.senate-sub { fill: #888; font-size: 0.8rem; text-anchor: middle; }
