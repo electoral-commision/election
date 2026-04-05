@@ -1,11 +1,11 @@
 // --- ONLY EDIT THE SEATS LIST BELOW ---
 // The top bars will update automatically when you add a 'party' to a seat.
 const seats = [
-    { name: "Melbourne", party: "alp", person: "Bounty", status: "GAIN", from: "", swing: "33%" },
-    { name: "Kooyong", party: "onp", person: "Bumuncha", status: "GAIN", from: "", swing: "50%" },
-    { name: "Higgins", party: "alp", person: "Thecone", status: "GAIN", from: "", swing: "50%" },
-    { name: "Chisholm", party: "", person: "", status: "IN DOUBT", from: "", swing: "Counting..." },
-    { name: "Macnamara", party: "", person: "", status: "IN DOUBT", from: "", swing: "Counting..." },
+    { name: "Melbourne", party: "alp", person: "Bounty", status: "GAIN", from: "from oth", swing: "33%" },
+    { name: "Kooyong", party: "onp", person: "Bumuncha", status: "GAIN", from: "from oth", swing: "50%" },
+    { name: "Higgins", party: "alp", person: "Thecone", status: "GAIN", from: "from oth", swing: "50%" },
+    { name: "Chisholm", party: "onp", person: "Triple G gaming", status: "GAIN", from: "from oth", swing: "100%" },
+    { name: "Macnamara", party: "onp", person: "itsmerealdd", status: "GAIN", from: "from oth", swing: "100%" },
     { name: "Maribyrnong", party: "", person: "", status: "IN DOUBT", from: "", swing: "Counting..." },
     { name: "Wills", party: "", person: "", status: "IN DOUBT", from: "", swing: "Counting..." },
     { name: "Fraser", party: "", person: "", status: "IN DOUBT", from: "", swing: "Counting..." },
