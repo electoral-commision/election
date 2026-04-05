@@ -1,4 +1,3 @@
-// --- ONLY EDIT THE SEATS LIST BELOW ---
 const seats = [
     { name: "Melbourne", party: "alp", person: "Bounty", status: "GAIN", from: "FROM OTH", swing: "33.3% Gain" },
     { name: "Kooyong", party: "onp", person: "Bumuncha", status: "GAIN", from: "FROM OTH", swing: "50.0% Gain" },
@@ -17,87 +16,73 @@ const seats = [
     { name: "Bruce", party: "alp", person: "Awol_21", status: "GAIN", from: "FROM OTH", swing: "50.0% Gain" }
 ];
 
+const senateData = [
+    { label: "LNP", count: 31, color: "#005696" },
+    { label: "ALP", count: 26, color: "#e61e2b" },
+    { label: "GRN", count: 12, color: "#009c3d" },
+    { label: "ONP", count: 7, color: "#f7941d" }
+];
+
 const TOTAL_SEATS = 15;
 let currentFilter = "all";
 
-async function updateDashboard() {
-    // 1. Calculate Totals
+function updateDashboard() {
     const totals = { alp: 0, lnp: 0, onp: 0, oth: 0 };
-    seats.forEach(s => {
-        if (totals[s.party] !== undefined) totals[s.party]++;
-    });
+    seats.forEach(s => { if (totals[s.party] !== undefined) totals[s.party]++; });
 
-    // 2. Winner Logic (Coalition: LNP + ONP)
     const winnerDiv = document.getElementById('election-winner');
     const coalitionTotal = totals.lnp + totals.onp;
-    
     winnerDiv.style.display = "block";
-    
+
     if (coalitionTotal >= 8) {
-        // Gradient from LNP Blue to ONP Orange
         winnerDiv.style.background = "linear-gradient(90deg, #005696 0%, #f7941d 100%)";
-        winnerDiv.style.color = "white";
         winnerDiv.innerText = "Government Formed: LNP-ONP Coalition";
     } else if (totals.alp >= 8) {
-        winnerDiv.style.background = "#e61e2b"; // ALP Red
-        winnerDiv.style.color = "white";
+        winnerDiv.style.background = "#e61e2b";
         winnerDiv.innerText = "Government Formed: Australian Labor Party";
     } else {
         winnerDiv.style.background = "#222";
-        winnerDiv.style.color = "#888";
         winnerDiv.innerText = "Hung Parliament: Negotiations Ongoing";
     }
 
-    // 3. Update Counters
-    const totalCounted = totals.alp + totals.lnp + totals.onp + totals.oth;
-    const percent = ((totalCounted / TOTAL_SEATS) * 100).toFixed(1);
-    document.getElementById('percent-counted').innerText = `${percent}% counted (${totalCounted}/${TOTAL_SEATS})`;
-
-    // 4. Fetch GitHub Time
-    try {
-        const response = await fetch('https://api.github.com/repos/electoral-commision/election/commits?path=script.js&page=1&per_page=1');
-        const data = await response.json();
-        if (data && data[0]) {
-            const commitDate = new Date(data[0].commit.committer.date);
-            const timeString = commitDate.toLocaleTimeString('en-AU', { hour: 'numeric', minute: '2-digit', second: '2-digit', hour12: true });
-            document.getElementById('time-display').innerText = `Updated at ${timeString}`;
-        }
-    } catch (err) {
-        document.getElementById('time-display').innerText = "Updated Live";
-    }
-
-    // 5. Update Bars
+    document.getElementById('percent-counted').innerText = `100% counted (${seats.length}/${TOTAL_SEATS})`;
     updateBar("alp", totals.alp);
     updateBar("lnp", totals.lnp);
     updateBar("onp", totals.onp);
-
     renderSeatList();
 }
 
-function renderSeatList() {
-    const list = document.getElementById('seat-list');
-    list.innerHTML = "";
-    seats.forEach(s => {
-        const isInDoubt = (s.party === "" || s.person === "");
-        const isChanging = (s.status === "GAIN" || s.status === "WIN");
-        if (currentFilter === "doubt" && !isInDoubt) return;
-        if (currentFilter === "changing" && !isChanging) return;
+function renderSenateHorshoe() {
+    const svg = document.getElementById('senate-svg');
+    const legend = document.getElementById('senate-legend');
+    svg.innerHTML = '';
+    legend.innerHTML = '';
 
-        const card = document.createElement('div');
-        card.className = 'seat-card';
-        const partyClass = s.party ? `bg-${s.party}` : 'bg-pending';
-        card.innerHTML = `
-            <div>
-                <div class="seat-name">${s.name}</div>
-                <div class="person-name">${s.person || "Candidate Pending"}</div>
-                <div class="badge-row">
-                    <span class="badge ${partyClass}">${s.party ? s.party.toUpperCase() : 'PENDING'} ${s.status}</span>
-                    <span class="from-text">${s.from}</span>
-                </div>
-            </div>
-            <div class="swing-box"><div class="swing-label">${s.swing}</div></div>
-        `;
-        list.appendChild(card);
+    const totalSenate = senateData.reduce((sum, p) => sum + p.count, 0);
+    let seatIndex = 0;
+    const rows = 4;
+    const seatsPerRow = Math.ceil(totalSenate / rows);
+
+    senateData.forEach(party => {
+        // Create Legend
+        legend.innerHTML += `<div class="legend-item"><div class="dot-sample" style="background:${party.color}"></div>${party.label}: ${party.count}</div>`;
+
+        // Create Dots
+        for (let i = 0; i < party.count; i++) {
+            const row = Math.floor(seatIndex / seatsPerRow);
+            const pos = seatIndex % seatsPerRow;
+            const radius = 100 + (row * 25);
+            const angle = Math.PI + (pos / (seatsPerRow - 1)) * Math.PI;
+            
+            const cx = 200 + radius * Math.cos(angle);
+            const cy = 180 + radius * Math.sin(angle);
+
+            const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            dot.setAttribute("cx", cx); dot.setAttribute("cy", cy); dot.setAttribute("r", 7);
+            dot.setAttribute("fill", party.color);
+            svg.appendChild(dot);
+            seatIndex++;
+        }
     });
 }
 
@@ -108,15 +93,41 @@ function updateBar(id, count) {
     if(bar) bar.style.width = (count / TOTAL_SEATS * 100) + "%";
 }
 
-function setFilter(type, el) {
-    currentFilter = type;
-    document.querySelectorAll('.filter-bar span').forEach(s => s.classList.remove('active'));
-    el.classList.add('active');
-    renderSeatList();
+function renderSeatList() {
+    const list = document.getElementById('seat-list');
+    list.innerHTML = "";
+    seats.forEach(s => {
+        if (currentFilter === "doubt" && s.party !== "") return;
+        const card = document.createElement('div');
+        card.className = 'seat-card';
+        card.innerHTML = `
+            <div>
+                <div class="seat-name">${s.name}</div>
+                <div class="person-name">${s.person}</div>
+                <div class="badge-row">
+                    <span class="badge bg-${s.party}">${s.party.toUpperCase()} ${s.status}</span>
+                    <span class="from-text">${s.from}</span>
+                </div>
+            </div>
+            <div class="swing-box"><div class="swing-label">${s.swing}</div></div>`;
+        list.appendChild(card);
+    });
 }
 
-document.getElementById('filter-all').onclick = function() { setFilter('all', this); };
-document.getElementById('filter-doubt').onclick = function() { setFilter('doubt', this); };
-document.getElementById('filter-changing').onclick = function() { setFilter('changing', this); };
+// Tab Toggling logic
+document.getElementById('tab-house').onclick = function() {
+    this.classList.add('active');
+    document.getElementById('tab-senate').classList.remove('active');
+    document.getElementById('house-view').style.display = 'block';
+    document.getElementById('senate-view').style.display = 'none';
+};
+
+document.getElementById('tab-senate').onclick = function() {
+    this.classList.add('active');
+    document.getElementById('tab-house').classList.remove('active');
+    document.getElementById('house-view').style.display = 'none';
+    document.getElementById('senate-view').style.display = 'block';
+    renderSenateHorshoe();
+};
 
 window.onload = updateDashboard;
