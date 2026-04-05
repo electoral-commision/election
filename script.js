@@ -1,4 +1,3 @@
-// --- CONFIG ---
 const REPO_NAME = "electoral-commision/election";
 
 const houseSeats = [
@@ -36,55 +35,41 @@ async function fetchEditTime() {
         const data = await response.json();
         if (data[0]) {
             const date = new Date(data[0].commit.committer.date);
-            document.getElementById('time-display').innerText = `Updated ${date.toLocaleTimeString('en-AU', {hour: 'numeric', minute:'2-digit', hour12:true})}`;
+            document.getElementById('time-display').innerText = `Updated ${date.toLocaleTimeString('en-AU', {hour:'numeric', minute:'2-digit', hour12:true})}`;
         }
     } catch (e) { document.getElementById('time-display').innerText = "Live Update Active"; }
 }
 
-function updateHouseTally() {
-    const totals = { alp: 0, lnp: 0, onp: 0 };
-    houseSeats.forEach(s => totals[s.party]++);
-
-    const winnerDiv = document.getElementById('election-winner');
-    winnerDiv.style.display = "block";
-    if ((totals.lnp + totals.onp) >= 8) {
-        winnerDiv.style.background = "linear-gradient(90deg, #005696 0%, #f7941d 100%)";
-        winnerDiv.innerText = "Coalition Government Formed";
-    } else if (totals.alp >= 8) {
-        winnerDiv.style.background = "#e61e2b";
-        winnerDiv.innerText = "Labor Government Formed";
-    }
-
-    ["alp", "lnp", "onp"].forEach(p => {
-        document.getElementById(`${p}-count`).innerText = totals[p];
-        document.getElementById(`${p}-bar`).style.width = (totals[p] / 15 * 100) + "%";
+function renderList(data) {
+    const list = document.getElementById('seat-list');
+    list.innerHTML = "";
+    const source = data || (activeTab === "senate" ? senateSeats : houseSeats);
+    source.forEach(s => {
+        const card = document.createElement('div');
+        card.className = 'seat-card';
+        card.innerHTML = `<div><div class="seat-name">${s.name}</div><div class="person-name">${s.person}</div>
+        <span class="badge ${s.party}">${s.party.toUpperCase()} ${s.status}</span></div>
+        <div class="swing-label">${s.swing}</div>`;
+        list.appendChild(card);
     });
 }
 
-function renderMap() {
-    const grid = document.getElementById('map-grid');
+function renderHexMap() {
+    const grid = document.getElementById('hex-grid');
     grid.innerHTML = "";
     houseSeats.forEach(s => {
-        const sq = document.createElement('div');
-        sq.className = `map-sq ${s.party}`;
-        sq.innerText = s.name.substring(0, 2).toUpperCase();
-        sq.title = `${s.name}: ${s.person}`;
-        grid.appendChild(sq);
+        const hex = document.createElement('div');
+        hex.className = `hex ${s.party}`;
+        hex.innerText = s.name.substring(0,2).toUpperCase();
+        hex.title = `${s.name}: ${s.person}`;
+        grid.appendChild(hex);
     });
 }
 
-function renderSenateHorshoe() {
+function renderSenate() {
     const svg = document.getElementById('senate-svg');
-    const legend = document.getElementById('senate-legend');
-    svg.innerHTML = ''; legend.innerHTML = '';
-    
+    svg.innerHTML = '';
     const colors = { alp: "#e61e2b", lnp: "#005696", onp: "#f7941d" };
-    const partyCounts = { ALP: 3, LNP: 1, ONP: 2 };
-
-    Object.entries(partyCounts).forEach(([name, count]) => {
-        legend.innerHTML += `<div class="legend-item"><div class="dot-sample" style="background:${colors[name.toLowerCase()]}"></div>${name}: ${count}</div>`;
-    });
-
     senateSeats.forEach((s, i) => {
         const angle = Math.PI + (i / (senateSeats.length - 1)) * Math.PI;
         const cx = 200 + 140 * Math.cos(angle);
@@ -96,34 +81,6 @@ function renderSenateHorshoe() {
     });
 }
 
-function renderSeatList(filteredData) {
-    const list = document.getElementById('seat-list');
-    list.innerHTML = "";
-    const data = filteredData || (activeTab === "senate" ? senateSeats : houseSeats);
-    
-    data.forEach(s => {
-        const card = document.createElement('div');
-        card.className = 'seat-card';
-        card.innerHTML = `
-            <div>
-                <div class="seat-name">${s.name}</div>
-                <div class="person-name">${s.person}</div>
-                <span class="badge bg-${s.party}">${s.party.toUpperCase()} ${s.status}</span>
-            </div>
-            <div class="swing-label">${s.swing}</div>`;
-        list.appendChild(card);
-    });
-}
-
-// Search Logic
-document.getElementById('seat-search').oninput = (e) => {
-    const val = e.target.value.toLowerCase();
-    const source = activeTab === "senate" ? senateSeats : houseSeats;
-    const filtered = source.filter(s => s.name.toLowerCase().includes(val) || s.person.toLowerCase().includes(val));
-    renderSeatList(filtered);
-};
-
-// Tab Switching
 function switchTab(tab) {
     activeTab = tab;
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -135,13 +92,20 @@ function switchTab(tab) {
         document.getElementById('tab-house').classList.add('active');
     } else if (tab === 'map') {
         document.getElementById('tab-map').classList.add('active');
-        renderMap();
+        renderHexMap();
     } else {
         document.getElementById('tab-senate').classList.add('active');
-        renderSenateHorshoe();
+        renderSenate();
     }
-    renderSeatList();
+    renderList();
 }
+
+document.getElementById('seat-search').oninput = (e) => {
+    const val = e.target.value.toLowerCase();
+    const source = activeTab === "senate" ? senateSeats : houseSeats;
+    const filtered = source.filter(s => s.name.toLowerCase().includes(val) || s.person.toLowerCase().includes(val));
+    renderList(filtered);
+};
 
 document.getElementById('tab-house').onclick = () => switchTab('house');
 document.getElementById('tab-map').onclick = () => switchTab('map');
@@ -149,6 +113,10 @@ document.getElementById('tab-senate').onclick = () => switchTab('senate');
 
 window.onload = () => {
     fetchEditTime();
-    updateHouseTally();
+    const totals = { alp: 8, lnp: 4, onp: 3 };
+    ["alp", "lnp", "onp"].forEach(p => {
+        document.getElementById(`${p}-count`).innerText = totals[p];
+        document.getElementById(`${p}-bar`).style.width = (totals[p]/15*100) + "%";
+    });
     switchTab('house');
 };
