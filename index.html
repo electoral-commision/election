@@ -16,7 +16,7 @@
                 <button class="tab-btn" data-view="senate">SENATE</button>
             </div>
             <h1>2026 Federal Election Results</h1>
-            <p class="update-time" id="time-display">Updated Live: 8:25 pm</p>
+            <p class="update-time" id="time-display">Updated 7:50 pm</p>
         </header>
 
         <div class="controls-wrapper">
@@ -30,59 +30,49 @@
                     <span class="label">Filters</span>
                     <button class="chip" id="filter-doubt">Seats in Doubt</button>
                     <button class="chip" id="filter-changing">Changing Seats</button>
+                    <select class="chip-select" id="filter-won"><option value="">Won by ▾</option></select>
                 </div>
                 <div class="control-group">
                     <span class="label">Sort</span>
-                    <button class="chip-mini" data-sort="az">A-Z</button>
                     <button class="chip-mini active" data-sort="latest">Latest</button>
+                    <button class="chip-mini" data-sort="az">A-Z</button>
                     <button class="chip-mini" data-sort="margin">Margin</button>
                 </div>
             </div>
         </div>
 
-        <div id="house-view" class="view-section">
+        <div id="house-view">
             <div id="winner-banner" class="banner">COALITION GOVERNMENT FORMED</div>
             <div class="tally-header">
-                <span>100% counted</span>
-                <span>8 to win</span>
+                <span class="tally-info">100% counted</span>
+                <span class="tally-info">8 to win</span>
             </div>
             <div class="bars-container">
                 <div class="majority-line"></div>
                 <div class="party-row">
                     <span class="p-name">ALP</span>
-                    <div class="p-bar-bg"><div class="p-bar alp" id="bar-alp"><span class="p-count" id="count-alp">0</span></div></div>
+                    <div class="p-bar-bg"><div class="p-bar alp" id="alp-bar"><span class="p-count" id="alp-count">7</span></div></div>
                 </div>
                 <div class="party-row">
                     <span class="p-name">LNP</span>
-                    <div class="p-bar-bg"><div class="p-bar lnp" id="bar-lnp"><span class="p-count" id="count-lnp">0</span></div></div>
+                    <div class="p-bar-bg"><div class="p-bar lnp" id="lnp-bar"><span class="p-count" id="lnp-count">5</span></div></div>
                 </div>
                 <div class="party-row">
                     <span class="p-name">ONP</span>
-                    <div class="p-bar-bg"><div class="p-bar onp" id="bar-onp"><span class="p-count" id="count-onp">0</span></div></div>
+                    <div class="p-bar-bg"><div class="p-bar onp" id="onp-bar"><span class="p-count" id="onp-count">3</span></div></div>
                 </div>
             </div>
         </div>
 
         <div id="map-view" class="view-section" style="display: none;">
-            <div class="map-container">
-                <p style="font-size: 10px; color: #555; margin-bottom: 10px;">Click seat to filter • Click background to clear</p>
-                <div class="vic-map" id="vic-map"></div>
-                <div class="map-legend">
-                    <span class="legend-item"><span class="dot alp"></span> ALP</span>
-                    <span class="legend-item"><span class="dot lnp"></span> LNP</span>
-                    <span class="legend-item"><span class="dot onp"></span> ONP</span>
-                </div>
+            <div class="hex-map-wrapper">
+                <div class="hex-grid" id="hex-grid"></div>
             </div>
         </div>
 
         <div id="senate-view" class="view-section" style="display: none;">
             <div class="senate-box">
                 <svg id="senate-svg" viewBox="0 0 400 200"></svg>
-                <div class="legend">
-                    <span class="legend-item"><span class="dot alp"></span> ALP</span>
-                    <span class="legend-item"><span class="dot lnp"></span> LNP</span>
-                    <span class="legend-item"><span class="dot onp"></span> ONP</span>
-                </div>
             </div>
         </div>
 
