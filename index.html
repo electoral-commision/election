@@ -1,105 +1,52 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>AEC Federal Election 2026</title>
-
     <link rel="stylesheet" href="style.css">
-
 </head>
-
 <body>
-
     <div class="container">
-
         <header>
-
             <p class="breadcrumb">AEC Live | Federal Election 2026 | Results</p>
-
             <h1>2026 Federal Election Results</h1>
-
             <p class="update-time" id="time-display">Loading last edit...</p>
-
         </header>
 
-
-
-        <div id="election-winner" style="text-align: center; font-size: 2.5rem; font-weight: 900; margin-bottom: 25px; text-transform: uppercase; padding: 25px; border-radius: 8px; display: none; line-height: 1.2; border: 2px solid rgba(255,255,255,0.1);">
-
-            </div>
-
-
+        <div id="election-winner"></div>
 
         <section class="main-tally">
-
             <div class="status-bar">
-
                 <span id="percent-counted">0% counted</span>
-
                 <span class="goal">8 to win</span>
-
             </div>
-
             <div class="bar-wrapper">
-
                 <div class="majority-marker"></div>
-
                 <div class="party-row">
-
                     <div class="party-label">ALP</div>
-
                     <div class="bar-container"><div class="bar alp" id="alp-bar"><span class="count" id="alp-count">0</span></div></div>
-
                 </div>
-
                 <div class="party-row">
-
                     <div class="party-label">LNP</div>
-
                     <div class="bar-container"><div class="bar lnp" id="lnp-bar"><span class="count" id="lnp-count">0</span></div></div>
-
                 </div>
-
                 <div class="party-row">
-
                     <div class="party-label">ONP</div>
-
                     <div class="bar-container"><div class="bar onp" id="onp-bar"><span class="count" id="onp-count">0</span></div></div>
-
                 </div>
-
             </div>
-
         </section>
-
-
 
         <section class="seat-by-seat">
-
             <div class="filter-bar">
-
                 <span id="filter-all" class="active">All Seats</span>
-
                 <span id="filter-doubt">In Doubt</span>
-
                 <span id="filter-changing">Changing</span>
-
             </div>
-
             <div id="seat-list"></div>
-
         </section>
-
     </div>
-
     <script src="script.js"></script>
-
 </body>
-
 </html>
