@@ -21,7 +21,7 @@ const seats = [
 const TOTAL_SEATS = 15;
 let currentFilter = "all";
 
-function updateDashboard() {
+async function updateDashboard() {
     // 1. Calculate Party Totals based on the seats list above
     const totals = { alp: 0, lnp: 0, onp: 0, oth: 0 };
     seats.forEach(s => {
@@ -35,9 +35,28 @@ function updateDashboard() {
     const totalCounted = totals.alp + totals.lnp + totals.onp + totals.oth;
     const percent = ((totalCounted / TOTAL_SEATS) * 100).toFixed(1);
     document.getElementById('percent-counted').innerText = `${percent}% counted (${totalCounted}/${TOTAL_SEATS})`;
-    document.getElementById('time-display').innerText = "Updated at 1:41:37 PM";
 
-    // 3. Update Bar Visuals
+    // 3. FETCH GITHUB LAST MODIFIED TIME (Automated)
+    try {
+        const response = await fetch('https://api.github.com/repos/electoral-commision/election/commits?path=script.js&page=1&per_page=1');
+        const data = await response.json();
+        if (data && data[0]) {
+            const commitDate = new Date(data[0].commit.committer.date);
+            // Format time as (e.g., 1:41:37 PM)
+            const timeString = commitDate.toLocaleTimeString('en-AU', { 
+                hour: 'numeric', 
+                minute: '2-digit', 
+                second: '2-digit', 
+                hour12: true 
+            });
+            document.getElementById('time-display').innerText = `Updated at ${timeString}`;
+        }
+    } catch (err) {
+        console.warn("GitHub API error:", err);
+        document.getElementById('time-display').innerText = "Updated Live";
+    }
+
+    // 4. Update Bar Visuals
     updateBar("alp", totals.alp);
     updateBar("lnp", totals.lnp);
     updateBar("onp", totals.onp);
@@ -51,14 +70,12 @@ function renderSeatList() {
     list.innerHTML = "";
 
     seats.forEach(s => {
-        // Logic for filters
         const isInDoubt = (s.party === "" || s.person === "");
         const isChanging = (s.status === "GAIN" || s.status === "WIN" || s.from !== "");
 
         if (currentFilter === "doubt" && !isInDoubt) return;
         if (currentFilter === "changing" && !isChanging) return;
 
-        // Build the HTML Card
         const card = document.createElement('div');
         card.className = 'seat-card';
         const partyClass = s.party ? `bg-${s.party}` : 'bg-pending';
