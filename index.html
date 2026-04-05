@@ -31,13 +31,11 @@
                     <button class="chip" id="btn-doubt">Seats in Doubt</button>
                     <button class="chip" id="btn-changing">Changing Seats</button>
                     <div class="chip select-wrapper">Won by <span class="arrow">▾</span></div>
-                    <div class="chip select-wrapper">Held by <span class="arrow">▾</span></div>
                 </div>
                 <div class="sort-group">
                     <span class="ctrl-label">Sort</span>
-                    <button class="chip-sm">A-Z</button>
                     <button class="chip-sm active">Latest</button>
-                    <button class="chip-sm">Margin</button>
+                    <button class="chip-sm">A-Z</button>
                 </div>
             </div>
         </div>
@@ -45,10 +43,7 @@
         <div id="house-view">
             <div id="election-winner"></div>
             <section class="main-tally">
-                <div class="status-bar">
-                    <span id="percent-counted">100% counted</span>
-                    <span class="goal">8 to win</span>
-                </div>
+                <div class="status-bar"><span>100% counted</span><span>8 to win</span></div>
                 <div class="bar-wrapper">
                     <div class="majority-marker"></div>
                     <div class="party-row">
@@ -68,7 +63,9 @@
         </div>
 
         <div id="map-view" style="display: none;">
-            <div class="map-grid" id="map-grid"></div>
+            <div class="hex-grid-container">
+                <div class="hex-grid" id="hex-grid"></div>
+            </div>
         </div>
 
         <div id="senate-view" style="display: none;">
