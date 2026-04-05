@@ -28,3 +28,18 @@ h1 { margin: 0 0 20px 0; font-size: 2.2rem; letter-spacing: -1px; }
 .filter-bar { display: flex; gap: 20px; margin-bottom: 20px; font-size: 0.8rem; color: #888; text-transform: uppercase; font-weight: bold; cursor: pointer; }
 .filter-bar .active { color: white; border-bottom: 2px solid white; padding-bottom: 5px; }
 .swing-label { font-size: 0.7rem; color: #aaa; font-weight: bold; text-align: right; }
+
+/* Tab Styles */
+.tab-container { display: flex; gap: 15px; margin-bottom: 20px; border-bottom: 1px solid #333; }
+.tab-btn { background: none; border: none; color: #888; padding: 10px 5px; cursor: pointer; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; }
+.tab-btn.active { color: #5cb7ff; border-bottom: 2px solid #5cb7ff; }
+
+/* Horseshoe Styles */
+.horseshoe-box { background: #1a1a1a; padding: 30px; border-radius: 12px; text-align: center; margin-bottom: 30px; border: 1px solid #222; }
+#senate-svg { width: 100%; max-width: 500px; height: auto; }
+.legend { display: flex; justify-content: center; gap: 20px; margin-top: 20px; font-size: 0.8rem; font-weight: bold; }
+.legend-item { display: flex; align-items: center; gap: 8px; }
+.dot-sample { width: 12px; height: 12px; border-radius: 50%; }
+
+/* Existing colors for legend */
+.bg-grn { background-color: #009c3d; }
