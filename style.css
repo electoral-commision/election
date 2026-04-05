@@ -10,12 +10,10 @@
 body { background: var(--bg); color: white; font-family: sans-serif; margin: 0; padding: 20px; }
 .container { max-width: 900px; margin: 0 auto; }
 
-/* Tabs & Header */
+/* Tabs */
 .tab-container { display: flex; gap: 20px; border-bottom: 1px solid #333; margin-bottom: 25px; }
 .tab-btn { background: none; border: none; color: #888; padding: 10px 0; cursor: pointer; font-size: 12px; font-weight: bold; }
 .tab-btn.active { color: #5cb7ff; border-bottom: 2px solid #5cb7ff; }
-.breadcrumb { color: #5cb7ff; font-size: 11px; font-weight: bold; letter-spacing: 1px; }
-h1 { margin: 5px 0; font-size: 32px; }
 
 /* Controls */
 .search-bar { background: #1a1a1a; border: 1px solid var(--border); border-radius: 25px; padding: 12px 20px; margin-bottom: 20px; display: flex; }
@@ -23,7 +21,7 @@ h1 { margin: 5px 0; font-size: 32px; }
 .filter-sort-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
 .control-group { display: flex; align-items: center; gap: 10px; }
 .label { font-size: 11px; color: #666; font-weight: bold; text-transform: uppercase; }
-.chip, .chip-mini { background: #1a1a1a; border: 1px solid var(--border); color: white; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: bold; cursor: pointer; }
+.chip, .chip-mini { background: #1a1a1a; border: 1px solid var(--border); color: white; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: bold; cursor: pointer; transition: 0.2s; }
 .chip.active, .chip-mini.active { background: #333; border-color: #5cb7ff; color: #5cb7ff; }
 
 /* Banner & Bars */
@@ -37,27 +35,39 @@ h1 { margin: 5px 0; font-size: 32px; }
 .p-bar { height: 100%; display: flex; align-items: center; justify-content: flex-end; transition: width 0.8s; }
 .p-count { padding-right: 15px; font-weight: 800; font-size: 18px; }
 
-.alp { background: var(--alp); }
-.lnp { background: var(--lnp); }
-.onp { background: var(--onp); }
+/* GAIN Badges with Colored Backgrounds */
+.s-badge {
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    display: inline-block;
+    color: white !important;
+}
+.s-badge.alp { background-color: var(--alp); }
+.s-badge.lnp { background-color: var(--lnp); }
+.s-badge.onp { background-color: var(--onp); }
 
-/* Geographic Map Style */
-.map-container { background: #0f0f0f; border-radius: 12px; padding: 20px; position: relative; height: 500px; display: flex; flex-direction: column; align-items: center; border: 1px solid #222; }
+/* Map View Styling */
+.map-container { background: #0f0f0f; border-radius: 12px; padding: 20px; position: relative; height: 500px; display: flex; flex-direction: column; align-items: center; border: 1px solid var(--border); }
 .vic-map { position: relative; width: 100%; max-width: 600px; height: 400px; margin-top: 20px; }
 .hex-geo { 
-    position: absolute; width: 46px; height: 52px; 
+    position: absolute; width: 48px; height: 54px; 
     clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    font-size: 9px; font-weight: bold; cursor: pointer; transition: 0.2s;
+    font-size: 10px; font-weight: bold; cursor: pointer; transition: transform 0.2s;
 }
-.hex-geo:hover { transform: scale(1.2); z-index: 10; }
-.hex-swing { font-size: 7px; opacity: 0.8; }
-.map-legend { margin-top: auto; display: flex; gap: 15px; font-size: 12px; color: #888; }
-.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.hex-geo:hover { transform: scale(1.2); z-index: 10; border: 1px solid white; }
+.hex-swing { font-size: 7px; opacity: 0.9; }
 
-/* Seat Cards */
+/* Senate & Legend */
+.senate-box { background: #111; padding: 40px; border-radius: 12px; border: 1px solid var(--border); text-align: center; }
+.legend { display: flex; justify-content: center; gap: 15px; margin-top: 20px; font-size: 12px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px; }
+
+/* List Cards */
 .seat-card { background: var(--card); border: 1px solid var(--border); padding: 18px 20px; border-radius: 4px; display: flex; justify-content: space-between; margin-bottom: 2px; }
 .s-name { font-size: 17px; font-weight: bold; }
 .s-person { color: #aaa; font-size: 14px; margin: 4px 0 8px; }
-.s-badge { font-size: 10px; font-weight: 900; text-transform: uppercase; }
 .s-swing { font-weight: bold; align-self: center; font-size: 15px; }
