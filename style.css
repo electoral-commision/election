@@ -1,64 +1,71 @@
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #050505;
-    color: white;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
     margin: 0;
     padding: 20px;
     display: flex;
     justify-content: center;
 }
 
-.container { width: 100%; max-width: 550px; }
+.container { width: 100%; max-width: 600px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
 
-header { text-align: center; margin-bottom: 20px; }
+header { text-align: center; border-bottom: 2px solid #eee; margin-bottom: 20px; padding-bottom: 10px; }
 
-.update-time { color: #00ff00; font-family: monospace; font-size: 0.9rem; }
+.breadcrumb { color: #666; font-size: 0.75rem; text-transform: uppercase; }
 
-/* Switcher */
-.view-switcher { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
-.view-btn {
-    padding: 8px 18px;
-    border: 1px solid #333;
-    border-radius: 20px;
-    background: #1a1a1a;
-    color: #888;
-    cursor: pointer;
-    font-weight: bold;
-}
-.view-btn.active { background: white; color: black; border-color: white; }
+.update-time { color: #d32f2f; font-weight: bold; font-size: 0.85rem; }
 
-/* House View */
-.main-tally { background: #111; padding: 20px; border-radius: 12px; margin-bottom: 20px; }
-.status-bar { display: flex; justify-content: space-between; font-size: 0.8rem; color: #777; margin-bottom: 15px; }
-.bar-wrapper { position: relative; }
-.majority-marker {
-    position: absolute; left: 53.3%; top: 0; bottom: 0;
-    width: 2px; background: rgba(255,255,255,0.2); border-left: 1px dashed white; z-index: 2;
-}
-.party-row { display: flex; align-items: center; margin-bottom: 10px; }
-.party-label { width: 45px; font-weight: bold; }
-.bar-container { flex-grow: 1; background: #222; height: 35px; border-radius: 4px; overflow: hidden; }
-.bar { height: 100%; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; font-weight: 900; }
+.winner-banner { text-align: center; font-size: 1.5rem; font-weight: bold; color: white; padding: 15px; border-radius: 5px; margin-bottom: 20px; text-transform: uppercase; }
+
+.view-switcher { display: flex; justify-content: center; gap: 5px; margin-bottom: 20px; }
+
+.view-btn { padding: 8px 15px; border: 1px solid #ccc; background: #eee; cursor: pointer; font-weight: bold; }
+
+.view-btn.active { background: #005696; color: white; border-color: #005696; }
+
+.main-tally { margin-bottom: 30px; }
+
+.status-bar { display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 10px; font-weight: bold; }
+
+.bar-wrapper { position: relative; margin-bottom: 20px; }
+
+.majority-marker { position: absolute; left: 53.3%; top: 0; bottom: 0; width: 2px; background: #333; z-index: 5; }
+
+.party-row { display: flex; align-items: center; margin-bottom: 8px; }
+
+.party-label { width: 45px; font-weight: bold; font-size: 0.9rem; }
+
+.bar-container { flex-grow: 1; background: #e0e0e0; height: 30px; position: relative; }
+
+.bar { height: 100%; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; color: white; font-weight: bold; }
 
 .alp { background: #e61e2b; }
 .lnp { background: #005696; }
 .onp { background: #f7941d; }
 
-/* Senate View */
-.senate-viz-container { background: #111; padding: 30px; border-radius: 12px; text-align: center; }
-.senate-svg { width: 280px; height: 180px; }
-.senate-total-text { font-size: 3rem; font-weight: 900; fill: white; text-anchor: middle; }
-.senate-label-small { font-size: 0.8rem; fill: #555; text-anchor: middle; }
-.senate-legend { display: flex; justify-content: center; gap: 15px; margin-top: 10px; font-size: 0.9rem; }
+.senate-viz-container { text-align: center; padding: 20px; background: #f9f9f9; border: 1px solid #ddd; margin-bottom: 20px; }
 
-/* Seat Cards */
-.seat-card {
-    background: #151515; padding: 15px; border-radius: 8px; margin-bottom: 8px;
-    display: flex; justify-content: space-between; align-items: center; border-left: 4px solid #333;
-}
-.seat-name { font-weight: bold; }
-.person-name { color: #888; font-size: 0.85rem; margin-bottom: 4px; }
-.badge { font-size: 0.7rem; padding: 2px 8px; border-radius: 3px; font-weight: bold; }
+.senate-svg { width: 250px; height: 150px; }
+
+.senate-total-text { font-size: 2.5rem; font-weight: bold; fill: #333; text-anchor: middle; }
+
+.senate-label-small { font-size: 0.75rem; fill: #777; text-anchor: middle; }
+
+.seat-card { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #eee; }
+
+.seat-name { font-weight: bold; color: #005696; }
+
+.person-name { font-size: 0.9rem; margin: 2px 0; }
+
+.badge { font-size: 0.7rem; padding: 2px 6px; color: white; font-weight: bold; border-radius: 3px; }
+
 .bg-alp { background: #e61e2b; }
 .bg-lnp { background: #005696; }
 .bg-onp { background: #f7941d; }
+
+.from-text { font-size: 0.7rem; color: #777; margin-left: 5px; }
+
+.swing-box { background: #eee; padding: 5px 10px; border-radius: 4px; min-width: 70px; text-align: center; }
+
+.swing-label { font-size: 0.75rem; font-weight: bold; }
