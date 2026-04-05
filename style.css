@@ -19,37 +19,25 @@ body { background: var(--bg); color: white; font-family: sans-serif; margin: 0; 
 .search-bar { background: #1a1a1a; border: 1px solid var(--border); border-radius: 25px; padding: 12px 20px; margin-bottom: 20px; display: flex; }
 .search-bar input { background: none; border: none; color: white; width: 100%; outline: none; margin-left: 10px; }
 .filter-sort-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-.control-group { display: flex; align-items: center; gap: 10px; }
-.label { font-size: 11px; color: #666; font-weight: bold; text-transform: uppercase; }
-.chip, .chip-mini { background: #1a1a1a; border: 1px solid var(--border); color: white; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+.chip, .chip-mini { background: #1a1a1a; border: 1px solid var(--border); color: white; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: bold; cursor: pointer; }
 .chip.active, .chip-mini.active { background: #333; border-color: #5cb7ff; color: #5cb7ff; }
 
-/* Banner & Bars */
+/* Tally Bars */
 .banner { background: linear-gradient(90deg, #005696, #f7941d); padding: 15px; text-align: center; border-radius: 8px; font-weight: 900; margin-bottom: 25px; }
-.tally-header { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px; font-weight: bold; }
 .bars-container { position: relative; margin-bottom: 40px; }
 .majority-line { position: absolute; left: 53.3%; top: 0; bottom: 0; width: 2px; border-left: 1px dashed rgba(255,255,255,0.3); z-index: 5; }
-.party-row { display: flex; align-items: center; margin-bottom: 10px; }
-.p-name { width: 50px; font-weight: bold; }
-.p-bar-bg { flex: 1; background: #222; height: 38px; border-radius: 4px; overflow: hidden; }
-.p-bar { height: 100%; display: flex; align-items: center; justify-content: flex-end; transition: width 0.8s; }
+.p-bar-bg { flex: 1; background: #222; height: 38px; border-radius: 4px; overflow: hidden; display: flex; }
+.p-bar { height: 100%; transition: width 0.8s; display: flex; align-items: center; justify-content: flex-end; }
 .p-count { padding-right: 15px; font-weight: 800; font-size: 18px; }
 
-/* GAIN Badges with Colored Backgrounds */
-.s-badge {
-    font-size: 10px;
-    font-weight: 900;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: 4px;
-    display: inline-block;
-    color: white !important;
-}
+/* List Cards & Colored GAIN Badges */
+.seat-card { background: var(--card); border: 1px solid var(--border); padding: 18px 20px; border-radius: 4px; display: flex; justify-content: space-between; margin-bottom: 2px; }
+.s-badge { font-size: 10px; font-weight: 900; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; display: inline-block; color: white !important; }
 .s-badge.alp { background-color: var(--alp); }
 .s-badge.lnp { background-color: var(--lnp); }
 .s-badge.onp { background-color: var(--onp); }
 
-/* Map View Styling */
+/* Map View & Hex Colors */
 .map-container { background: #0f0f0f; border-radius: 12px; padding: 20px; position: relative; height: 500px; display: flex; flex-direction: column; align-items: center; border: 1px solid var(--border); }
 .vic-map { position: relative; width: 100%; max-width: 600px; height: 400px; margin-top: 20px; }
 .hex-geo { 
@@ -58,16 +46,12 @@ body { background: var(--bg); color: white; font-family: sans-serif; margin: 0; 
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     font-size: 10px; font-weight: bold; cursor: pointer; transition: transform 0.2s;
 }
+.hex-geo.alp { background-color: var(--alp); }
+.hex-geo.lnp { background-color: var(--lnp); }
+.hex-geo.onp { background-color: var(--onp); }
 .hex-geo:hover { transform: scale(1.2); z-index: 10; border: 1px solid white; }
 .hex-swing { font-size: 7px; opacity: 0.9; }
 
-/* Senate & Legend */
-.senate-box { background: #111; padding: 40px; border-radius: 12px; border: 1px solid var(--border); text-align: center; }
-.legend { display: flex; justify-content: center; gap: 15px; margin-top: 20px; font-size: 12px; }
-.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px; }
-
-/* List Cards */
-.seat-card { background: var(--card); border: 1px solid var(--border); padding: 18px 20px; border-radius: 4px; display: flex; justify-content: space-between; margin-bottom: 2px; }
-.s-name { font-size: 17px; font-weight: bold; }
-.s-person { color: #aaa; font-size: 14px; margin: 4px 0 8px; }
-.s-swing { font-weight: bold; align-self: center; font-size: 15px; }
+.alp { background-color: var(--alp); }
+.lnp { background-color: var(--lnp); }
+.onp { background-color: var(--onp); }
