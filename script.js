@@ -1,4 +1,4 @@
-// --- DATA ---
+// --- DATA: 15 House Seats & 6 Senate Seats ---
 const houseData = [
     { name: "Melbourne", person: "Bounty", party: "alp", status: "GAIN", swing: "33.3% Gain", margin: 33.3, date: 1, inDoubt: false },
     { name: "Kooyong", person: "Bumuncha", party: "onp", status: "GAIN", swing: "50.0% Gain", margin: 50.0, date: 2, inDoubt: true },
@@ -26,12 +26,13 @@ const senateData = [
     { name: "Senate Seat 6", person: "siua10011", party: "onp", status: "ELECTED", swing: "0.6 Quotas", margin: 0.6, date: 6 }
 ];
 
-// --- STATE ---
+// --- APP STATE ---
 let currentView = 'house';
 let currentSort = 'latest';
 let filters = { search: '', doubt: false, changing: false };
 
-// --- RENDERING ---
+// --- RENDERING LOGIC ---
+
 function renderList() {
     const container = document.getElementById('list-container');
     container.innerHTML = "";
@@ -49,10 +50,15 @@ function renderList() {
     }
 
     // Sort Logic
-    if (currentSort === 'az') data.sort((a,b) => a.name.localeCompare(b.name));
-    else if (currentSort === 'latest') data.sort((a,b) => b.date - a.date);
-    else if (currentSort === 'margin') data.sort((a,b) => b.margin - a.margin);
+    if (currentSort === 'az') {
+        data.sort((a,b) => a.name.localeCompare(b.name));
+    } else if (currentSort === 'latest') {
+        data.sort((a,b) => b.date - a.date);
+    } else if (currentSort === 'margin') {
+        data.sort((a,b) => b.margin - a.margin);
+    }
 
+    // Render Cards
     data.forEach(s => {
         container.innerHTML += `
             <div class="seat-card">
@@ -66,25 +72,42 @@ function renderList() {
     });
 }
 
-function updateBars() {
+function updateTally() {
     const totals = { alp: 0, lnp: 0, onp: 0 };
     houseData.forEach(s => totals[s.party]++);
     
+    const maxSeats = 15; // Total seats in houseData
     ["alp", "lnp", "onp"].forEach(p => {
         const bar = document.getElementById(`bar-${p}`);
-        const count = document.getElementById(`count-${p}`);
-        bar.style.width = (totals[p] / houseData.length * 100) + "%";
-        count.innerText = totals[p];
+        const countDisplay = document.getElementById(`count-${p}`);
+        if (bar && countDisplay) {
+            bar.style.width = (totals[p] / maxSeats * 100) + "%";
+            countDisplay.innerText = totals[p];
+        }
     });
+
+    // Update Banner
+    const banner = document.getElementById('winner-banner');
+    if (banner) {
+        if (totals.lnp + totals.onp >= 8) {
+            banner.innerText = "COALITION GOVERNMENT FORMED";
+            banner.style.background = "linear-gradient(90deg, var(--lnp), var(--onp))";
+        } else if (totals.alp >= 8) {
+            banner.innerText = "LABOR GOVERNMENT FORMED";
+            banner.style.background = "var(--alp)";
+        }
+    }
 }
 
 function renderHexMap() {
     const grid = document.getElementById('hex-grid');
+    if (!grid) return;
     grid.innerHTML = "";
     houseData.forEach(s => {
         const hex = document.createElement('div');
         hex.className = `hex ${s.party}`;
         hex.innerText = s.name.substring(0,2).toUpperCase();
+        hex.title = `${s.name}: ${s.person}`;
         hex.onclick = () => {
             filters.search = s.name;
             document.getElementById('seat-search').value = s.name;
@@ -96,6 +119,7 @@ function renderHexMap() {
 
 function renderSenate() {
     const svg = document.getElementById('senate-svg');
+    if (!svg) return;
     svg.innerHTML = '';
     const colors = { alp: "#e61e2b", lnp: "#005696", onp: "#f7941d" };
     
@@ -103,26 +127,41 @@ function renderSenate() {
         const angle = Math.PI + (i / (senateData.length - 1)) * Math.PI;
         const cx = 200 + 140 * Math.cos(angle);
         const cy = 175 + 140 * Math.sin(angle);
+        
         const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        circle.setAttribute("cx", cx); circle.setAttribute("cy", cy); circle.setAttribute("r", 16);
+        circle.setAttribute("cx", cx); 
+        circle.setAttribute("cy", cy); 
+        circle.setAttribute("r", 16);
         circle.setAttribute("fill", colors[s.party]);
-        circle.onclick = () => { filters.search = s.person; renderList(); };
+        circle.style.cursor = "pointer";
+        circle.onclick = () => { 
+            filters.search = s.person; 
+            document.getElementById('seat-search').value = s.person;
+            renderList(); 
+        };
         svg.appendChild(circle);
     });
 }
 
-// --- EVENTS ---
+// --- EVENT LISTENERS ---
+
 document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.onclick = () => {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         currentView = btn.dataset.view;
         
-        document.querySelectorAll('.view-section').forEach(s => s.style.display = 'none');
-        document.getElementById(`${currentView}-view`).style.display = 'block';
+        // Switch View Sections
+        document.getElementById('house-view').style.display = currentView === 'house' ? 'block' : 'none';
+        document.getElementById('map-view').style.display = currentView === 'map' ? 'block' : 'none';
+        document.getElementById('senate-view').style.display = currentView === 'senate' ? 'block' : 'none';
 
         if (currentView === 'map') renderHexMap();
         if (currentView === 'senate') renderSenate();
+        
+        // Reset Search on tab change
+        filters.search = '';
+        document.getElementById('seat-search').value = '';
         renderList();
     };
 });
@@ -153,8 +192,8 @@ document.getElementById('seat-search').oninput = (e) => {
     renderList();
 };
 
-// --- INIT ---
+// --- INITIALIZE ---
 window.onload = () => {
-    updateBars();
+    updateTally();
     renderList();
 };
