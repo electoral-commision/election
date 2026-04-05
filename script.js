@@ -1,5 +1,5 @@
-// Change this to your actual GitHub username and repository name
-const REPO_NAME = "electoral-commision/election";
+// --- CONFIG ---
+const REPO_NAME = "electoral-commision/election"; // For time edited feature
 
 const houseSeats = [
     { name: "Melbourne", party: "alp", person: "Bounty", status: "GAIN", from: "FROM OTH", swing: "33.3% Gain" },
@@ -20,39 +20,30 @@ const houseSeats = [
 ];
 
 const senateSeats = [
-    { name: "Senator 1", party: "lnp", person: "Senator A", status: "ELECTED", from: "LNP", swing: "2.1% Gain" },
-    { name: "Senator 2", party: "alp", person: "Senator B", status: "ELECTED", from: "ALP", swing: "1.5% Gain" },
-    { name: "Senator 3", party: "onp", person: "Senator C", status: "ELECTED", from: "ONP", swing: "12.0% Gain" },
-    { name: "Senator 4", party: "grn", person: "Senator D", status: "ELECTED", from: "GRN", swing: "0.5% Gain" },
-    { name: "Senator 5", party: "lnp", person: "Senator E", status: "ELECTED", from: "LNP", swing: "3.2% Gain" },
-    { name: "Senator 6", party: "alp", person: "Senator F", status: "ELECTED", from: "ALP", swing: "1.1% Gain" }
-];
-
-const senateChart = [
-    { label: "LNP", count: 2, color: "#005696" },
-    { label: "ALP", count: 2, color: "#e61e2b" },
-    { label: "ONP", count: 1, color: "#f7941d" },
-    { label: "GRN", count: 1, color: "#009c3d" }
+    { name: "Senate Seat 1", party: "alp", person: "itxw4sley._.", status: "ELECTED", from: "VIC SENATE", swing: "1.1 Quotas" },
+    { name: "Senate Seat 2", party: "alp", person: "jeffery_harrold1", status: "ELECTED", from: "VIC SENATE", swing: "0.9 Quotas" },
+    { name: "Senate Seat 3", party: "alp", person: "asperytravel", status: "ELECTED", from: "VIC SENATE", swing: "0.8 Quotas" },
+    { name: "Senate Seat 4", party: "lnp", person: "hitheresam", status: "ELECTED", from: "VIC SENATE", swing: "1.0 Quotas" },
+    { name: "Senate Seat 5", party: "onp", person: "Reald", status: "ELECTED", from: "VIC SENATE", swing: "0.7 Quotas" },
+    { name: "Senate Seat 6", party: "onp", person: "siua10011", status: "ELECTED", from: "VIC SENATE", swing: "0.6 Quotas" }
 ];
 
 let currentView = "house";
 
-async function fetchLastEditTime() {
+async function fetchEditTime() {
     try {
         const response = await fetch(`https://api.github.com/repos/${REPO_NAME}/commits?path=script.js&per_page=1`);
         const data = await response.json();
-        if (data && data[0]) {
+        if (data[0]) {
             const date = new Date(data[0].commit.committer.date);
-            document.getElementById('time-display').innerText = `Updated at ${date.toLocaleTimeString('en-AU', { hour: 'numeric', minute: '2-digit', hour12: true })}`;
+            document.getElementById('time-display').innerText = `Updated ${date.toLocaleTimeString('en-AU', {hour: 'numeric', minute:'2-digit', hour12:true})}`;
         }
-    } catch (e) {
-        document.getElementById('time-display').innerText = "Live Update Active";
-    }
+    } catch (e) { document.getElementById('time-display').innerText = "Live Update Active"; }
 }
 
-function updateHouseDashboard() {
+function updateHouseView() {
     const totals = { alp: 0, lnp: 0, onp: 0 };
-    houseSeats.forEach(s => { if (totals[s.party] !== undefined) totals[s.party]++; });
+    houseSeats.forEach(s => totals[s.party]++);
 
     const winnerDiv = document.getElementById('election-winner');
     winnerDiv.style.display = "block";
@@ -64,12 +55,10 @@ function updateHouseDashboard() {
         winnerDiv.innerText = "Government Formed: Labor";
     }
 
-    document.getElementById('alp-count').innerText = totals.alp;
-    document.getElementById('alp-bar').style.width = (totals.alp / 15 * 100) + "%";
-    document.getElementById('lnp-count').innerText = totals.lnp;
-    document.getElementById('lnp-bar').style.width = (totals.lnp / 15 * 100) + "%";
-    document.getElementById('onp-count').innerText = totals.onp;
-    document.getElementById('onp-bar').style.width = (totals.onp / 15 * 100) + "%";
+    ["alp", "lnp", "onp"].forEach(p => {
+        document.getElementById(`${p}-count`).innerText = totals[p];
+        document.getElementById(`${p}-bar`).style.width = (totals[p] / 15 * 100) + "%";
+    });
 }
 
 function renderSenateHorshoe() {
@@ -77,21 +66,25 @@ function renderSenateHorshoe() {
     const legend = document.getElementById('senate-legend');
     svg.innerHTML = ''; legend.innerHTML = '';
     
-    let seatIndex = 0;
-    const totalSeats = 6;
+    // Group totals for legend
+    const totals = { alp: 3, lnp: 1, onp: 2 }; 
+    const colors = { alp: "#e61e2b", lnp: "#005696", onp: "#f7941d" };
 
-    senateChart.forEach(party => {
-        legend.innerHTML += `<div class="legend-item"><div class="dot-sample" style="background:${party.color}"></div>${party.label}: ${party.count}</div>`;
-        for (let i = 0; i < party.count; i++) {
-            const angle = Math.PI + (seatIndex / (totalSeats - 1)) * Math.PI;
-            const cx = 200 + 130 * Math.cos(angle);
-            const cy = 170 + 130 * Math.sin(angle);
-            const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-            dot.setAttribute("cx", cx); dot.setAttribute("cy", cy); dot.setAttribute("r", 15);
-            dot.setAttribute("fill", party.color);
-            svg.appendChild(dot);
-            seatIndex++;
-        }
+    Object.keys(totals).forEach(p => {
+        legend.innerHTML += `<div class="legend-item"><div class="dot-sample" style="background:${colors[p]}"></div>${p.toUpperCase()}: ${totals[p]}</div>`;
+    });
+
+    // Draw dots
+    let seatIdx = 0;
+    senateSeats.forEach(s => {
+        const angle = Math.PI + (seatIdx / (senateSeats.length - 1)) * Math.PI;
+        const cx = 200 + 140 * Math.cos(angle);
+        const cy = 175 + 140 * Math.sin(angle);
+        const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        dot.setAttribute("cx", cx); dot.setAttribute("cy", cy); dot.setAttribute("r", 18);
+        dot.setAttribute("fill", colors[s.party]);
+        svg.appendChild(dot);
+        seatIdx++;
     });
 }
 
@@ -134,7 +127,7 @@ document.getElementById('tab-senate').onclick = function() {
 };
 
 window.onload = () => {
-    fetchLastEditTime();
-    updateHouseDashboard();
+    fetchEditTime();
+    updateHouseView();
     renderSeatList();
 };
