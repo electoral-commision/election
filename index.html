@@ -33,8 +33,8 @@
                 </div>
                 <div class="control-group">
                     <span class="label">Sort</span>
-                    <button class="chip-mini active" data-sort="latest">Latest</button>
                     <button class="chip-mini" data-sort="az">A-Z</button>
+                    <button class="chip-mini active" data-sort="latest">Latest</button>
                     <button class="chip-mini" data-sort="margin">Margin</button>
                 </div>
             </div>
@@ -64,15 +64,19 @@
         </div>
 
         <div id="map-view" class="view-section" style="display: none;">
-            <div class="hex-map-wrapper">
-                <div class="hex-grid" id="hex-grid"></div>
+            <div class="map-container">
+                <div class="vic-map" id="vic-map"></div>
+                <div class="map-legend">
+                    <span class="legend-item"><span class="dot alp"></span> ALP</span>
+                    <span class="legend-item"><span class="dot lnp"></span> LNP</span>
+                    <span class="legend-item"><span class="dot onp"></span> ONP</span>
+                </div>
             </div>
         </div>
 
         <div id="senate-view" class="view-section" style="display: none;">
             <div class="senate-box">
                 <svg id="senate-svg" viewBox="0 0 400 200"></svg>
-                <div id="senate-legend" class="legend"></div>
             </div>
         </div>
 
