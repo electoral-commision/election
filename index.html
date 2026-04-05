@@ -9,35 +9,46 @@
 <body>
     <div class="container">
         <header>
-            <p class="breadcrumb">AEC Live | Federal Election 2026 | Results</p>
-            <h1>2026 Federal Election Results</h1>
-            <p class="update-time" id="time-display">Loading last edit...</p>
+            <p class="breadcrumb">AEC Live | Federal Election 2026</p>
+            <div class="tab-container">
+                <button class="tab-btn active" id="tab-house">House of Reps</button>
+                <button class="tab-btn" id="tab-senate">Senate</button>
+            </div>
+            <h1 id="view-title">2026 Federal Election Results</h1>
+            <p class="update-time" id="time-display">Loading...</p>
         </header>
 
-        <div id="election-winner" style="text-align: center; font-size: 2.5rem; font-weight: 900; margin-bottom: 25px; text-transform: uppercase; padding: 25px; border-radius: 8px; display: none; line-height: 1.2; border: 2px solid rgba(255,255,255,0.1);">
-            </div>
+        <div id="house-view">
+            <div id="election-winner"></div>
+            <section class="main-tally">
+                <div class="status-bar">
+                    <span id="percent-counted">0% counted</span>
+                    <span class="goal">8 to win</span>
+                </div>
+                <div class="bar-wrapper">
+                    <div class="majority-marker"></div>
+                    <div class="party-row">
+                        <div class="party-label">ALP</div>
+                        <div class="bar-container"><div class="bar alp" id="alp-bar"><span class="count" id="alp-count">0</span></div></div>
+                    </div>
+                    <div class="party-row">
+                        <div class="party-label">LNP</div>
+                        <div class="bar-container"><div class="bar lnp" id="lnp-bar"><span class="count" id="lnp-count">0</span></div></div>
+                    </div>
+                    <div class="party-row">
+                        <div class="party-label">ONP</div>
+                        <div class="bar-container"><div class="bar onp" id="onp-bar"><span class="count" id="onp-count">0</span></div></div>
+                    </div>
+                </div>
+            </section>
+        </div>
 
-        <section class="main-tally">
-            <div class="status-bar">
-                <span id="percent-counted">0% counted</span>
-                <span class="goal">8 to win</span>
+        <div id="senate-view" style="display: none;">
+            <div class="horseshoe-box">
+                <svg id="senate-svg" viewBox="0 0 400 200"></svg>
+                <div id="senate-legend" class="legend"></div>
             </div>
-            <div class="bar-wrapper">
-                <div class="majority-marker"></div>
-                <div class="party-row">
-                    <div class="party-label">ALP</div>
-                    <div class="bar-container"><div class="bar alp" id="alp-bar"><span class="count" id="alp-count">0</span></div></div>
-                </div>
-                <div class="party-row">
-                    <div class="party-label">LNP</div>
-                    <div class="bar-container"><div class="bar lnp" id="lnp-bar"><span class="count" id="lnp-count">0</span></div></div>
-                </div>
-                <div class="party-row">
-                    <div class="party-label">ONP</div>
-                    <div class="bar-container"><div class="bar onp" id="onp-bar"><span class="count" id="onp-count">0</span></div></div>
-                </div>
-            </div>
-        </section>
+        </div>
 
         <section class="seat-by-seat">
             <div class="filter-bar">
