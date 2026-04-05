@@ -35,7 +35,7 @@ function updateDashboard() {
     const totalCounted = totals.alp + totals.lnp + totals.onp + totals.oth;
     const percent = ((totalCounted / TOTAL_SEATS) * 100).toFixed(1);
     document.getElementById('percent-counted').innerText = `${percent}% counted (${totalCounted}/${TOTAL_SEATS})`;
-    document.getElementById('time-display').innerText = "Updated " + new Date().toLocaleTimeString();
+    document.getElementById('time-display').innerText = "Updated at 1:41:37 PM";
 
     // 3. Update Bar Visuals
     updateBar("alp", totals.alp);
