@@ -14,38 +14,60 @@
             <p class="update-time" id="time-display">Loading last edit...</p>
         </header>
 
-        <div id="election-winner"></div>
+        <nav class="tab-nav">
+            <button id="btn-tally" class="tab-btn active">Tally Room</button>
+            <button id="btn-map" class="tab-btn">Electoral Map</button>
+        </nav>
 
-        <section class="main-tally">
-            <div class="status-bar">
-                <span id="percent-counted">0% counted</span>
-                <span class="goal">8 to win</span>
-            </div>
-            <div class="bar-wrapper">
-                <div class="majority-marker"></div>
-                <div class="party-row">
-                    <div class="party-label">ALP</div>
-                    <div class="bar-container"><div class="bar alp" id="alp-bar"><span class="count" id="alp-count">0</span></div></div>
-                </div>
-                <div class="party-row">
-                    <div class="party-label">LNP</div>
-                    <div class="bar-container"><div class="bar lnp" id="lnp-bar"><span class="count" id="lnp-count">0</span></div></div>
-                </div>
-                <div class="party-row">
-                    <div class="party-label">ONP</div>
-                    <div class="bar-container"><div class="bar onp" id="onp-bar"><span class="count" id="onp-count">0</span></div></div>
-                </div>
-            </div>
-        </section>
+        <div id="view-tally">
+            <div id="election-winner"></div>
 
-        <section class="seat-by-seat">
-            <div class="filter-bar">
-                <span id="filter-all" class="active">All Seats</span>
-                <span id="filter-doubt">In Doubt</span>
-                <span id="filter-changing">Changing</span>
+            <section class="main-tally">
+                <div class="status-bar">
+                    <span id="percent-counted">0% counted</span>
+                    <span class="goal">8 to win</span>
+                </div>
+                <div class="bar-wrapper">
+                    <div class="majority-marker"></div>
+                    <div class="party-row">
+                        <div class="party-label">ALP</div>
+                        <div class="bar-container"><div class="bar alp" id="alp-bar"><span class="count" id="alp-count">0</span></div></div>
+                    </div>
+                    <div class="party-row">
+                        <div class="party-label">LNP</div>
+                        <div class="bar-container"><div class="bar lnp" id="lnp-bar"><span class="count" id="lnp-count">0</span></div></div>
+                    </div>
+                    <div class="party-row">
+                        <div class="party-label">ONP</div>
+                        <div class="bar-container"><div class="bar onp" id="onp-bar"><span class="count" id="onp-count">0</span></div></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="seat-by-seat">
+                <div class="filter-bar">
+                    <span id="filter-all" class="active">All Seats</span>
+                    <span id="filter-doubt">In Doubt</span>
+                    <span id="filter-changing">Changing</span>
+                </div>
+                <div id="seat-list"></div>
+            </section>
+        </div>
+
+        <div id="view-map" style="display: none;">
+            <div class="map-legend">
+                <span class="dot alp"></span> ALP 
+                <span class="dot lnp"></span> LNP 
+                <span class="dot onp"></span> ONP
             </div>
-            <div id="seat-list"></div>
-        </section>
+            <div id="map-container">
+                <svg id="qld-svg" viewBox="0 0 1000 1200" xmlns="http://www.w3.org/2000/svg">
+                    <path id="Cairns" d="..." class="electorate" />
+                    <path id="Cook" d="..." class="electorate" />
+                    </svg>
+            </div>
+            <div id="map-tooltip"></div>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
