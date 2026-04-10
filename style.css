@@ -1,48 +1,17 @@
-body { 
-    background-color: #121212; 
-    color: white; 
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
-    margin: 0; 
-    padding: 40px 20px; 
-}
-
+body { background-color: #121212; color: white; font-family: sans-serif; margin: 0; padding: 40px 20px; }
 .container { max-width: 800px; margin: 0 auto; }
-
-.breadcrumb { 
-    color: #5cb7ff; 
-    font-size: 0.75rem; 
-    font-weight: bold; 
-    text-transform: uppercase; 
-    margin-bottom: 5px; 
-}
-
+.breadcrumb { color: #5cb7ff; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; }
 h1 { margin: 0 0 20px 0; font-size: 2.2rem; letter-spacing: -1px; }
 
-/* Tabs Navigation */
 .tab-nav { display: flex; gap: 10px; margin-bottom: 30px; border-bottom: 1px solid #222; padding-bottom: 15px; }
-.tab-btn { background: #1a1a1a; border: 1px solid #333; color: #888; padding: 12px 24px; cursor: pointer; border-radius: 6px; font-weight: bold; transition: 0.2s; }
-.tab-btn:hover { background: #222; color: #fff; }
+.tab-btn { background: #1a1a1a; border: 1px solid #333; color: #888; padding: 12px 24px; cursor: pointer; border-radius: 6px; font-weight: bold; }
 .tab-btn.active { background: #5cb7ff; color: #000; border-color: #5cb7ff; }
 
-/* Filter Bar Fix */
-.filter-bar { 
-    display: flex; 
-    gap: 30px; 
-    margin-bottom: 25px; 
-    font-size: 0.85rem; 
-    color: #666; 
-    text-transform: uppercase; 
-    font-weight: bold; 
-}
-.filter-bar span { cursor: pointer; padding-bottom: 5px; transition: 0.2s; }
-.filter-bar span:hover { color: #aaa; }
+.filter-bar { display: flex; gap: 30px; margin-bottom: 25px; font-size: 0.85rem; color: #666; text-transform: uppercase; font-weight: bold; }
+.filter-bar span { cursor: pointer; padding-bottom: 5px; }
 .filter-bar .active { color: white; border-bottom: 2px solid white; }
 
-/* Tally & Bars */
-.winner-box {
-    text-align: center; font-size: 1.8rem; font-weight: 900; margin-bottom: 25px; 
-    text-transform: uppercase; padding: 25px; border-radius: 8px; border: 2px solid rgba(255,255,255,0.1);
-}
+.winner-box { text-align: center; font-size: 1.8rem; font-weight: 900; margin-bottom: 25px; text-transform: uppercase; padding: 25px; border-radius: 8px; border: 2px solid rgba(255,255,255,0.1); }
 .coalition { background: linear-gradient(90deg, #005696 0%, #f7941d 100%); }
 .alp-win { background-color: #e61e2b; }
 .hung { background-color: #222; color: #888; }
@@ -52,26 +21,20 @@ h1 { margin: 0 0 20px 0; font-size: 2.2rem; letter-spacing: -1px; }
 .party-row { display: flex; align-items: center; margin-bottom: 12px; }
 .party-label { width: 70px; font-weight: 900; font-size: 1.2rem; }
 .bar-container { flex-grow: 1; background-color: #2a2a2a; height: 45px; border-radius: 4px; overflow: hidden; }
-.bar { height: 100%; display: flex; align-items: center; justify-content: flex-end; transition: width 1s ease; width: 0%; }
+.bar { height: 100%; display: flex; align-items: center; justify-content: flex-end; transition: width 1s ease; }
 .count { padding-right: 15px; font-size: 1.3rem; font-weight: 800; }
 
-/* Party Colors */
 .alp, .bg-alp { background-color: #e61e2b; }
 .lnp, .bg-lnp { background-color: #005696; }
 .onp, .bg-onp { background-color: #f7941d; }
+.oth, .bg-oth { background-color: #444; }
 
-/* Seat Cards */
-.seat-card { 
-    background-color: #1a1a1a; border-radius: 8px; padding: 15px 20px; 
-    margin-bottom: 10px; display: flex; justify-content: space-between; 
-    align-items: center; border: 1px solid #222; 
-}
+.seat-card { background-color: #1a1a1a; border-radius: 8px; padding: 15px 20px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #222; }
 .seat-name { font-size: 1.1rem; font-weight: bold; }
 .person-name { color: #aaa; font-size: 0.85rem; margin-bottom: 8px; }
 .badge { padding: 3px 8px; border-radius: 4px; font-size: 0.65rem; font-weight: 900; text-transform: uppercase; }
 .from-text { color: #5cb7ff; font-size: 0.65rem; font-weight: bold; margin-left: 8px; }
 .swing-label { font-size: 0.75rem; color: #aaa; font-weight: bold; }
 
-/* Map */
 .map-container-box { background: #1a1a1a; padding: 20px; border-radius: 8px; border: 1px solid #222; text-align: center; }
 .static-map { max-width: 100%; height: auto; border-radius: 4px; }
