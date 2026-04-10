@@ -1,70 +1,53 @@
 const seats = [
-    { name: "Cairns", party: "alp", person: "Candidate Name", status: "HOLD", from: "ALP", swing: "2.1% Swing", hidden: true },
-    { name: "Cook", party: "alp", person: "Candidate Name", status: "HOLD", from: "ALP", swing: "1.5% Swing", hidden: true },
-    { name: "Burdekin", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "0.8% Swing", hidden: true },
-    { name: "Townsville", party: "onp", person: "Candidate Name", status: "GAIN", from: "ALP", swing: "12.4% Swing", hidden: true },
-    { name: "Traeger", party: "oth", person: "Candidate Name", status: "HOLD", from: "KAP", swing: "0.0% Swing", hidden: true },
-    { name: "Burnett", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "0.0% Swing", hidden: true },
-    { name: "Callide", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "0.0% Swing", hidden: true },
-    { name: "Gregory", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "0.0% Swing", hidden: true },
-    { name: "Maryborough", party: "alp", person: "Candidate Name", status: "HOLD", from: "ALP", swing: "0.0% Swing", hidden: true },
-    { name: "Rockhampton", party: "alp", person: "Candidate Name", status: "HOLD", from: "ALP", swing: "0.0% Swing", hidden: true },
-    { name: "Warrego", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "0.0% Swing", hidden: true },
-    { name: "Toowoomba", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "0.0% Swing", hidden: true },
-    { name: "Southern Downs", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "0.0% Swing", hidden: true },
-    { name: "Ferny Grove", party: "alp", person: "Candidate Name", status: "HOLD", from: "ALP", swing: "0.0% Swing", hidden: true },
-    { name: "McConnel", party: "alp", person: "Candidate Name", status: "HOLD", from: "ALP", swing: "0.0% Swing", hidden: true },
-    { name: "Nudgee", party: "alp", person: "Candidate Name", status: "HOLD", from: "ALP", swing: "0.0% Swing", hidden: true },
-    { name: "Redcliffe", party: "alp", person: "Candidate Name", status: "HOLD", from: "ALP", swing: "0.0% Swing", hidden: true },
-    { name: "Lytton", party: "alp", person: "Candidate Name", status: "HOLD", from: "ALP", swing: "0.0% Swing", hidden: true },
-    { name: "Mansfield", party: "alp", person: "Candidate Name", status: "HOLD", from: "ALP", swing: "0.0% Swing", hidden: true },
-    { name: "Moggill", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "0.0% Swing", hidden: true },
-    { name: "South Brisbane", party: "oth", person: "Candidate Name", status: "HOLD", from: "GRN", swing: "0.0% Swing", hidden: true },
-    { name: "Caloundra", party: "alp", person: "Candidate Name", status: "HOLD", from: "ALP", swing: "0.0% Swing", hidden: true },
-    { name: "Gympie", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "0.0% Swing", hidden: true },
-    { name: "Nanango", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "0.0% Swing", hidden: true },
-    { name: "Noosa", party: "oth", person: "Candidate Name", status: "HOLD", from: "IND", swing: "0.0% Swing", hidden: true },
-    { name: "Coomera", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "0.0% Swing", hidden: true },
-    { name: "Mudgeeraba", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "0.0% Swing", hidden: true },
-    { name: "Surfers Paradise", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "0.0% Swing", hidden: true },
-    { name: "Redlands", party: "alp", person: "Candidate Name", status: "HOLD", from: "ALP", swing: "0.0% Swing", hidden: true },
-    { name: "Ipswich", party: "alp", person: "Candidate Name", status: "HOLD", from: "ALP", swing: "0.0% Swing", hidden: true },
-    { name: "Logan", party: "alp", person: "Candidate Name", status: "HOLD", from: "ALP", swing: "0.0% Swing", hidden: true },
-    { name: "Scenic Rim", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "0.0% Swing", hidden: true }
+    { name: "Cairns", party: "alp", person: "Michael Healy", status: "HOLD", from: "ALP", swing: "2.1%", hidden: true },
+    { name: "Cook", party: "alp", person: "Cynthia Lui", status: "HOLD", from: "ALP", swing: "1.5%", hidden: true },
+    { name: "Townsville", party: "alp", person: "Scott Stewart", status: "HOLD", from: "ALP", swing: "3.2%", hidden: true },
+    { name: "Traeger", party: "kap", person: "Robbie Katter", status: "HOLD", from: "KAP", swing: "0.0%", hidden: false },
+    { name: "South Brisbane", party: "grn", person: "Amy MacMahon", status: "HOLD", from: "GRN", swing: "0.5%", hidden: false },
+    { name: "Broadwater", party: "lnp", person: "David Crisafulli", status: "HOLD", from: "LNP", swing: "5.6%", hidden: false },
+    { name: "Hinchinbrook", party: "kap", person: "Nick Dametto", status: "HOLD", from: "KAP", swing: "1.2%", hidden: false },
+    { name: "Hill", party: "kap", person: "Shane Knuth", status: "HOLD", from: "KAP", swing: "0.8%", hidden: false },
+    { name: "Mirani", party: "onp", person: "Stephen Andrew", status: "HOLD", from: "ONP", swing: "2.3%", hidden: false },
+    { name: "Maiwar", party: "grn", person: "Michael Berkman", status: "HOLD", from: "GRN", swing: "1.1%", hidden: false },
+    { name: "Gregory", party: "lnp", person: "Lachlan Millar", status: "HOLD", from: "LNP", swing: "0.0%", hidden: true },
+    { name: "Maryborough", party: "alp", person: "Bruce Saunders", status: "HOLD", from: "ALP", swing: "0.0%", hidden: true },
+    { name: "Rockhampton", party: "alp", person: "Barry O'Rourke", status: "HOLD", from: "ALP", swing: "0.0%", hidden: true },
+    { name: "Warrego", party: "lnp", person: "Ann Leahy", status: "HOLD", from: "LNP", swing: "0.0%", hidden: true },
+    { name: "Toowoomba N", party: "lnp", person: "Trevor Watts", status: "HOLD", from: "LNP", swing: "0.0%", hidden: true },
+    { name: "Southern Downs", party: "lnp", person: "James Lister", status: "HOLD", from: "LNP", swing: "0.0%", hidden: true },
+    { name: "Ferny Grove", party: "alp", person: "Mark Furner", status: "HOLD", from: "ALP", swing: "0.0%", hidden: true },
+    { name: "McConnel", party: "alp", person: "Grace Grace", status: "HOLD", from: "ALP", swing: "0.0%", hidden: true },
+    { name: "Nudgee", party: "alp", person: "Leanne Linard", status: "HOLD", from: "ALP", swing: "0.0%", hidden: true },
+    { name: "Redcliffe", party: "alp", person: "Yvette D'Ath", status: "HOLD", from: "ALP", swing: "0.0%", hidden: true },
+    { name: "Lytton", party: "alp", person: "Joan Pease", status: "HOLD", from: "ALP", swing: "0.0%", hidden: true },
+    { name: "Mansfield", party: "alp", person: "Corrine McMillan", status: "HOLD", from: "ALP", swing: "0.0%", hidden: true },
+    { name: "Moggill", party: "lnp", person: "Christian Rowan", status: "HOLD", from: "LNP", swing: "0.0%", hidden: true },
+    { name: "Caloundra", party: "alp", person: "Jason Hunt", status: "HOLD", from: "ALP", swing: "0.0%", hidden: true },
+    { name: "Gympie", party: "lnp", person: "Tony Perrett", status: "HOLD", from: "LNP", swing: "0.0%", hidden: true },
+    { name: "Nanango", party: "lnp", person: "Deb Frecklington", status: "HOLD", from: "LNP", swing: "0.0%", hidden: true },
+    { name: "Noosa", party: "oth", person: "Sandy Bolton", status: "HOLD", from: "IND", swing: "0.0%", hidden: true },
+    { name: "Coomera", party: "lnp", person: "Michael Crandon", status: "HOLD", from: "LNP", swing: "0.0%", hidden: true },
+    { name: "Mudgeeraba", party: "lnp", person: "Ros Bates", status: "HOLD", from: "LNP", swing: "0.0%", hidden: true },
+    { name: "Surfers Paradise", party: "lnp", person: "John-Paul Langbroek", status: "HOLD", from: "LNP", swing: "0.0%", hidden: true },
+    { name: "Logan", party: "alp", person: "Linus Power", status: "HOLD", from: "ALP", swing: "0.0%", hidden: true },
+    { name: "Scenic Rim", party: "lnp", person: "Jon Krause", status: "HOLD", from: "LNP", swing: "0.0%", hidden: true }
 ];
 
 const TOTAL_SEATS = 32;
-let currentFilter = 'all';
+const WIN_GOAL = 17;
 
 function updateDashboard() {
-    const totals = { alp: 0, lnp: 0, onp: 0, oth: 0 };
-    seats.forEach(s => { 
-        if (!s.hidden && totals[s.party] !== undefined) totals[s.party]++; 
-    });
+    const totals = { alp: 0, lnp: 0, grn: 0, kap: 0, onp: 0, oth: 0 };
+    seats.forEach(s => { if (!s.hidden) totals[s.party]++; });
 
-    const revealedCount = seats.filter(s => !s.hidden).length;
-    const winnerDiv = document.getElementById('election-winner');
-    const coalition = totals.lnp + totals.onp;
-
-    if (revealedCount === 0) {
-        winnerDiv.className = "winner-box hung";
-        winnerDiv.innerText = "Awaiting First Results...";
-    } else if (coalition >= 17) {
-        winnerDiv.className = "winner-box coalition";
-        winnerDiv.innerText = "Projected: LNP-ONP Coalition Government";
-    } else if (totals.alp >= 17) {
-        winnerDiv.className = "winner-box alp-win";
-        winnerDiv.innerText = "Projected: ALP Majority Government";
-    } else {
-        winnerDiv.className = "winner-box hung";
-        winnerDiv.innerText = "Live Count in Progress";
-    }
-
-    document.getElementById('percent-counted').innerText = `${revealedCount} of ${TOTAL_SEATS} Declared`;
-
-    ["alp", "lnp", "onp"].forEach(p => {
-        document.getElementById(`${p}-count`).innerText = totals[p];
-        document.getElementById(`${p}-bar`).style.width = (totals[p] / TOTAL_SEATS * 100) + "%";
+    // Update Bars
+    Object.keys(totals).forEach(p => {
+        const barEl = document.getElementById(`${p}-bar`);
+        const countEl = document.getElementById(`${p}-count`);
+        if(barEl) {
+            barEl.style.width = (totals[p] / TOTAL_SEATS * 100) + "%";
+            countEl.innerText = totals[p];
+        }
     });
 
     renderSeatList();
@@ -72,64 +55,21 @@ function updateDashboard() {
 
 function renderSeatList() {
     const list = document.getElementById('seat-list');
-    list.innerHTML = "";
-    
-    const filtered = seats.filter(s => {
-        // Updated Logic: If hidden, it counts as "In Doubt" and NOT "Changing"
-        if (currentFilter === 'doubt') {
-            return s.hidden || s.status === "IN DOUBT";
-        }
-        if (currentFilter === 'changing') {
-            return !s.hidden && s.status === "GAIN";
-        }
-        return true;
-    });
-
-    list.innerHTML = filtered.map(s => {
-        const name = s.hidden ? "CALCULATING..." : s.person;
-        const status = s.hidden ? "WAITING FOR DATA" : `${s.party.toUpperCase()} ${s.status}`;
-        const swing = s.hidden ? "---" : s.swing;
-        const colorClass = s.hidden ? "oth" : s.party;
-
+    list.innerHTML = seats.map(s => {
+        const isDoubt = s.hidden || s.status === "IN DOUBT";
         return `
-            <div class="seat-card" style="${s.hidden ? 'opacity: 0.7;' : ''}">
+            <div class="seat-card" style="${s.hidden ? 'opacity:0.6' : ''}">
                 <div>
                     <div class="seat-name">${s.name}</div>
-                    <div class="person-name">${name}</div>
-                    <div class="badge-row">
-                        <span class="badge bg-${colorClass}">${status}</span>
-                        <span class="from-text">${s.hidden ? "" : "FROM " + s.from}</span>
-                    </div>
+                    <div class="person-name">${s.hidden ? 'CALCULATING...' : s.person}</div>
+                    <span class="badge ${s.hidden ? 'oth' : s.party}">
+                        ${s.hidden ? 'WAITING' : s.party.toUpperCase() + ' ' + s.status}
+                    </span>
                 </div>
-                <div class="swing-label">${swing}</div>
+                <div class="person-name">${s.hidden ? '--' : s.swing + ' swing'}</div>
             </div>
         `;
     }).join('');
 }
-
-// Tab and Filter Controls
-document.getElementById('btn-tally').onclick = () => {
-    document.getElementById('view-tally').style.display = 'block';
-    document.getElementById('view-map').style.display = 'none';
-    document.getElementById('btn-tally').classList.add('active');
-    document.getElementById('btn-map').classList.remove('active');
-};
-document.getElementById('btn-map').onclick = () => {
-    document.getElementById('view-tally').style.display = 'none';
-    document.getElementById('view-map').style.display = 'block';
-    document.getElementById('btn-map').classList.add('active');
-    document.getElementById('btn-tally').classList.remove('active');
-};
-
-function setFilter(type, el) {
-    currentFilter = type;
-    document.querySelectorAll('.filter-bar span').forEach(s => s.classList.remove('active'));
-    el.classList.add('active');
-    renderSeatList();
-}
-
-document.getElementById('filter-all').onclick = function() { setFilter('all', this); };
-document.getElementById('filter-doubt').onclick = function() { setFilter('doubt', this); };
-document.getElementById('filter-changing').onclick = function() { setFilter('changing', this); };
 
 window.onload = updateDashboard;
