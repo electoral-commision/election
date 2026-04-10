@@ -39,7 +39,7 @@ const seats = [
     { name: "South Brisbane", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
     { name: "Southern Downs", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
     { name: "Thuringowa", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Toowoomba N", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
+    { name: "Toowoomba", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
     { name: "Townsville", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
     { name: "Traeger", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
     { name: "Warrego", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true }
