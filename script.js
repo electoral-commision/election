@@ -1,12 +1,12 @@
 // 1. PARTY CONFIGURATION
-// Add any party here: [Full Name, Color, Show by default (true/false)]
+// [Full Name, Hex Color, Master Visibility (true = always show bar)]
 const PARTY_CONFIG = {
-    alp: ["Australian Labor Party", "#E51F30", true],
-    lnp: ["Liberal National Party", "#166FF3", true],
-    grn: ["The Greens", "#4E8321", true],
-    kap: ["Katter's Australian Party", "#AA6255", true],
-    onp: ["One Nation", "#ff9900", true],
-    oth: ["Independent/Other", "#444444", true]
+    alp: ["Australian Labor Party", "#e61e2b", true],
+    lnp: ["Liberal National Party", "#005696", true],
+    grn: ["The Greens", "#539c35", true],
+    kap: ["Katter's Australian Party", "#a54d44", true],
+    onp: ["One Nation", "#f7941d", true],
+    oth: ["Independent / Other", "#666666", true]
 };
 
 // 2. ELECTORATE DATA
@@ -45,16 +45,18 @@ const seats = [
     { name: "Scenic Rim", party: "lnp", person: "Jon Krause", status: "HOLD", from: "LNP", swing: "0.0%", hidden: false }
 ];
 
+let currentFilter = 'all';
+
 function updateDashboard() {
     const tallyContainer = document.getElementById('bar-rows-container');
     const legendContainer = document.getElementById('map-legend');
     const totals = {};
     const hasSeats = new Set();
 
-    // Reset totals
+    // Reset totals based on config
     Object.keys(PARTY_CONFIG).forEach(code => totals[code] = 0);
 
-    // Calculate totals
+    // Calculate actual wins
     seats.forEach(s => {
         if (!s.hidden) {
             totals[s.party]++;
@@ -62,17 +64,18 @@ function updateDashboard() {
         }
     });
 
-    // Build Bar UI
     tallyContainer.innerHTML = '';
     legendContainer.innerHTML = '';
 
+    // Automatically generate Bars and Legends
     Object.keys(PARTY_CONFIG).forEach(code => {
         const [fullName, color, masterShow] = PARTY_CONFIG[code];
         
-        // Show if master is true OR they have won a seat
+        // Show if master is true OR they have at least 1 seat (Override)
         if (masterShow || hasSeats.has(code)) {
-            // Add Bar
             const width = (totals[code] / 32 * 100);
+            
+            // Generate Bar HTML
             tallyContainer.innerHTML += `
                 <div class="party-row">
                     <div class="party-label">${code.toUpperCase()}</div>
@@ -82,7 +85,7 @@ function updateDashboard() {
                     </div>
                 </div>`;
 
-            // Add Map Legend Dot
+            // Generate Map Legend Dot
             legendContainer.innerHTML += `
                 <span class="legend-item">
                     <span class="dot" style="background-color: ${color};"></span> ${code.toUpperCase()}
@@ -90,19 +93,26 @@ function updateDashboard() {
         }
     });
 
-    renderList();
+    renderSeatList();
 }
 
-function renderList() {
+function renderSeatList() {
     const list = document.getElementById('seat-list');
-    list.innerHTML = seats.map(s => {
-        const partyColor = PARTY_CONFIG[s.party] ? PARTY_CONFIG[s.party][1] : "#444";
+    
+    const filtered = seats.filter(s => {
+        if (currentFilter === 'doubt') return s.hidden || s.status === "IN DOUBT";
+        if (currentFilter === 'changing') return !s.hidden && s.status === "GAIN";
+        return true;
+    });
+
+    list.innerHTML = filtered.map(s => {
+        const config = PARTY_CONFIG[s.party] || ["Unknown", "#444"];
         return `
         <div class="seat-card">
             <div class="seat-info">
                 <h3>${s.name}</h3>
-                <p>${s.hidden ? 'Calculating...' : s.person}</p>
-                <span class="badge" style="background-color: ${s.hidden ? '#444' : partyColor}">
+                <p>${s.hidden ? 'Calculating live results...' : s.person}</p>
+                <span class="badge" style="background-color: ${s.hidden ? '#444' : config[1]}">
                     ${s.hidden ? 'IN DOUBT' : s.party.toUpperCase() + ' ' + s.status}
                 </span>
             </div>
@@ -111,13 +121,16 @@ function renderList() {
     }).join('');
 }
 
-// Switching logic
-document.getElementById('btn-tally').onclick = function() {
-    toggleView('tally');
-};
-document.getElementById('btn-map').onclick = function() {
-    toggleView('map');
-};
+function setFilter(type) {
+    currentFilter = type;
+    document.querySelectorAll('.filter-bar span').forEach(el => el.classList.remove('active'));
+    document.getElementById('filter-' + type).classList.add('active');
+    renderSeatList();
+}
+
+// Tab Switching
+document.getElementById('btn-tally').onclick = () => toggleView('tally');
+document.getElementById('btn-map').onclick = () => toggleView('map');
 
 function toggleView(view) {
     document.getElementById('tally-view').style.display = view === 'tally' ? 'block' : 'none';
@@ -126,4 +139,5 @@ function toggleView(view) {
     document.getElementById('btn-map').classList.toggle('active', view === 'map');
 }
 
+// Initial Load
 window.onload = updateDashboard;
