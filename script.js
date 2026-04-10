@@ -42,36 +42,49 @@ function updateDashboard() {
     // Winner Box
     const winnerDiv = document.getElementById('election-winner');
     const coalition = totals.lnp + totals.onp;
+    winnerDiv.style.display = "block";
     
     if (coalition >= 17) {
         winnerDiv.className = "winner-box coalition";
-        winnerDiv.innerText = "LNP-ONP COALITION GOVERNMENT";
+        winnerDiv.innerText = "Projected: LNP-ONP Coalition Government";
     } else if (totals.alp >= 17) {
         winnerDiv.className = "winner-box alp-win";
-        winnerDiv.innerText = "ALP MAJORITY GOVERNMENT";
+        winnerDiv.innerText = "Projected: ALP Majority Government";
     } else {
         winnerDiv.className = "winner-box hung";
-        winnerDiv.innerText = "HUNG PARLIAMENT";
+        winnerDiv.innerText = "Hung Parliament: Negotiations Ongoing";
     }
 
-    // Update Progress Bars
-    ["alp", "lnp", "onp"].forEach(id => {
-        const count = totals[id];
-        document.getElementById(`${id}-count`).innerText = count;
-        document.getElementById(`${id}-bar`).style.width = (count / TOTAL_SEATS * 100) + "%";
+    document.getElementById('percent-counted').innerText = `100% counted (${TOTAL_SEATS}/${TOTAL_SEATS})`;
+
+    // Update Bars
+    ["alp", "lnp", "onp"].forEach(party => {
+        const count = totals[party];
+        document.getElementById(`${party}-count`).innerText = count;
+        document.getElementById(`${party}-bar`).style.width = (count / TOTAL_SEATS * 100) + "%";
     });
 
-    // Render Seat List
+    renderSeatList();
+}
+
+function renderSeatList() {
     const list = document.getElementById('seat-list');
     list.innerHTML = seats.map(s => `
         <div class="seat-card">
-            <strong>${s.name}</strong>
-            <span class="badge ${s.party}">${s.party.toUpperCase()} ${s.status}</span>
+            <div>
+                <div class="seat-name">${s.name}</div>
+                <div class="person-name">${s.person}</div>
+                <div class="badge-row">
+                    <span class="badge bg-${s.party}">${s.party.toUpperCase()} ${s.status}</span>
+                    <span class="from-text">FROM ${s.from}</span>
+                </div>
+            </div>
+            <div class="swing-box"><div class="swing-label">${s.swing}</div></div>
         </div>
     `).join('');
 }
 
-// Tab Controls
+// Tabs
 document.getElementById('btn-tally').onclick = () => {
     document.getElementById('view-tally').style.display = 'block';
     document.getElementById('view-map').style.display = 'none';
