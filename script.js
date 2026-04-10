@@ -1,94 +1,70 @@
 const seats = [
-    { name: "Melbourne", party: "onp", person: "siua10011", status: "GAIN", from: "FROM OTH", swing: "100% Gain" },
-    { name: "Kooyong", party: "onp", person: "Bumuncha", status: "GAIN", from: "FROM OTH", swing: "50.0% Gain" },
-    { name: "Higgins", party: "alp", person: "Thecone", status: "GAIN", from: "FROM OTH", swing: "50.0% Gain" },
-    { name: "Chisholm", party: "onp", person: "Triple G gaming", status: "GAIN", from: "FROM OTH", swing: "100% Gain" },
-    { name: "Macnamara", party: "onp", person: "itsmerealdd", status: "GAIN", from: "FROM OTH", swing: "100% Gain" },
-    { name: "Maribyrnong", party: "lnp", person: "2023 Toyota Camry", status: "GAIN", from: "FROM OTH", swing: "100% Gain" },
-    { name: "Wills", party: "lnp", person: "Nswsteamtrainfan10", status: "GAIN", from: "FROM OTH", swing: "100% Gain" },
-    { name: "Fraser", party: "lnp", person: "Chris", status: "GAIN", from: "FROM OTH", swing: "100% Gain" },
-    { name: "Dunkley", party: "alp", person: "Jehrhfdhdhhfhdj", status: "GAIN", from: "FROM OTH", swing: "50.0% Gain" },
-    { name: "Corangamite", party: "alp", person: "nathantombleson2024", status: "GAIN", from: "FROM OTH", swing: "50.0% Gain" },
-    { name: "Casey", party: "lnp", person: "officer_chilly", status: "GAIN", from: "FROM OTH", swing: "50.0% Gain" },
-    { name: "La Trobe", party: "alp", person: "itxW4sley._.", status: "GAIN", from: "FROM OTH", swing: "100% Gain" },
-    { name: "Monash", party: "lnp", person: "Harley", status: "GAIN", from: "FROM OTH", swing: "100% Gain" },
-    { name: "Calwell", party: "alp", person: "kiwi", status: "GAIN", from: "FROM OTH", swing: "50.0% Gain" },
-    { name: "Bruce", party: "alp", person: "Awol_21", status: "GAIN", from: "FROM OTH", swing: "50.0% Gain" }
+    { name: "Cairns", party: "alp", person: "Candidate Name", status: "HOLD", from: "ALP", swing: "0.0%" },
+    { name: "Cook", party: "lnp", person: "Candidate Name", status: "GAIN", from: "ALP", swing: "5.2%" },
+    { name: "Burdekin", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "1.0%" },
+    { name: "Townsville", party: "onp", person: "Candidate Name", status: "GAIN", from: "ALP", swing: "12.0%" },
+    { name: "Traeger", party: "oth", person: "Candidate Name", status: "HOLD", from: "KAP", swing: "0.0%" },
+    { name: "Burnett", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "0.0%" },
+    { name: "Callide", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "0.0%" },
+    { name: "Gregory", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "0.0%" },
+    { name: "Maryborough", party: "alp", person: "Candidate Name", status: "HOLD", from: "ALP", swing: "0.0%" },
+    { name: "Rockhampton", party: "alp", person: "Candidate Name", status: "HOLD", from: "ALP", swing: "0.0%" },
+    { name: "Warrego", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "0.0%" },
+    { name: "Toowoomba", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "0.0%" },
+    { name: "Southern Downs", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "0.0%" },
+    { name: "Ferny Grove", party: "alp", person: "Candidate Name", status: "HOLD", from: "ALP", swing: "0.0%" },
+    { name: "McConnel", party: "alp", person: "Candidate Name", status: "HOLD", from: "ALP", swing: "0.0%" },
+    { name: "Nudgee", party: "alp", person: "Candidate Name", status: "HOLD", from: "ALP", swing: "0.0%" },
+    { name: "Redcliffe", party: "alp", person: "Candidate Name", status: "HOLD", from: "ALP", swing: "0.0%" },
+    { name: "Lytton", party: "alp", person: "Candidate Name", status: "HOLD", from: "ALP", swing: "0.0%" },
+    { name: "Mansfield", party: "alp", person: "Candidate Name", status: "HOLD", from: "ALP", swing: "0.0%" },
+    { name: "Moggill", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "0.0%" },
+    { name: "South Brisbane", party: "oth", person: "Candidate Name", status: "HOLD", from: "GRN", swing: "0.0%" },
+    { name: "Caloundra", party: "alp", person: "Candidate Name", status: "HOLD", from: "ALP", swing: "0.0%" },
+    { name: "Gympie", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "0.0%" },
+    { name: "Nanango", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "0.0%" },
+    { name: "Noosa", party: "oth", person: "Candidate Name", status: "HOLD", from: "IND", swing: "0.0%" },
+    { name: "Coomera", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "0.0%" },
+    { name: "Mudgeeraba", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "0.0%" },
+    { name: "Surfers Paradise", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "0.0%" },
+    { name: "Redlands", party: "alp", person: "Candidate Name", status: "HOLD", from: "ALP", swing: "0.0%" },
+    { name: "Ipswich", party: "alp", person: "Candidate Name", status: "HOLD", from: "ALP", swing: "0.0%" },
+    { name: "Logan", party: "alp", person: "Candidate Name", status: "HOLD", from: "ALP", swing: "0.0%" },
+    { name: "Scenic Rim", party: "lnp", person: "Candidate Name", status: "HOLD", from: "LNP", swing: "0.0%" }
 ];
 
-const TOTAL_SEATS = 15;
+const TOTAL_SEATS = seats.length;
 let currentFilter = "all";
 
+// --- Dashboard Logic ---
 async function updateDashboard() {
     const totals = { alp: 0, lnp: 0, onp: 0, oth: 0 };
-    seats.forEach(s => {
-        if (totals[s.party] !== undefined) totals[s.party]++;
-    });
+    seats.forEach(s => { if (totals[s.party] !== undefined) totals[s.party]++; });
 
+    // Winner Box
     const winnerDiv = document.getElementById('election-winner');
     const coalitionTotal = totals.lnp + totals.onp;
-    
     winnerDiv.style.display = "block";
     
-    if (coalitionTotal >= 8) {
+    if (coalitionTotal >= (TOTAL_SEATS / 2)) {
         winnerDiv.className = "winner-box coalition";
-        winnerDiv.innerText = "Government Formed: LNP-ONP Coalition";
-    } else if (totals.alp >= 8) {
+        winnerDiv.innerText = "Projected Government: LNP-ONP Coalition";
+    } else if (totals.alp >= (TOTAL_SEATS / 2)) {
         winnerDiv.className = "winner-box alp-win";
-        winnerDiv.innerText = "Government Formed: Australian Labor Party";
+        winnerDiv.innerText = "Projected Government: ALP";
     } else {
         winnerDiv.className = "winner-box hung";
-        winnerDiv.innerText = "Hung Parliament: Negotiations Ongoing";
+        winnerDiv.innerText = "Hung Parliament Likely";
     }
 
-    const totalCounted = totals.alp + totals.lnp + totals.onp + totals.oth;
-    const percent = ((totalCounted / TOTAL_SEATS) * 100).toFixed(1);
-    document.getElementById('percent-counted').innerText = `${percent}% counted (${totalCounted}/${TOTAL_SEATS})`;
-
-    try {
-        const response = await fetch('https://api.github.com/repos/electoral-commision/election/commits?path=script.js&page=1&per_page=1');
-        const data = await response.json();
-        if (data && data[0]) {
-            const commitDate = new Date(data[0].commit.committer.date);
-            const timeString = commitDate.toLocaleTimeString('en-AU', { hour: 'numeric', minute: '2-digit', hour12: true });
-            document.getElementById('time-display').innerText = `Updated at ${timeString}`;
-        }
-    } catch (err) {
-        document.getElementById('time-display').innerText = "Updated Live";
-    }
-
+    document.getElementById('percent-counted').innerText = `100% counted (${TOTAL_SEATS}/${TOTAL_SEATS})`;
+    
     updateBar("alp", totals.alp);
     updateBar("lnp", totals.lnp);
     updateBar("onp", totals.onp);
 
     renderSeatList();
-}
-
-function renderSeatList() {
-    const list = document.getElementById('seat-list');
-    list.innerHTML = "";
-    seats.forEach(s => {
-        const isInDoubt = (s.party === "" || s.person === "");
-        const isChanging = (s.status === "GAIN" || s.status === "WIN");
-        if (currentFilter === "doubt" && !isInDoubt) return;
-        if (currentFilter === "changing" && !isChanging) return;
-
-        const card = document.createElement('div');
-        card.className = 'seat-card';
-        const partyClass = s.party ? `bg-${s.party}` : 'bg-pending';
-        card.innerHTML = `
-            <div>
-                <div class="seat-name">${s.name}</div>
-                <div class="person-name">${s.person || "Candidate Pending"}</div>
-                <div class="badge-row">
-                    <span class="badge ${partyClass}">${s.party ? s.party.toUpperCase() : 'PENDING'} ${s.status}</span>
-                    <span class="from-text">${s.from}</span>
-                </div>
-            </div>
-            <div class="swing-box"><div class="swing-label">${s.swing}</div></div>
-        `;
-        list.appendChild(card);
-    });
+    colorMap();
 }
 
 function updateBar(id, count) {
@@ -98,15 +74,59 @@ function updateBar(id, count) {
     if(bar) bar.style.width = (count / TOTAL_SEATS * 100) + "%";
 }
 
-function setFilter(type, el) {
-    currentFilter = type;
-    document.querySelectorAll('.filter-bar span').forEach(s => s.classList.remove('active'));
-    el.classList.add('active');
-    renderSeatList();
+// --- Map Logic ---
+function colorMap() {
+    seats.forEach(seat => {
+        const path = document.getElementById(seat.name);
+        if (path) {
+            path.setAttribute('class', `electorate fill-${seat.party}`);
+            
+            path.onmousemove = (e) => {
+                const tip = document.getElementById('map-tooltip');
+                tip.style.display = 'block';
+                tip.style.left = e.pageX + 15 + 'px';
+                tip.style.top = e.pageY + 15 + 'px';
+                tip.innerHTML = `<strong>${seat.name}</strong><br>${seat.party.toUpperCase()} ${seat.status}`;
+            };
+            path.onmouseout = () => document.getElementById('map-tooltip').style.display = 'none';
+        }
+    });
 }
 
-document.getElementById('filter-all').onclick = function() { setFilter('all', this); };
-document.getElementById('filter-doubt').onclick = function() { setFilter('doubt', this); };
-document.getElementById('filter-changing').onclick = function() { setFilter('changing', this); };
+// --- Tab & Filter Logic ---
+document.getElementById('btn-tally').onclick = function() {
+    this.classList.add('active');
+    document.getElementById('btn-map').classList.remove('active');
+    document.getElementById('view-tally').style.display = 'block';
+    document.getElementById('view-map').style.display = 'none';
+};
+
+document.getElementById('btn-map').onclick = function() {
+    this.classList.add('active');
+    document.getElementById('btn-tally').classList.remove('active');
+    document.getElementById('view-tally').style.display = 'none';
+    document.getElementById('view-map').style.display = 'block';
+};
+
+function renderSeatList() {
+    const list = document.getElementById('seat-list');
+    list.innerHTML = "";
+    seats.forEach(s => {
+        const card = document.createElement('div');
+        card.className = 'seat-card';
+        card.innerHTML = `
+            <div>
+                <div class="seat-name">${s.name}</div>
+                <div class="person-name">${s.person}</div>
+                <div class="badge-row">
+                    <span class="badge bg-${s.party}">${s.party.toUpperCase()} ${s.status}</span>
+                    <span class="from-text">FROM ${s.from}</span>
+                </div>
+            </div>
+            <div class="swing-box"><div class="swing-label">${s.swing} Swing</div></div>
+        `;
+        list.appendChild(card);
+    });
+}
 
 window.onload = updateDashboard;
