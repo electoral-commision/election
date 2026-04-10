@@ -2,37 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>AEC Live | Federal Election 2026</title>
+    <title>QLD Election 2026 | Live Results</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <p class="breadcrumb">AEC Live | Federal Election 2026 | Full Results</p>
-        <h1>2026 Queensland Results</h1>
-        <p class="update-time">87.7% counted, updated 2026</p>
+        <p class="breadcrumb">AEC Live | Federal Election 2026</p>
+        <h1>Queensland Results</h1>
+        <p class="update-time">93 of 93 districts | Updated April 2026</p>
 
         <div class="bar-wrapper">
-            <div class="goal-text">17 to win</div>
             <div class="majority-marker"></div>
-            
             <div class="party-row">
-                <div class="party-label alp">ALP</div>
+                <div class="party-label">ALP</div>
                 <div class="bar-container"><div class="bar alp" id="alp-bar"><span class="count" id="alp-count">0</span></div></div>
             </div>
             <div class="party-row">
-                <div class="party-label lnp">LNP</div>
+                <div class="party-label">LNP</div>
                 <div class="bar-container"><div class="bar lnp" id="lnp-bar"><span class="count" id="lnp-count">0</span></div></div>
             </div>
             <div class="party-row">
-                <div class="party-label grn">GRN</div>
+                <div class="party-label">GRN</div>
                 <div class="bar-container"><div class="bar grn" id="grn-bar"><span class="count" id="grn-count">0</span></div></div>
             </div>
             <div class="party-row">
-                <div class="party-label kap">KAP</div>
+                <div class="party-label">KAP</div>
                 <div class="bar-container"><div class="bar kap" id="kap-bar"><span class="count" id="kap-count">0</span></div></div>
             </div>
             <div class="party-row">
-                <div class="party-label onp">ONP</div>
+                <div class="party-label">ONP</div>
                 <div class="bar-container"><div class="bar onp" id="onp-bar"><span class="count" id="onp-count">0</span></div></div>
             </div>
         </div>
@@ -41,6 +39,12 @@
             <button class="tab-btn active">Tally Room</button>
             <button class="tab-btn">Electoral Map</button>
         </nav>
+
+        <div class="filter-bar">
+            <span id="filter-all" class="active" onclick="setFilter('all')">All Seats</span>
+            <span id="filter-doubt" onclick="setFilter('doubt')">In Doubt</span>
+            <span id="filter-changing" onclick="setFilter('changing')">Changing</span>
+        </div>
 
         <div id="seat-list"></div>
     </div>
