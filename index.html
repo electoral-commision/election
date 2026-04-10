@@ -7,9 +7,9 @@
 </head>
 <body>
     <div class="container">
-        <p class="breadcrumb">AEC Live | Queensland Election 2026</p>
+        <p class="breadcrumb">QLD Election 2026 | Full Results ></p>
         <h1>Queensland Results</h1>
-        <p class="update-time">93 of 93 districts | Updated Live</p>
+        <p class="update-time">87.7% counted, updated April 2026</p>
 
         <div class="bar-wrapper">
             <div class="required-text">17 required for majority</div>
@@ -29,19 +29,40 @@
                     <span class="count-text" id="lnp-count">0</span>
                 </div>
             </div>
+            <div class="party-row">
+                <div class="party-label">GRN</div>
+                <div class="bar-container">
+                    <div class="bar grn" id="grn-bar"></div>
+                    <span class="count-text" id="grn-count">0</span>
+                </div>
             </div>
+            <div class="party-row">
+                <div class="party-label">KAP</div>
+                <div class="bar-container">
+                    <div class="bar kap" id="kap-bar"></div>
+                    <span class="count-text" id="kap-count">0</span>
+                </div>
+            </div>
+        </div>
 
         <nav class="tab-nav">
             <button class="tab-btn active" id="btn-tally">Tally Room</button>
             <button class="tab-btn" id="btn-map">Electoral Map</button>
         </nav>
 
-        <div id="tally-view">
+        <div id="tally-view" class="seat-list-container">
             <div id="seat-list"></div>
         </div>
 
         <div id="map-view" class="map-view" style="display:none;">
-            <img src="https://cdn.discordapp.com/attachments/1035879662921986079/1492058642944364655/m94btm1.png?ex=69d9f365&is=69d8a1e5&hm=1ecf685424858bbc707e1a92d0f60780967eb0054818f5b54e379b71b92b9f3f&" class="map-img" alt="Election Map">
+            <div class="map-legend">
+                <span class="legend-item"><span class="dot alp"></span> ALP</span>
+                <span class="legend-item"><span class="dot lnp"></span> LNP</span>
+                <span class="legend-item"><span class="dot grn"></span> GRN</span>
+                <span class="legend-item"><span class="dot kap"></span> KAP</span>
+                <span class="legend-item"><span class="dot onp"></span> ONP</span>
+            </div>
+            <img src="https://cdn.discordapp.com/attachments/1035879662921986079/1492058642944364655/m94btm1.png?ex=69d9f365&is=69d8a1e5&hm=1ecf685424858bbc707e1a92d0f60780967eb0054818f5b54e379b71b92b9f3f&" class="map-img" alt="Map">
         </div>
     </div>
     <script src="script.js"></script>
