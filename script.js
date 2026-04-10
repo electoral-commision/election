@@ -37,7 +37,7 @@ function updateDashboard() {
     const totals = { alp: 0, lnp: 0, grn: 0, kap: 0, onp: 0, oth: 0 };
     seats.forEach(s => { if (!s.hidden) totals[s.party]++; });
 
-    // Update Bars & Numbers
+    // Update Bars
     Object.keys(totals).forEach(p => {
         const bar = document.getElementById(`${p}-bar`);
         const count = document.getElementById(`${p}-count`);
@@ -46,7 +46,6 @@ function updateDashboard() {
             count.innerText = totals[p];
         }
     });
-
     renderList();
 }
 
@@ -54,17 +53,17 @@ function renderList() {
     const list = document.getElementById('seat-list');
     list.innerHTML = seats.map(s => `
         <div class="seat-card">
-            <div>
-                <div style="font-weight:bold">${s.name}</div>
-                <div style="color:#888; font-size:13px">${s.hidden ? 'Calculating...' : s.person}</div>
+            <div class="seat-info">
+                <h3>${s.name}</h3>
+                <p>${s.hidden ? 'Calculating...' : s.person}</p>
                 <span class="badge ${s.hidden ? 'oth' : s.party}">${s.hidden ? 'IN DOUBT' : s.party.toUpperCase() + ' ' + s.status}</span>
             </div>
-            <div style="font-weight:bold; color:#888">${s.hidden ? '--' : s.swing}</div>
+            <div style="font-weight:900; color:#888; font-size:16px">${s.hidden ? '--' : s.swing}</div>
         </div>
     `).join('');
 }
 
-// Map vs Tally Room Switcher
+// Tab Switcher
 document.getElementById('btn-tally').onclick = function() {
     this.classList.add('active');
     document.getElementById('btn-map').classList.remove('active');
