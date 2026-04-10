@@ -45,67 +45,33 @@ function updateDashboard() {
     
     if (coalition >= 17) {
         winnerDiv.className = "winner-box coalition";
-        winnerDiv.innerText = "Government Formed: LNP-ONP Coalition";
+        winnerDiv.innerText = "LNP-ONP COALITION GOVERNMENT";
     } else if (totals.alp >= 17) {
         winnerDiv.className = "winner-box alp-win";
-        winnerDiv.innerText = "Government Formed: ALP Majority";
+        winnerDiv.innerText = "ALP MAJORITY GOVERNMENT";
     } else {
         winnerDiv.className = "winner-box hung";
-        winnerDiv.innerText = "Hung Parliament";
+        winnerDiv.innerText = "HUNG PARLIAMENT";
     }
 
-    // Update Bars
-    updateBar("alp", totals.alp);
-    updateBar("lnp", totals.lnp);
-    updateBar("onp", totals.onp);
-
-    renderSeatList();
-    colorMap();
-}
-
-function updateBar(id, count) {
-    const bar = document.getElementById(`${id}-bar`);
-    const label = document.getElementById(`${id}-count`);
-    label.innerText = count;
-    bar.style.width = (count / TOTAL_SEATS * 100) + "%";
-}
-
-function colorMap() {
-    seats.forEach(seat => {
-        const path = document.getElementById(seat.name);
-        if (path) {
-            path.setAttribute('class', `electorate fill-${seat.party}`);
-            path.onmouseover = (e) => {
-                const tip = document.getElementById('map-tooltip');
-                tip.style.display = 'block';
-                tip.innerHTML = `<strong>${seat.name}</strong><br>${seat.party.toUpperCase()}`;
-            };
-            path.onmousemove = (e) => {
-                const tip = document.getElementById('map-tooltip');
-                tip.style.left = e.pageX + 15 + 'px';
-                tip.style.top = e.pageY + 15 + 'px';
-            };
-            path.onmouseout = () => {
-                document.getElementById('map-tooltip').style.display = 'none';
-            };
-        }
+    // Update Progress Bars
+    ["alp", "lnp", "onp"].forEach(id => {
+        const count = totals[id];
+        document.getElementById(`${id}-count`).innerText = count;
+        document.getElementById(`${id}-bar`).style.width = (count / TOTAL_SEATS * 100) + "%";
     });
-}
 
-function renderSeatList() {
+    // Render Seat List
     const list = document.getElementById('seat-list');
     list.innerHTML = seats.map(s => `
         <div class="seat-card">
-            <div>
-                <div class="seat-name">${s.name}</div>
-                <div class="badge bg-${s.party}">${s.party.toUpperCase()} ${s.status}</div>
-            </div>
-            <div class="swing-label">${s.swing} Swing</div>
+            <strong>${s.name}</strong>
+            <span class="badge ${s.party}">${s.party.toUpperCase()} ${s.status}</span>
         </div>
     `).join('');
 }
 
-// Tab Switching
+// Tab Controls
 document.getElementById('btn-tally').onclick = () => {
     document.getElementById('view-tally').style.display = 'block';
     document.getElementById('view-map').style.display = 'none';
@@ -118,7 +84,6 @@ document.getElementById('btn-map').onclick = () => {
     document.getElementById('view-map').style.display = 'block';
     document.getElementById('btn-map').classList.add('active');
     document.getElementById('btn-tally').classList.remove('active');
-    colorMap();
 };
 
 window.onload = updateDashboard;
