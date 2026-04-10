@@ -1,45 +1,42 @@
-body { background-color: #121212; color: white; font-family: sans-serif; margin: 0; padding: 40px 20px; }
-.container { max-width: 800px; margin: 0 auto; }
-.breadcrumb { color: #5cb7ff; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
+body { background: #121212; color: white; font-family: sans-serif; margin: 0; padding: 20px; }
+.container { max-width: 850px; margin: 0 auto; }
 
 /* Tabs */
-.tab-nav { display: flex; gap: 10px; margin: 20px 0; border-bottom: 1px solid #333; padding-bottom: 15px; }
+.tab-nav { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 15px; }
 .tab-btn { background: #222; border: 1px solid #444; color: #888; padding: 10px 20px; cursor: pointer; border-radius: 4px; font-weight: bold; }
 .tab-btn.active { background: #5cb7ff; color: #000; border-color: #5cb7ff; }
 
-/* Map Specific */
-#map-container { background: #1a1a1a; padding: 20px; border-radius: 8px; border: 1px solid #333; margin-top: 10px; }
-.electorate { fill: #333; stroke: #000; stroke-width: 1px; transition: 0.2s; cursor: crosshair; }
-.electorate:hover { stroke: #fff; stroke-width: 2px; filter: brightness(1.2); }
+/* Map Rendering */
+#map-container { background: #1a1a1a; padding: 20px; border-radius: 8px; border: 1px solid #333; }
+#map-container svg { width: 100%; height: auto; display: block; }
+.electorate { fill: #333; stroke: #000; stroke-width: 0.5px; transition: 0.2s; cursor: pointer; }
+.electorate:hover { stroke: #fff; stroke-width: 1.5px; filter: brightness(1.2); }
 
+/* Party Fills */
 .fill-alp { fill: #e61e2b !important; }
 .fill-lnp { fill: #005696 !important; }
 .fill-onp { fill: #f7941d !important; }
 .fill-oth { fill: #444444 !important; }
 
-#map-tooltip { 
-    position: absolute; background: #000; padding: 8px; border: 1px solid #5cb7ff; 
-    border-radius: 4px; font-size: 0.8rem; display: none; pointer-events: none; z-index: 1000;
-}
-
-.map-legend { margin-bottom: 15px; font-size: 0.9rem; font-weight: bold; }
-.dot { height: 10px; width: 10px; display: inline-block; border-radius: 50%; margin: 0 5px 0 15px; }
-
-/* Tally Bars & Winner Box (Existing) */
+/* Tally Styles */
 .winner-box { text-align: center; font-size: 1.5rem; font-weight: 900; margin-bottom: 25px; padding: 20px; border-radius: 8px; }
 .coalition { background: linear-gradient(90deg, #005696, #f7941d); }
-.alp-win { background-color: #e61e2b; }
-.hung { background-color: #333; }
+.alp-win { background: #e61e2b; }
+.hung { background: #333; }
 
-.bar-container { background: #2a2a2a; height: 35px; border-radius: 4px; overflow: hidden; flex-grow: 1; }
-.bar { height: 100%; display: flex; align-items: center; justify-content: flex-end; transition: width 1s ease; }
-.party-row { display: flex; align-items: center; margin-bottom: 10px; }
-.party-label { width: 60px; font-weight: bold; }
-.alp, .bg-alp { background-color: #e61e2b; }
-.lnp, .bg-lnp { background-color: #005696; }
-.onp, .bg-onp { background-color: #f7941d; }
-.count { padding-right: 10px; font-weight: bold; }
+.party-row { display: flex; align-items: center; margin-bottom: 12px; gap: 10px; }
+.party-label { width: 50px; font-weight: bold; }
+.bar-container { flex-grow: 1; background: #2a2a2a; height: 35px; border-radius: 4px; overflow: hidden; }
+.bar { height: 100%; display: flex; align-items: center; justify-content: flex-end; transition: width 1s; }
+.alp, .bg-alp { background: #e61e2b; }
+.lnp, .bg-lnp { background: #005696; }
+.onp, .bg-onp { background: #f7941d; }
+.oth, .bg-oth { background: #444444; }
+.count { padding-right: 15px; font-weight: bold; }
 
-.seat-card { background: #1a1a1a; padding: 15px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; border: 1px solid #222; }
-.badge { padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; }
-.from-text { color: #5cb7ff; font-size: 0.7rem; margin-left: 10px; }
+.seat-card { background: #1a1a1a; border: 1px solid #222; padding: 15px; border-radius: 8px; display: flex; justify-content: space-between; margin-bottom: 8px; }
+.badge { padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; display: inline-block; margin-top: 5px; }
+
+#map-tooltip { position: absolute; background: #000; padding: 8px; border: 1px solid #5cb7ff; display: none; pointer-events: none; border-radius: 4px; z-index: 1000; font-size: 0.9rem; }
+.map-legend { margin-bottom: 15px; font-size: 0.8rem; }
+.dot { height: 10px; width: 10px; display: inline-block; border-radius: 50%; margin: 0 5px 0 15px; }
