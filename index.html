@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AEC Live | 2026 Federal Election</title>
+    <title>AEC Federal Election 2026</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,6 +11,7 @@
         <header>
             <p class="breadcrumb">AEC Live | Federal Election 2026 | Results</p>
             <h1>2026 Federal Election Results</h1>
+            <p class="update-time" id="time-display">Updated Live</p>
         </header>
 
         <nav class="tab-nav">
@@ -19,14 +20,15 @@
         </nav>
 
         <div id="view-tally">
-            <div id="election-winner" class="winner-box">Loading...</div>
-            
+            <div id="election-winner"></div>
+
             <section class="main-tally">
                 <div class="status-bar">
-                    <span>100% counted</span>
-                    <span>17 to win</span>
+                    <span id="percent-counted">0% counted</span>
+                    <span class="goal">17 to win</span>
                 </div>
                 <div class="bar-wrapper">
+                    <div class="majority-marker"></div>
                     <div class="party-row">
                         <div class="party-label">ALP</div>
                         <div class="bar-container"><div class="bar alp" id="alp-bar"><span class="count" id="alp-count">0</span></div></div>
@@ -42,12 +44,19 @@
                 </div>
             </section>
 
-            <div id="seat-list"></div>
+            <section class="seat-by-seat">
+                <div class="filter-bar">
+                    <span class="active">All Seats</span>
+                    <span>In Doubt</span>
+                    <span>Changing</span>
+                </div>
+                <div id="seat-list"></div>
+            </section>
         </div>
 
         <div id="view-map" style="display: none;">
-            <div class="map-container">
-                <img src="https://raw.githubusercontent.com/electoral-commision/election/main/qld-1.svg" alt="Election Map" class="static-map">
+            <div class="map-container-box">
+                <img src="YOUR_IMAGE_LINK_HERE" alt="Election Map" class="static-map">
             </div>
         </div>
     </div>
