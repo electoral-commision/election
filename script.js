@@ -34,15 +34,15 @@ const seats = [
 ];
 
 const TOTAL_SEATS = 32;
+let currentFilter = 'all';
 
 function updateDashboard() {
     const totals = { alp: 0, lnp: 0, onp: 0, oth: 0 };
     seats.forEach(s => { if (totals[s.party] !== undefined) totals[s.party]++; });
 
-    // Winner Box
+    // Winner Box Logic
     const winnerDiv = document.getElementById('election-winner');
     const coalition = totals.lnp + totals.onp;
-    winnerDiv.style.display = "block";
     
     if (coalition >= 17) {
         winnerDiv.className = "winner-box coalition";
@@ -58,10 +58,9 @@ function updateDashboard() {
     document.getElementById('percent-counted').innerText = `100% counted (${TOTAL_SEATS}/${TOTAL_SEATS})`;
 
     // Update Bars
-    ["alp", "lnp", "onp"].forEach(party => {
-        const count = totals[party];
-        document.getElementById(`${party}-count`).innerText = count;
-        document.getElementById(`${party}-bar`).style.width = (count / TOTAL_SEATS * 100) + "%";
+    ["alp", "lnp", "onp"].forEach(p => {
+        document.getElementById(`${p}-count`).innerText = totals[p];
+        document.getElementById(`${p}-bar`).style.width = (totals[p] / TOTAL_SEATS * 100) + "%";
     });
 
     renderSeatList();
@@ -69,22 +68,30 @@ function updateDashboard() {
 
 function renderSeatList() {
     const list = document.getElementById('seat-list');
-    list.innerHTML = seats.map(s => `
+    list.innerHTML = "";
+    
+    const filtered = seats.filter(s => {
+        if (currentFilter === 'doubt') return s.status === "IN DOUBT" || s.person === "";
+        if (currentFilter === 'changing') return s.status === "GAIN";
+        return true;
+    });
+
+    list.innerHTML = filtered.map(s => `
         <div class="seat-card">
             <div>
                 <div class="seat-name">${s.name}</div>
-                <div class="person-name">${s.person}</div>
+                <div class="person-name">${s.person || "Candidate Pending"}</div>
                 <div class="badge-row">
                     <span class="badge bg-${s.party}">${s.party.toUpperCase()} ${s.status}</span>
                     <span class="from-text">FROM ${s.from}</span>
                 </div>
             </div>
-            <div class="swing-box"><div class="swing-label">${s.swing}</div></div>
+            <div class="swing-label">${s.swing}</div>
         </div>
     `).join('');
 }
 
-// Tabs
+// Tab Controls
 document.getElementById('btn-tally').onclick = () => {
     document.getElementById('view-tally').style.display = 'block';
     document.getElementById('view-map').style.display = 'none';
@@ -98,5 +105,17 @@ document.getElementById('btn-map').onclick = () => {
     document.getElementById('btn-map').classList.add('active');
     document.getElementById('btn-tally').classList.remove('active');
 };
+
+// Filter Controls
+function setFilter(type, el) {
+    currentFilter = type;
+    document.querySelectorAll('.filter-bar span').forEach(s => s.classList.remove('active'));
+    el.classList.add('active');
+    renderSeatList();
+}
+
+document.getElementById('filter-all').onclick = function() { setFilter('all', this); };
+document.getElementById('filter-doubt').onclick = function() { setFilter('doubt', this); };
+document.getElementById('filter-changing').onclick = function() { setFilter('changing', this); };
 
 window.onload = updateDashboard;
