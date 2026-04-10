@@ -2,51 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>QLD Election 2026 | Live Results</title>
+    <title>QLD Live Results</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <p class="breadcrumb">AEC Live | Queensland Election 2026</p>
         <h1>Queensland Results</h1>
-        <p class="update-time">93 of 93 districts | Updated April 2026</p>
+        <p class="update-time">93 of 93 districts | Updated Live</p>
 
         <div class="bar-wrapper">
+            <div class="required-text">17 required for majority</div>
             <div class="majority-marker"></div>
+            
             <div class="party-row">
                 <div class="party-label">ALP</div>
-                <div class="bar-container"><div class="bar alp" id="alp-bar"><span class="count" id="alp-count">0</span></div></div>
+                <div class="bar-container">
+                    <div class="bar alp" id="alp-bar"></div>
+                    <span class="count-text" id="alp-count">0</span>
+                </div>
             </div>
             <div class="party-row">
                 <div class="party-label">LNP</div>
-                <div class="bar-container"><div class="bar lnp" id="lnp-bar"><span class="count" id="lnp-count">0</span></div></div>
+                <div class="bar-container">
+                    <div class="bar lnp" id="lnp-bar"></div>
+                    <span class="count-text" id="lnp-count">0</span>
+                </div>
             </div>
-            <div class="party-row">
-                <div class="party-label">GRN</div>
-                <div class="bar-container"><div class="bar grn" id="grn-bar"><span class="count" id="grn-count">0</span></div></div>
             </div>
-            <div class="party-row">
-                <div class="party-label">KAP</div>
-                <div class="bar-container"><div class="bar kap" id="kap-bar"><span class="count" id="kap-count">0</span></div></div>
-            </div>
-            <div class="party-row">
-                <div class="party-label">ONP</div>
-                <div class="bar-container"><div class="bar onp" id="onp-bar"><span class="count" id="onp-count">0</span></div></div>
-            </div>
-        </div>
 
         <nav class="tab-nav">
-            <button class="tab-btn active">Tally Room</button>
-            <button class="tab-btn">Electoral Map</button>
+            <button class="tab-btn active" id="btn-tally">Tally Room</button>
+            <button class="tab-btn" id="btn-map">Electoral Map</button>
         </nav>
 
-        <div class="filter-bar">
-            <span id="filter-all" class="active" onclick="setFilter('all')">All Seats</span>
-            <span id="filter-doubt" onclick="setFilter('doubt')">In Doubt</span>
-            <span id="filter-changing" onclick="setFilter('changing')">Changing</span>
+        <div id="tally-view">
+            <div id="seat-list"></div>
         </div>
 
-        <div id="seat-list"></div>
+        <div id="map-view" class="map-view" style="display:none;">
+            <img src="https://cdn.discordapp.com/attachments/1035879662921986079/1492058642944364655/m94btm1.png?ex=69d9f365&is=69d8a1e5&hm=1ecf685424858bbc707e1a92d0f60780967eb0054818f5b54e379b71b92b9f3f&" class="map-img" alt="Election Map">
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
