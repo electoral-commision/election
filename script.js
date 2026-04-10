@@ -1,10 +1,10 @@
 // 1. PARTY CONFIGURATION
 // Add any party here: [Full Name, Color, Show by default (true/false)]
 const PARTY_CONFIG = {
-    alp: ["Australian Labor Party", "#ff0000", true],
-    lnp: ["Liberal National Party", "#0066ff", true],
-    grn: ["The Greens", "#00cc00", true],
-    kap: ["Katter's Australian Party", "#800000", true],
+    alp: ["Australian Labor Party", "#E51F30", true],
+    lnp: ["Liberal National Party", "#166FF3", true],
+    grn: ["The Greens", "#4E8321", true],
+    kap: ["Katter's Australian Party", "#AA6255", true],
     onp: ["One Nation", "#ff9900", true],
     oth: ["Independent/Other", "#444444", true]
 };
