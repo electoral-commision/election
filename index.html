@@ -11,7 +11,6 @@
         <header>
             <p class="breadcrumb">AEC Live | Federal Election 2026 | Results</p>
             <h1>2026 Federal Election Results</h1>
-            <p class="update-time" id="time-display">Live Update Active</p>
         </header>
 
         <nav class="tab-nav">
@@ -20,15 +19,14 @@
         </nav>
 
         <div id="view-tally">
-            <div id="election-winner"></div>
-
+            <div id="election-winner" class="winner-box">Loading...</div>
+            
             <section class="main-tally">
                 <div class="status-bar">
-                    <span id="percent-counted">100% counted</span>
-                    <span class="goal">17 to win (Majority)</span>
+                    <span>100% counted</span>
+                    <span>17 to win</span>
                 </div>
                 <div class="bar-wrapper">
-                    <div class="majority-marker"></div>
                     <div class="party-row">
                         <div class="party-label">ALP</div>
                         <div class="bar-container"><div class="bar alp" id="alp-bar"><span class="count" id="alp-count">0</span></div></div>
@@ -44,21 +42,13 @@
                 </div>
             </section>
 
-            <section class="seat-by-seat">
-                <div id="seat-list"></div>
-            </section>
+            <div id="seat-list"></div>
         </div>
 
         <div id="view-map" style="display: none;">
-            <div class="map-legend">
-                <span class="dot alp"></span> ALP 
-                <span class="dot lnp"></span> LNP 
-                <span class="dot onp"></span> ONP
-                <span class="dot oth"></span> OTH
+            <div class="map-container">
+                <img src="https://raw.githubusercontent.com/electoral-commision/election/main/qld-1.svg" alt="Election Map" class="static-map">
             </div>
-            <div id="map-container" >
-                </div>
-            <div id="map-tooltip"></div>
         </div>
     </div>
     <script src="script.js"></script>
