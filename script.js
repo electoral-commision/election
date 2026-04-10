@@ -33,52 +33,50 @@ const seats = [
     { name: "Scenic Rim", party: "lnp", person: "Jon Krause", status: "HOLD", from: "LNP", swing: "0.0%", hidden: true }
 ];
 
-const TOTAL_SEATS = 32;
-let currentFilter = 'all';
-
 function updateDashboard() {
     const totals = { alp: 0, lnp: 0, grn: 0, kap: 0, onp: 0, oth: 0 };
     seats.forEach(s => { if (!s.hidden) totals[s.party]++; });
 
+    // Update Bars & Numbers
     Object.keys(totals).forEach(p => {
         const bar = document.getElementById(`${p}-bar`);
         const count = document.getElementById(`${p}-count`);
         if (bar) {
-            bar.style.width = (totals[p] / TOTAL_SEATS * 100) + "%";
+            bar.style.width = (totals[p] / 32 * 100) + "%";
             count.innerText = totals[p];
         }
     });
-    renderSeatList();
+
+    renderList();
 }
 
-function renderSeatList() {
+function renderList() {
     const list = document.getElementById('seat-list');
-    
-    const filtered = seats.filter(s => {
-        if (currentFilter === 'doubt') return s.hidden || s.status === "IN DOUBT";
-        if (currentFilter === 'changing') return !s.hidden && s.status === "GAIN";
-        return true;
-    });
-
-    list.innerHTML = filtered.map(s => `
+    list.innerHTML = seats.map(s => `
         <div class="seat-card">
             <div>
-                <div class="seat-name">${s.name}</div>
-                <div class="person-name">${s.hidden ? 'Calculating results...' : s.person}</div>
-                <span class="badge ${s.hidden ? 'oth' : s.party}">
-                    ${s.hidden ? 'IN DOUBT' : s.party.toUpperCase() + ' ' + s.status}
-                </span>
+                <div style="font-weight:bold">${s.name}</div>
+                <div style="color:#888; font-size:13px">${s.hidden ? 'Calculating...' : s.person}</div>
+                <span class="badge ${s.hidden ? 'oth' : s.party}">${s.hidden ? 'IN DOUBT' : s.party.toUpperCase() + ' ' + s.status}</span>
             </div>
-            <div class="swing-text">${s.hidden ? '--' : s.swing + ' swing'}</div>
+            <div style="font-weight:bold; color:#888">${s.hidden ? '--' : s.swing}</div>
         </div>
     `).join('');
 }
 
-function setFilter(type) {
-    currentFilter = type;
-    document.querySelectorAll('.filter-bar span').forEach(el => el.classList.remove('active'));
-    document.getElementById('filter-' + type).classList.add('active');
-    renderSeatList();
-}
+// Map vs Tally Room Switcher
+document.getElementById('btn-tally').onclick = function() {
+    this.classList.add('active');
+    document.getElementById('btn-map').classList.remove('active');
+    document.getElementById('tally-view').style.display = 'block';
+    document.getElementById('map-view').style.display = 'none';
+};
+
+document.getElementById('btn-map').onclick = function() {
+    this.classList.add('active');
+    document.getElementById('btn-tally').classList.remove('active');
+    document.getElementById('tally-view').style.display = 'none';
+    document.getElementById('map-view').style.display = 'block';
+};
 
 window.onload = updateDashboard;
