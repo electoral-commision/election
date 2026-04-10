@@ -1,12 +1,12 @@
 // 1. PARTY CONFIGURATION
 // [Full Name, Hex Color, Master Visibility (true = always show bar)]
 const PARTY_CONFIG = {
-    alp: ["Australian Labor Party", "#e61e2b", true],
-    lnp: ["Liberal National Party", "#005696", true],
-    grn: ["The Greens", "#539c35", true],
-    kap: ["Katter's Australian Party", "#a54d44", true],
+    alp: ["Australian Labor Party", "#E51F30", true],
+    lnp: ["Liberal National Party", "#166FF3", true],
+    grn: ["The Greens", "#4E8321", true],
+    kap: ["Katter's Australian Party", "#AA6255", true],
     onp: ["One Nation", "#f7941d", true],
-    oth: ["Independent / Other", "#666666", true]
+    oth: ["Independent / Other", "#757575", true]
 };
 
 // 2. ELECTORATE DATA
