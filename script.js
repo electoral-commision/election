@@ -34,42 +34,51 @@ const seats = [
 ];
 
 const TOTAL_SEATS = 32;
-const WIN_GOAL = 17;
+let currentFilter = 'all';
 
 function updateDashboard() {
     const totals = { alp: 0, lnp: 0, grn: 0, kap: 0, onp: 0, oth: 0 };
     seats.forEach(s => { if (!s.hidden) totals[s.party]++; });
 
-    // Update Bars
     Object.keys(totals).forEach(p => {
-        const barEl = document.getElementById(`${p}-bar`);
-        const countEl = document.getElementById(`${p}-count`);
-        if(barEl) {
-            barEl.style.width = (totals[p] / TOTAL_SEATS * 100) + "%";
-            countEl.innerText = totals[p];
+        const bar = document.getElementById(`${p}-bar`);
+        const count = document.getElementById(`${p}-count`);
+        if (bar) {
+            bar.style.width = (totals[p] / TOTAL_SEATS * 100) + "%";
+            count.innerText = totals[p];
         }
     });
-
     renderSeatList();
 }
 
 function renderSeatList() {
     const list = document.getElementById('seat-list');
-    list.innerHTML = seats.map(s => {
-        const isDoubt = s.hidden || s.status === "IN DOUBT";
-        return `
-            <div class="seat-card" style="${s.hidden ? 'opacity:0.6' : ''}">
-                <div>
-                    <div class="seat-name">${s.name}</div>
-                    <div class="person-name">${s.hidden ? 'CALCULATING...' : s.person}</div>
-                    <span class="badge ${s.hidden ? 'oth' : s.party}">
-                        ${s.hidden ? 'WAITING' : s.party.toUpperCase() + ' ' + s.status}
-                    </span>
-                </div>
-                <div class="person-name">${s.hidden ? '--' : s.swing + ' swing'}</div>
+    
+    const filtered = seats.filter(s => {
+        if (currentFilter === 'doubt') return s.hidden || s.status === "IN DOUBT";
+        if (currentFilter === 'changing') return !s.hidden && s.status === "GAIN";
+        return true;
+    });
+
+    list.innerHTML = filtered.map(s => `
+        <div class="seat-card">
+            <div>
+                <div class="seat-name">${s.name}</div>
+                <div class="person-name">${s.hidden ? 'Calculating results...' : s.person}</div>
+                <span class="badge ${s.hidden ? 'oth' : s.party}">
+                    ${s.hidden ? 'IN DOUBT' : s.party.toUpperCase() + ' ' + s.status}
+                </span>
             </div>
-        `;
-    }).join('');
+            <div class="swing-text">${s.hidden ? '--' : s.swing + ' swing'}</div>
+        </div>
+    `).join('');
+}
+
+function setFilter(type) {
+    currentFilter = type;
+    document.querySelectorAll('.filter-bar span').forEach(el => el.classList.remove('active'));
+    document.getElementById('filter-' + type).classList.add('active');
+    renderSeatList();
 }
 
 window.onload = updateDashboard;
