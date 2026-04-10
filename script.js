@@ -9,40 +9,41 @@ const PARTY_CONFIG = {
     oth: ["Independent / Other", "#757575", true]
 };
 
-// 2. ELECTORATE DATA
+// 2. ELECTORATE DATA (33 Seats)
 const seats = [
-    { name: "Broadwater", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Bundaberg", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Cairns", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Caloundra", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Cook", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Ferny Grove", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Gregory", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Gympie", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Hill", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Hinchinbrook", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Logan", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Lytton", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Maiwar", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Mansfield", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Maryborough", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "McConnel", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Mirani", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Moggill", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Nanango", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Nicklin", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Noosa", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Nudgee", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Redcliffe", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Rockhampton", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Scenic Rim", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "South Brisbane", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Southern Downs", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Thuringowa", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Toowoomba", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Townsville", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Traeger", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true },
-    { name: "Warrego", party: "", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: true }
+    { name: "Cairns", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Cook", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Burdekin", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Townsville", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Traeger", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Burnett", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Callide", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Gregory", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Maryborough", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Rockhampton", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Warrego", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Toowoomba", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Southern Downs", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Ferny Grove", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "McConnel", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Nudgee", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Redcliffe", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Lytton", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Mansfield", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Moggill", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "South Brisbane", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Caloundra", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Gympie", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Nanango", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Noosa", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Coomera", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Mudgeeraba", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Surfers Paradise", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Redlands", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Ipswich", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Logan", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Scenic Rim", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false },
+    { name: "Mirani", party: "oth", person: "Candidate Name", status: "TBD", from: "TBD", swing: "0.0%", hidden: false }
 ];
 
 let currentFilter = 'all';
@@ -53,10 +54,8 @@ function updateDashboard() {
     const totals = {};
     const hasSeats = new Set();
 
-    // Reset totals based on config
     Object.keys(PARTY_CONFIG).forEach(code => totals[code] = 0);
 
-    // Calculate actual wins
     seats.forEach(s => {
         if (!s.hidden) {
             totals[s.party]++;
@@ -67,15 +66,11 @@ function updateDashboard() {
     tallyContainer.innerHTML = '';
     legendContainer.innerHTML = '';
 
-    // Automatically generate Bars and Legends
     Object.keys(PARTY_CONFIG).forEach(code => {
         const [fullName, color, masterShow] = PARTY_CONFIG[code];
-        
-        // Show if master is true OR they have at least 1 seat (Override)
         if (masterShow || hasSeats.has(code)) {
-            const width = (totals[code] / 32 * 100);
-            
-            // Generate Bar HTML
+            // Updated math for 33 seats
+            const width = (totals[code] / 33 * 100);
             tallyContainer.innerHTML += `
                 <div class="party-row">
                     <div class="party-label">${code.toUpperCase()}</div>
@@ -85,20 +80,17 @@ function updateDashboard() {
                     </div>
                 </div>`;
 
-            // Generate Map Legend Dot
             legendContainer.innerHTML += `
                 <span class="legend-item">
                     <span class="dot" style="background-color: ${color};"></span> ${code.toUpperCase()}
                 </span>`;
         }
     });
-
     renderSeatList();
 }
 
 function renderSeatList() {
     const list = document.getElementById('seat-list');
-    
     const filtered = seats.filter(s => {
         if (currentFilter === 'doubt') return s.hidden || s.status === "IN DOUBT";
         if (currentFilter === 'changing') return !s.hidden && s.status === "GAIN";
@@ -128,7 +120,6 @@ function setFilter(type) {
     renderSeatList();
 }
 
-// Tab Switching
 document.getElementById('btn-tally').onclick = () => toggleView('tally');
 document.getElementById('btn-map').onclick = () => toggleView('map');
 
@@ -139,5 +130,4 @@ function toggleView(view) {
     document.getElementById('btn-map').classList.toggle('active', view === 'map');
 }
 
-// Initial Load
 window.onload = updateDashboard;
