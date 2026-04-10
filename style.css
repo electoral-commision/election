@@ -1,37 +1,65 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
 
-body { background-color: #000; color: #fff; font-family: 'Roboto', sans-serif; margin: 0; padding: 20px; }
+body { 
+    background-color: #000; 
+    color: #fff; 
+    font-family: 'Roboto', sans-serif; 
+    margin: 0; 
+    padding: 20px; 
+    line-height: 1.4;
+}
+
 .container { max-width: 900px; margin: 0 auto; }
 
-.breadcrumb { font-size: 12px; font-weight: bold; color: #fff; opacity: 0.8; margin-bottom: 4px; }
+/* Header */
+.breadcrumb { font-size: 12px; font-weight: bold; color: #fff; opacity: 0.7; margin-bottom: 4px; text-transform: uppercase; }
+h1 { font-size: 28px; font-weight: 900; margin: 0; letter-spacing: -0.5px; }
 .update-time { font-size: 12px; color: #888; margin-bottom: 25px; }
 
-/* Bars */
+/* Tally Bars */
 .bar-wrapper { margin-top: 40px; position: relative; padding-top: 20px; }
-.party-row { display: flex; align-items: center; margin-bottom: 8px; }
-.party-label { width: 60px; font-weight: 900; font-size: 14px; }
-.bar-container { flex-grow: 1; background-color: #262626; height: 34px; position: relative; border-radius: 4px; overflow: hidden; }
-.bar { height: 100%; transition: width 0.8s ease; }
-.count-text { position: absolute; right: 12px; top: 7px; font-weight: 900; font-size: 16px; color: #fff; }
+.party-row { display: flex; align-items: center; margin-bottom: 10px; }
+.party-label { width: 60px; font-weight: 900; font-size: 14px; color: #fff; }
+.bar-container { 
+    flex-grow: 1; 
+    background-color: #262626; 
+    height: 36px; 
+    position: relative; 
+    border-radius: 4px; 
+    overflow: hidden; 
+}
+.bar { height: 100%; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+.count-text { position: absolute; right: 12px; top: 7px; font-weight: 900; font-size: 16px; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
 
-/* Marker */
-.majority-marker { position: absolute; top: 0; bottom: 0; left: 53.1%; border-left: 1px dashed rgba(255,255,255,0.6); z-index: 10; }
-.required-text { position: absolute; top: -8px; left: 53.1%; transform: translateX(-50%); font-size: 11px; font-weight: bold; color: #fff; white-space: nowrap; }
+/* Marker & Goal */
+.majority-marker { position: absolute; top: 0; bottom: 0; left: 53.1%; border-left: 1px dashed rgba(255,255,255,0.5); z-index: 5; }
+.required-text { position: absolute; top: -10px; left: 53.1%; transform: translateX(-50%); font-size: 11px; font-weight: 900; color: #fff; white-space: nowrap; }
 
-/* Tabs */
+/* Navigation & Filters */
 .tab-nav { display: flex; gap: 25px; margin: 30px 0 15px 0; border-bottom: 1px solid #333; }
-.tab-btn { background: none; border: none; color: #888; font-weight: bold; padding: 10px 0; cursor: pointer; font-size: 14px; }
+.tab-btn { background: none; border: none; color: #888; font-weight: bold; padding: 10px 5px; cursor: pointer; font-size: 14px; transition: 0.2s; }
 .tab-btn.active { color: #fff; border-bottom: 2px solid #fff; }
 
-/* Map Legend */
-.map-legend { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; }
-.legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: bold; }
-.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
-.map-img { width: 100%; max-width: 800px; border-radius: 4px; }
+.filter-bar { display: flex; gap: 20px; margin: 20px 0; color: #888; font-size: 13px; font-weight: bold; }
+.filter-bar span { cursor: pointer; padding-bottom: 2px; }
+.filter-bar span.active { color: #fff; border-bottom: 1px solid #fff; }
 
-/* Seat List */
-.seat-card { display: flex; justify-content: space-between; padding: 16px 10px; border-bottom: 1px solid #222; align-items: center; }
-.seat-info h3 { margin: 0; font-size: 16px; font-weight: bold; }
+/* Map Backdrop */
+.map-backdrop {
+    background-color: #111;
+    border: 1px solid #222;
+    border-radius: 12px;
+    padding: 30px;
+    margin-top: 10px;
+}
+.map-legend { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 25px; justify-content: center; padding-bottom: 15px; border-bottom: 1px solid #222; }
+.legend-item { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: bold; }
+.dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+.map-img { width: 100%; height: auto; border-radius: 4px; display: block; }
+
+/* Seat Cards */
+.seat-card { display: flex; justify-content: space-between; padding: 18px 10px; border-bottom: 1px solid #222; align-items: center; }
+.seat-info h3 { margin: 0; font-size: 17px; font-weight: bold; }
 .seat-info p { margin: 2px 0; color: #888; font-size: 13px; }
-.badge { font-size: 10px; font-weight: 900; padding: 3px 6px; border-radius: 2px; text-transform: uppercase; color: #fff; margin-top: 5px; display: inline-block; }
+.badge { font-size: 10px; font-weight: 900; padding: 3px 7px; border-radius: 2px; text-transform: uppercase; color: #fff; margin-top: 6px; display: inline-block; }
 .swing-display { font-weight: 900; color: #888; font-size: 16px; }
