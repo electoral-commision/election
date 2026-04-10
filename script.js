@@ -38,8 +38,6 @@ let currentFilter = 'all';
 
 function updateDashboard() {
     const totals = { alp: 0, lnp: 0, onp: 0, oth: 0 };
-    
-    // Only tally if NOT hidden
     seats.forEach(s => { 
         if (!s.hidden && totals[s.party] !== undefined) totals[s.party]++; 
     });
@@ -77,8 +75,13 @@ function renderSeatList() {
     list.innerHTML = "";
     
     const filtered = seats.filter(s => {
-        if (currentFilter === 'doubt') return s.status === "IN DOUBT";
-        if (currentFilter === 'changing') return s.status === "GAIN";
+        // Updated Logic: If hidden, it counts as "In Doubt" and NOT "Changing"
+        if (currentFilter === 'doubt') {
+            return s.hidden || s.status === "IN DOUBT";
+        }
+        if (currentFilter === 'changing') {
+            return !s.hidden && s.status === "GAIN";
+        }
         return true;
     });
 
@@ -104,7 +107,7 @@ function renderSeatList() {
     }).join('');
 }
 
-// Controls
+// Tab and Filter Controls
 document.getElementById('btn-tally').onclick = () => {
     document.getElementById('view-tally').style.display = 'block';
     document.getElementById('view-map').style.display = 'none';
