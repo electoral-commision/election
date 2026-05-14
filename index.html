@@ -11,11 +11,12 @@
         <header>
             <p class="breadcrumb">QLD Election 2026 | Full Results ></p>
             <h1>Queensland Results</h1>
-            <p class="update-time">33 of 33 districts counted | Updated Live</p>
+            <!-- The text here is now handled by script.js -->
+            <p class="update-time" id="last-updated">Loading results...</p>
         </header>
 
         <div class="bar-wrapper">
-            <div class="required-text">17 required for majority</div>
+            <div class="required-text"><span id="majority-count">0</span> required for majority</div>
             <div class="majority-marker"></div>
             <div id="bar-rows-container"></div>
         </div>
