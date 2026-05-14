@@ -1,5 +1,4 @@
 // 1. PARTY CONFIGURATION
-// [Full Name, Hex Color, Master Visibility (true = always show bar)]
 const PARTY_CONFIG = {
     alp: ["Australian Labor Party", "#E51F30", true],
     lnp: ["Liberal National Party", "#166FF3", true],
@@ -48,9 +47,48 @@ const seats = [
 
 let currentFilter = 'all';
 
+// NEW: Global variables to store counts for the GitHub function to use
+let totalSeatsCount = seats.length;
+let seatsCalledCount = seats.filter(s => !s.hidden).length;
+
+async function fetchLastUpdateTime() {
+    const owner = 'YOUR_USERNAME'; 
+    const repo = 'YOUR_REPO_NAME'; 
+    const filePath = 'index.html';
+    const url = `https://api.github.com/repos/${owner}/${repo}/commits?path=${filePath}&per_page=1`;
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('API Error');
+        const data = await response.json();
+        if (data.length > 0) {
+            const commitDate = new Date(data[0].commit.committer.date);
+            const formattedDate = commitDate.toLocaleString('en-AU', { 
+                day: 'numeric', month: 'short', year: 'numeric', 
+                hour: '2-digit', minute: '2-digit', hour12: true 
+            });
+            // Uses dynamic counts calculated in updateDashboard
+            document.getElementById('last-updated').innerText = `${seatsCalledCount} of ${totalSeatsCount} districts counted | Updated ${formattedDate}`;
+        }
+    } catch (error) {
+        console.error('GitHub Fetch Error:', error);
+        document.getElementById('last-updated').innerText = `${seatsCalledCount} of ${totalSeatsCount} districts counted | Live`;
+    }
+}
+
 function updateDashboard() {
     const tallyContainer = document.getElementById('bar-rows-container');
     const legendContainer = document.getElementById('map-legend');
+    const majorityEl = document.getElementById('majority-count');
+    
+    // Auto-calculate counts
+    totalSeatsCount = seats.length;
+    seatsCalledCount = seats.filter(s => !s.hidden).length;
+    
+    // Auto-calculate majority (50% + 1)
+    const majorityRequired = Math.floor(totalSeatsCount / 2) + 1;
+    if (majorityEl) majorityEl.innerText = majorityRequired;
+
     const totals = {};
     const hasSeats = new Set();
 
@@ -69,8 +107,7 @@ function updateDashboard() {
     Object.keys(PARTY_CONFIG).forEach(code => {
         const [fullName, color, masterShow] = PARTY_CONFIG[code];
         if (masterShow || hasSeats.has(code)) {
-            // Updated math for 33 seats
-            const width = (totals[code] / 33 * 100);
+            const width = (totals[code] / totalSeatsCount * 100);
             tallyContainer.innerHTML += `
                 <div class="party-row">
                     <div class="party-label">${code.toUpperCase()}</div>
@@ -130,4 +167,7 @@ function toggleView(view) {
     document.getElementById('btn-map').classList.toggle('active', view === 'map');
 }
 
-window.onload = updateDashboard;
+window.onload = () => {
+    updateDashboard(); // Run first to set counts
+    fetchLastUpdateTime(); // Then fetch time using those counts
+};
