@@ -47,11 +47,8 @@ const seats = [
 
 let currentFilter = 'all';
 
-// NEW: Global variables to store counts for the GitHub function to use
-let totalSeatsCount = seats.length;
-let seatsCalledCount = seats.filter(s => !s.hidden).length;
-
 async function fetchLastUpdateTime() {
+    // REPLACE THESE WITH YOUR REPO DETAILS
     const owner = 'YOUR_USERNAME'; 
     const repo = 'YOUR_REPO_NAME'; 
     const filePath = 'index.html';
@@ -67,12 +64,11 @@ async function fetchLastUpdateTime() {
                 day: 'numeric', month: 'short', year: 'numeric', 
                 hour: '2-digit', minute: '2-digit', hour12: true 
             });
-            // Uses dynamic counts calculated in updateDashboard
-            document.getElementById('last-updated').innerText = `${seatsCalledCount} of ${totalSeatsCount} districts counted | Updated ${formattedDate}`;
+            document.getElementById('last-updated').innerText = `Updated ${formattedDate}`;
         }
     } catch (error) {
         console.error('GitHub Fetch Error:', error);
-        document.getElementById('last-updated').innerText = `${seatsCalledCount} of ${totalSeatsCount} districts counted | Live`;
+        document.getElementById('last-updated').innerText = `Live`;
     }
 }
 
@@ -80,18 +76,17 @@ function updateDashboard() {
     const tallyContainer = document.getElementById('bar-rows-container');
     const legendContainer = document.getElementById('map-legend');
     const majorityEl = document.getElementById('majority-count');
+    const liveCountEl = document.getElementById('live-count');
     
-    // Auto-calculate counts
-    totalSeatsCount = seats.length;
-    seatsCalledCount = seats.filter(s => !s.hidden).length;
-    
-    // Auto-calculate majority (50% + 1)
-    const majorityRequired = Math.floor(totalSeatsCount / 2) + 1;
+    const totalSeats = seats.length;
+    const countedSeats = seats.filter(s => !s.hidden).length;
+    const majorityRequired = Math.floor(totalSeats / 2) + 1;
+
     if (majorityEl) majorityEl.innerText = majorityRequired;
+    if (liveCountEl) liveCountEl.innerText = `${countedSeats} of ${totalSeats} districts counted`;
 
     const totals = {};
     const hasSeats = new Set();
-
     Object.keys(PARTY_CONFIG).forEach(code => totals[code] = 0);
 
     seats.forEach(s => {
@@ -107,7 +102,7 @@ function updateDashboard() {
     Object.keys(PARTY_CONFIG).forEach(code => {
         const [fullName, color, masterShow] = PARTY_CONFIG[code];
         if (masterShow || hasSeats.has(code)) {
-            const width = (totals[code] / totalSeatsCount * 100);
+            const width = (totals[code] / totalSeats * 100);
             tallyContainer.innerHTML += `
                 <div class="party-row">
                     <div class="party-label">${code.toUpperCase()}</div>
@@ -168,6 +163,6 @@ function toggleView(view) {
 }
 
 window.onload = () => {
-    updateDashboard(); // Run first to set counts
-    fetchLastUpdateTime(); // Then fetch time using those counts
+    updateDashboard();
+    fetchLastUpdateTime();
 };
